@@ -1,18 +1,27 @@
 {
-  "name": "api-server",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app"
-  },
-  "dependencies": {
-    "node-restify-validation": "*",
-    "node-restify-swagger": "*",
-    "restify": "*",
-    "serve-favicon": "*",
-    "express": "*",
-    "filed": "*",
-    "mime": "*",
-    "underscore": "*"
-  }
+    "name": "CLS-mobile-App",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "express": "3.4.8",
+        "ejs": "*",
+        "lodash": "*",
+        "ejs-locals":"*",
+        "mongodb":"*",
+        "tingodb":"*",
+        "tungus":"*",
+        "mongoose":"*",
+        "winston":"*",
+        "async":"*",
+        "request":"*",
+        "bcrypt-nodejs":"*",
+        "mkdirp":"*",
+        "formidable":"*",
+        "fs-extra":"*",
+        "mongoose-fakery":"*",
+        "node-uuid":"*"
+    }
 }

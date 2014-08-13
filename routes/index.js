@@ -1,9 +1,3 @@
-
-/*
- * GET home page.
- */
-
-exports.index = function(req, res, next){
-    res.render('index', { title: 'Server' });
-    return next();
+exports.index = function(req, res){
+  res.render('index.html', { title: 'CLS' });
 };
