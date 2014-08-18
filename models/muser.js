@@ -13,17 +13,10 @@ module.exports = function (mongoose) {
        roles:[String],
        created_at:{type:Date,default:Date.now},
        updated_at:Date ,
-       tokens:[{_id:false,token:{type:String},token_created:{type:Date},token_expires:{type:Date}}] ,
-       profile:{
-           sex:{type:String,default:'male',enum:'male,female'.split(',')},
-           age:{type:Number,default:21},
-           origin:String,
-           married:{type:Boolean,default:false},
-           children_under_18:{type:Number,default:0},
-           employer:String,
-           occupation:String,
-           interests:[{_id:false,text:{type:String,default:''},type:{type:String,default:'tourism'}}]
-        }
+       tokens:[{token:{type:String},token_created:{type:Date},token_expires:{type:Date}}] ,
+       provider:{type:String,enum:'web,facebook'.split(','),default:'web'},
+       sex:{type:String,default:'male',enum:'male,female'.split(',')},
+       age:{type:Number,default:21}
     });
 
 
@@ -118,7 +111,7 @@ module.exports = function (mongoose) {
             next();
             });
     }
-    var User = mongoose.model('User', usersSchema);
+    var User = mongoose.model('mUser', usersSchema);
 
     return User;
 }

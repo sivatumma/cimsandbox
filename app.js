@@ -8,6 +8,7 @@ var tungus=require('tungus');
 var mongoose=require('mongoose');
 var app = express();
 var user_model=require('./models/user.js')(mongoose);
+var mobile_user_model=require('./models/muser.js')(mongoose);
 
 app.configure(function() {
     app.set('port', process.env.PORT || 80);
@@ -36,6 +37,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 var user = require('./routes/user.js')(app);
+var muser = require('./routes/muser.js')(app);
 var fixtures = require('./routes/fixtures.js')(app);
 
 mongoose.connect(config.database);
