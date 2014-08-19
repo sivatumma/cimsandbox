@@ -20,11 +20,11 @@ if you want run on production
 
 node app.js
 
-GET http://localhost:3030/  app root
+GET https://localhost/  app root
 
-GET http://localhost:3030/fixtures/users   will add random / dummy user with testing password.
+GET https://localhost/fixtures/users   will add random / dummy user with testing password.
 
-POST http://localhost:3030/login 
+POST https://localhost/login 
 Request Body:
 {
 "username":"username",
@@ -77,7 +77,7 @@ Response Body:
 }
 
 
-GET http://localhost:3030/userlist
+GET https://localhost/userlist
 
 Request Headers:
 token: a954a8f7-8721-4e9c-92b8-0565dbc93c80
@@ -93,5 +93,91 @@ Response Body:
     "username": "xqrgyl"
   }
 ]
+
+#Mqidentity Proxy#
+To use Mqidentity API , we have to use following localhost url and equivalent Service Url.
+We can refer same document provided by them.
+
+We must pass token in headers for authorization.
+
+https:/localhost/api/lights  ==> http://mqciscocls.mqidentity.net:8080/fid-SmartLightGateway
+https:/localhost/api/organisation  ==> http://mqciscocls.mqidentity.net:8080/fid-OrganizationAddOn
+https:/localhost/api/subscriber ==>  http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn
+
+Example:
+POST https://localhost/api/lights
+
+Request Header: token: d419a210-599b-4733-b53e-f9dd794bdade
+
+Request body: 
+{
+    "query": {
+        "documentation": "Get all lights operated by specified organization",
+        "find": {
+            "light": {
+                "operatedBy": "sensity-lab",
+                "geocoordinates": {
+                    "lat": 1.34,
+                    "lon": 34.4,
+                    "alt": 134
+                }
+            }
+        }
+    }
+}
+
+Response Body:
+
+
+{
+  "scopes":
+  [
+    {
+      "id":"*SHKW4W59",
+      "Path":"N01230c7d",
+      "types":
+      [
+        "device"
+      ],
+      "Connection":
+      [
+        {
+          "connected":true,
+          "since":"2014-08-14T20:20:47.105Z",
+          "count":1
+        },
+        null
+      ],
+      "sensors":{},
+      "hardware":
+      {
+        "model":"unode-v2"
+      },
+      "location":{},
+      "sensor-configs":{},
+      "device-fw":
+      {
+        "current":"afc612c"
+      },
+      "light":
+      {
+        "Schedule":"",
+        "fixture":"abcdds"
+      },
+      "fixture":{},
+      "faults":{},
+      "wifi-connection":
+      {
+        "ip":"192.168.65.78",
+        "channel":165,
+        "ssid":"XeraL"
+      }
+    }
+  ]
+}
+
+
+
+
 
 
