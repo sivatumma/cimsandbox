@@ -8,6 +8,10 @@ var proxy_route=function (url){
         var proxy = null;
         if(req.method === 'POST') {
             proxy = request.post({uri: url, json: req.body});
+        } else if (req.method === 'DELETE'){
+            proxy = request.delete({uri: url, json: req.body});
+        }   else if (req.method === 'PUT'){
+            proxy = request.put({uri: url, json: req.body});
         } else {
             proxy = request(url);
         }
