@@ -1,42 +1,24 @@
+var request=require('request');
+var mongoose=require('mongoose');
+var User=mongoose.model('User');
+
+var proxy_route=function (url){
+
+    return function (req,res){
+        var proxy = null;
+        if(req.method === 'POST') {
+            proxy = request.post({uri: url, json: req.body});
+        } else {
+            proxy = request(url);
+        }
+        req.pipe(proxy).pipe(res);
+    }
+}
+
 module.exports = function (app){
 
-    app.post('/mq-query',function (req,res){
+    app.all('/api/lights',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartLightGateway'));
+    app.all('/api/organisation',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-OrganizationAddOn'));
+    app.all('/api/subscriber',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn'));
 
-           res.send({
-                   "scopes": [
-                       {
-                           "id": "*SHKW4W59",
-                           "Path": "N01230c7d",
-                           "types": [
-                               "device"
-                           ],
-                           "Connection": [
-                               {
-                                   "connected": true,
-                                   "since": "2014-08-14T20:20:47.105Z",
-                                   "count": 1
-                               }
-                           ],
-                           "sensors": {},
-                           "hardware": {
-                               "model": "unode-v2"
-                           },
-                           "location": {},
-                           "sensor-configs": {},
-                           "device-fw": {
-                               "current": "afc612c"
-                           },
-                           "light": {},
-                           "fixture": {},
-                           "faults": {},
-                           "wifi-connection": {
-                               "ip": "192.168.65.78",
-                               "channel": 165,
-                               "ssid": "XeraL"
-                           }
-                       }
-                   ]
-               }
-           );
-    });
 }

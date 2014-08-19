@@ -42,6 +42,7 @@ app.get('/', routes.index);
 var user = require('./routes/user.js')(app);
 var muser = require('./routes/muser.js')(app);
 var fixtures = require('./routes/fixtures.js')(app);
+var mqi = require('./routes/mqi.js')(app);
 
 mongoose.connect(config.database);
 var db = mongoose.connection;
