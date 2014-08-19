@@ -55,7 +55,7 @@ module.exports = function (app){
         if(!req.body.username || !req.body.password || !req.body.provider || !req.body.age || !req.body.sex) return res.send(500,{message:'Invalid request params.',status:500});
         var user=new User(req.body);
         user.save(function (err,doc){
-            if(err) return res.send(500,err.stack);
+            if(err) return res.send(403,'Username or email not available.');
             var new_user=_.cloneDeep(doc.toObject());
             delete new_user.tokens;
             delete new_user.password;

@@ -28,6 +28,8 @@ app.configure(function() {
     app.use(express.session({ secret: 'keyboard cat' }));
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
+    app.use('/mobile',express.static(config.mobile_app_root));
+    app.use('/portal',express.static(config.portal_app_root));
 });
 
 
@@ -47,7 +49,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
     console.log(path.join(config.certificates_dir,'server.key'))  ;
     var server_credentials={
-
         key: fs.readFileSync(path.join(config.certificates_dir,'server.key')),
         ca: fs.readFileSync(path.join(config.certificates_dir,'server.csr')),
         cert: fs.readFileSync(path.join(config.certificates_dir,'server.crt'))

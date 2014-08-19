@@ -8,7 +8,9 @@ module.exports = function (env){
       app_name:'CLS mobile app',
       app_root:root_path,
       temp:path.join('D:','temp'),
-      certificates_dir:path.join('C:','self-signed')
+      certificates_dir:path.join('C:','self-signed'),
+      mobile_app_root:path.join('D:','CLS-Mobile-App'),
+      portal_app_root:path.join('D:','CLS-Portal-App')
     };
 
     var dev={
@@ -18,7 +20,9 @@ module.exports = function (env){
     var prod={
         temp:path.join('/','tmp'),
         env:'production',
-        certificates_dir:path.join('/','etc','ssl','self-signed')
+        certificates_dir:path.join('/','etc','ssl','self-signed'),
+        mobile_app_root:path.join('/','opt','CLS-Mobile-App'),
+        portal_app_root:path.join('/','opt','CLS-Portal-App')
     }
 
     return _.extend(main,(env=='dev')?dev:prod);
