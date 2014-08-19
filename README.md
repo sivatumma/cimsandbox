@@ -14,7 +14,7 @@ npm install
 running app on linux
 
 if you want run on dev mode 
-env=dev;PORT=3030 node app.js
+env=dev node app.js
 
 if you want run on production 
 

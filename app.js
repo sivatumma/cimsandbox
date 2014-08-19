@@ -1,17 +1,18 @@
 var config=require('./config.js')(process.env.env);
 var express = require('express');
 var routes = require('./routes');
-var http = require('http');
+var https = require('https');
 var path = require('path');
 if(config.env=='development')
 var tungus=require('tungus');
 var mongoose=require('mongoose');
 var app = express();
+var fs=require('fs');
 var user_model=require('./models/user.js')(mongoose);
 var mobile_user_model=require('./models/muser.js')(mongoose);
 
 app.configure(function() {
-    app.set('port', process.env.PORT || 80);
+    app.set('port', process.env.PORT || 443);
     app.set('config', config);
     app.set('env', config.env);
     app.use(express.favicon('public/favicon.ico'));
@@ -44,7 +45,15 @@ mongoose.connect(config.database);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
-    http.createServer(app).listen(app.get('port'), function(){
+    console.log(path.join(config.certificates_dir,'server.key'))  ;
+    var server_credentials={
+
+        key: fs.readFileSync(path.join(config.certificates_dir,'server.key')),
+        ca: fs.readFileSync(path.join(config.certificates_dir,'server.csr')),
+        cert: fs.readFileSync(path.join(config.certificates_dir,'server.crt'))
+    };
+
+    https.createServer(server_credentials,app).listen(app.get('port'), function(){
         console.log('Express server listening on port ' + app.get('port'));
     });
 });

@@ -7,7 +7,8 @@ module.exports = function (env){
       database:'mongodb://localhost/cls',
       app_name:'CLS mobile app',
       app_root:root_path,
-      temp:path.join('D','temp')
+      temp:path.join('D:','temp'),
+      certificates_dir:path.join('C:','self-signed')
     };
 
     var dev={
@@ -16,7 +17,8 @@ module.exports = function (env){
         };
     var prod={
         temp:path.join('/','tmp'),
-        env:'production'
+        env:'production',
+        certificates_dir:path.join('/','etc','ssl','self-signed')
     }
 
     return _.extend(main,(env=='dev')?dev:prod);
