@@ -28,7 +28,7 @@ module.exports = function (app){
                         message="Maximum login attempts."
                         break;
                 }
-                return res.send(500,{message:message});
+                return res.send(403,{message:message});
             }
 
             var token_object={token:uuid.v4(),token_created:new Date(),token_expires:(new Date().addHours(2))};
@@ -40,6 +40,8 @@ module.exports = function (app){
                 var user = _.cloneDeep(doc.toObject());
                 delete user.tokens;
                 delete user.password;
+                delete user._id;
+                delete user.__v;
                 res.set(token_object);
                 res.send(user)
             })
