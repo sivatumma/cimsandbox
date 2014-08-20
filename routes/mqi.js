@@ -13,7 +13,7 @@ var proxy_route=function (url){
         }   else if (req.method === 'PUT'){
             proxy = request.put({uri: url, json: req.body});
         } else {
-            proxy = request(url);
+            proxy = request.get({uri:url,qs:req.query});
         }
         req.pipe(proxy).pipe(res);
     }
