@@ -14,7 +14,7 @@ module.exports = function (env){
     };
 
     var dev={
-        database:'tingodb://'+root_path+'/data/',
+        database:'mongodb://localhost/clsdev',
         env:'development'
         };
     var prod={

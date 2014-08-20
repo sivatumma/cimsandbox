@@ -3,8 +3,6 @@ var express = require('express');
 var routes = require('./routes');
 var https = require('https');
 var path = require('path');
-if(config.env=='development')
-var tungus=require('tungus');
 var mongoose=require('mongoose');
 var app = express();
 var fs=require('fs');
@@ -16,8 +14,6 @@ app.configure(function() {
     app.set('config', config);
     app.set('env', config.env);
     app.use(express.favicon('public/favicon.ico'));
-    app.set('views', path.join(__dirname, 'views'));
-    app.engine('.html', require('ejs').__express);
     if(config.env=='development')
     app.use(express.logger('dev'));
     app.use(express.json({limit:'500mb'}));
