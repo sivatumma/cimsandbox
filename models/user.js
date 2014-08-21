@@ -10,7 +10,7 @@ module.exports = function (mongoose) {
        active:{ type: Boolean, default: true },
        loginAttempts: { type: Number, required: true, default: 0 },
        lockUntil: { type: Number },
-       roles:[String],
+       roles:{type:String,default:'subscriber'},
        created_at:{type:Date,default:Date.now},
        updated_at:Date ,
        tokens:[{_id:false,token:{type:String},token_created:{type:Date},token_expires:{type:Date}}] ,
