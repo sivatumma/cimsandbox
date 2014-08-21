@@ -7,7 +7,7 @@ module.exports = function (app){
         fakery.fake('user', mongoose.model('User'), {
             username: fakery.g.alphanum(5,10),
             password: 'testing',
-            roles:[fakery.g.pick('subscriber,cityoperator,administrator,lightoperator'.split(','))],
+            roles:fakery.g.pick('subscriber,cityoperator,administrator,lightoperator'.split(',')),
             profile:{
                 sex:fakery.g.pick('male,female'.split(',')),
                 age:fakery.g.rndint(10,80),
