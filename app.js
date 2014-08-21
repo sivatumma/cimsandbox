@@ -44,7 +44,6 @@ mongoose.connect(config.database);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
-    console.log(path.join(config.certificates_dir,'server.key'))  ;
     var server_credentials={
         key: fs.readFileSync(path.join(config.certificates_dir,'server.key')),
         ca: fs.readFileSync(path.join(config.certificates_dir,'server.csr')),
