@@ -22,6 +22,11 @@ node app.js
 
 GET https://localhost/  app root
 
+GET https://localhost/mobile mobile app root
+
+GET https://localhost/portal portal app root
+
+
 GET https://localhost/fixtures/users   will add random / dummy user with testing password.
 
 POST https://localhost/login 
@@ -93,6 +98,20 @@ Response Body:
     "username": "xqrgyl"
   }
 ]
+
+GET https://localhost/logout
+
+Request Headers:
+token: a954a8f7-8721-4e9c-92b8-0565dbc93c80
+
+
+
+Success
+Response Body:
+{
+message:ok,
+status:200
+}
 
 #Mqidentity Proxy#
 To use Mqidentity API , we have to use following localhost url and equivalent Service Url.

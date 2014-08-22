@@ -42,6 +42,8 @@ module.exports = function (app){
                 delete user.password;
                 delete user._id;
                 delete user.__v;
+                delete user.loginAttempts;
+                delete user.active;
                 res.set(token_object);
                 res.send(user)
             })
@@ -57,6 +59,15 @@ module.exports = function (app){
 
            res.send(docs)
         });
+    });
+
+    app.get('/logout',User.authorize,function (req,res){
+        req.user.tokens.pull({token:req.headers['token']});
+        req.user.markModified('tokens');
+        req.user.save(function (err){
+            if(err)return res.send(500,{message:err.stack});
+            res.send({message:'Ok',status:200});
+        })
     });
 
 

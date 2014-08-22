@@ -69,6 +69,15 @@ module.exports = function (app){
 
 });
 
+    app.get('/mobile-app/logout',User.authorize,function (req,res){
+        req.user.tokens.pull({token:req.headers['token']});
+        req.user.markModified('tokens');
+        req.user.save(function (err){
+            if(err)return res.send(500,{message:err.stack});
+            res.send({message:'Ok',status:200});
+        })
+    });
+
 
 
 }
