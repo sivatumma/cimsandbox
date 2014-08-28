@@ -28,6 +28,7 @@ module.exports = function (app){
   //  app.all('/api/subscriber',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn'));
 
     app.get('/api/poi',function (req,res){
+        console.log(req.query);
         proxy = request.get({
             uri:'http://192.168.100.244:8080/rest/poiservice/results.json',
             qs:req.query,
