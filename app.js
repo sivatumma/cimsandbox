@@ -54,3 +54,8 @@ db.once('open', function callback () {
         console.log('Express server listening on port ' + app.get('port'));
     });
 });
+
+
+process.on('uncaughtException',function (err){
+    console.log(err.stack);
+});
