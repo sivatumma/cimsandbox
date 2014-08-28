@@ -24,7 +24,24 @@ module.exports = function (app){
     app.all('/api/lights',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartLightGateway') );
     app.all('/api/organisation',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-OrganizationAddOn'));
     app.all('/api/subscriber',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn'));
-    //app.all('/api/subscriber',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn'));
+    app.all('/api/parking',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartParkingGateway'));
   //  app.all('/api/subscriber',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn'));
+
+    app.get('/api/poi',function (req,res){
+        proxy = request.get({
+            uri:'http://192.168.100.244:8080/rest/poiservice/results.json?Data.POI=Kiosk&Data.Details=TRUE',
+            headers: {
+                'User-Agent': 'request',
+                'Authorization':'Basic YWRtaW46YWRtaW4=',
+                'Username':'admin',
+                'Password':'admin'
+            }},function callback(error, response, body) {
+            if (!error && response.statusCode == 200) {
+               console.log('got response')
+            }else
+            console.log(response)
+        });
+        req.pipe(proxy).pipe(res);
+    });
 
 }
