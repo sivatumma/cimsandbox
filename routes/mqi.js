@@ -29,7 +29,8 @@ module.exports = function (app){
 
     app.get('/api/poi',function (req,res){
         proxy = request.get({
-            uri:'http://192.168.100.244:8080/rest/poiservice/results.json?Data.POI=Kiosk&Data.Details=TRUE',
+            uri:'http://192.168.100.244:8080/rest/poiservice/results.json',
+            qs:req.query,
             headers: {
                 'User-Agent': 'request',
                 'Authorization':'Basic YWRtaW46YWRtaW4=',
