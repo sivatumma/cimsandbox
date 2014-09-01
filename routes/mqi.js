@@ -47,7 +47,7 @@ module.exports = function (app){
         req.pipe(proxy).pipe(res);
     });
 
-    app.get('/api/raster/kiosk',User.authorize,function (req,res){
+    app.get('/api/raster/kiosk',function (req,res){
         var proxy = request.get({
             uri:'http://192.168.100.244:8080/renderMap/poi/raster/kiosk/',
             qs:req.query,
