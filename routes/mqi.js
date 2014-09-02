@@ -27,7 +27,6 @@ module.exports = function (app){
     app.all('/api/parking',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartParkingGateway'));
 
     app.get('/api/poi',User.authorize,function (req,res){
-        console.log(req.query);
         var proxy = request.get({
             uri:'http://192.168.100.244:8080/rest/poiservice/results.json',
             qs:req.query,
@@ -49,12 +48,11 @@ module.exports = function (app){
 
     app.get('/api/raster/:poiname/',function (req,res){
 
-        var uri='http://192.168.100.244:8080/rest/Spatial/MappingService/maps/image.png;w='+req.query.WIDTH+';h='+req.query.HEIGHT+';b='+req.query.BBOX;
+        var uri='http://192.168.100.244:8080/rest/Spatial/MappingService/maps/image.png;w='+req.query.WIDTH+';h='+req.query.HEIGHT+';b='+escape(req.query.BBOX);
         console.log(uri)
         var proxy = request.post({
             uri:uri,
-            qs:req.query,
-            json: { layers:[ { type:"FeatureLayer", Table: { type:"NamedTable", name:req.param('poiname') } } ] },
+            json: JSON.stringify({ layers:[ { type:"FeatureLayer", Table: { type:"NamedTable", name:req.param('poiname') } } ] }),
             headers: {
                 'User-Agent': 'request',
                 'Authorization':'Basic YWRtaW46YWRtaW4=',
@@ -62,7 +60,7 @@ module.exports = function (app){
                 'Password':'admin'
             }},function callback(error, response, body) {
             if (!error && response.statusCode == 200) {
-                console.log('got response')
+                console.log('from poiname got response')
             }else
                 console.log(response)
         });
