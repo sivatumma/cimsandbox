@@ -47,37 +47,14 @@ module.exports = function (app){
         req.pipe(proxy).pipe(res);
     });
 
-    app.get('/api/raster/kiosk',function (req,res){
-        var proxy = request.get({
-            uri:'http://192.168.100.244:8080/renderMap/poi/raster/kiosk/',
-            qs:req.query,
-            headers: {
-                'User-Agent': 'request',
-                'Authorization':'Basic YWRtaW46YWRtaW4=',
-                'Username':'admin',
-                'Password':'admin'
-            }},function callback(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log('got response')
-            }else
-                console.log(response)
-        });
-        req.pipe(proxy).pipe(res);
-    });
 
 
-    app.post('/api/raster/:width/:height/:bbox',function (req,res){
-
-        var width= req.param('width');
-        var height= req.param('height');
-        var bbox= req.param('bbox');
-
-        if(!width || !height || !bbox )return res.send(500,'Invalid Parameters')
-
+    app.get('/api/raster/:poiname',function (req,res){
+            if(!req.param('poiname'))return res.send(500,{message:'invalid parameters.'});
         var proxy = request.post({
-            uri:'http://192.168.100.244:8080/rest/Spatial/MappingService/maps/image.png;w='+width+';h='+height+';b='+bbox,
+            uri:'http://192.168.100.244:8080/rest/Spatial/MappingService/maps/image.png;w='+req.query.w+';h='+req.query.h+';b='+req.query.b,
             qs:req.query,
-            json: req.body,
+            json: { layers:[ { type:"FeatureLayer", Table: { type:"NamedTable", name:req.param('poiname') } } ] },
             headers: {
                 'User-Agent': 'request',
                 'Authorization':'Basic YWRtaW46YWRtaW4=',
