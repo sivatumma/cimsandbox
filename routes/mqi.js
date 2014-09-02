@@ -26,8 +26,6 @@ module.exports = function (app){
     app.all('/api/subscriber',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn'));
     app.all('/api/parking',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartParkingGateway'));
 
-
-    http://192.168.100.244:8080/renderMap/poi/raster/kiosk/
     app.get('/api/poi',User.authorize,function (req,res){
         console.log(req.query);
         var proxy = request.get({
@@ -49,10 +47,12 @@ module.exports = function (app){
 
 
 
-    app.get('/api/raster/:poiname',function (req,res){
-            if(!req.param('poiname'))return res.send(500,{message:'invalid parameters.'});
+    app.get('/api/raster/:poiname/',function (req,res){
+
+        var uri='http://192.168.100.244:8080/rest/Spatial/MappingService/maps/image.png;w='+req.query.WIDTH+';h='+req.query.HEIGHT+';b='+req.query.BBOX;
+        console.log(uri)
         var proxy = request.post({
-            uri:'http://192.168.100.244:8080/rest/Spatial/MappingService/maps/image.png;w='+req.query.w+';h='+req.query.h+';b='+req.query.b,
+            uri:uri,
             qs:req.query,
             json: { layers:[ { type:"FeatureLayer", Table: { type:"NamedTable", name:req.param('poiname') } } ] },
             headers: {
