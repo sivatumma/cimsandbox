@@ -48,7 +48,7 @@ module.exports = function (app){
 
     app.get('/api/raster/:poiname/',function (req,res){
 
-        var uri='http://192.168.100.244:8080/rest/Spatial/MappingService/maps/image.png;w='+req.query.WIDTH+';h='+req.query.HEIGHT+';b='+req.query.BBOX;
+        var uri='http://192.168.100.244:8080/rest/Spatial/MappingService/maps/image.png;w='+req.query.WIDTH+';h='+req.query.HEIGHT+';b='+req.query.BBOX+',EPSG%3A4326';
         var proxy = request.post({
             uri:uri,
             json: JSON.stringify({ layers:[ { type:"FeatureLayer", Table: { type:"NamedTable", name:req.param('poiname') } } ] }),
