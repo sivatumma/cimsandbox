@@ -51,7 +51,7 @@ module.exports = function (app){
         var uri='http://192.168.100.244:8080/rest/Spatial/MappingService/maps/image.png;w='+req.query.WIDTH+';h='+req.query.HEIGHT+';b='+req.query.BBOX+',EPSG%3A4326';
         var proxy = request.post({
             uri:uri,
-            json: { layers:[ { type:"FeatureLayer", Table: { type:"NamedTable", name:req.param('poiname') } } ] },
+            json: { layers:[ { type:"FeatureLayer", Table: { type:"NamedTable", name:'/cisco/'+req.param('poiname') } } ] },
             headers: {
                 'User-Agent': 'request',
                 'Authorization':'Basic YWRtaW46YWRtaW4=',
