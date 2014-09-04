@@ -49,6 +49,7 @@ module.exports = function (app){
     app.all('/api/organisation',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-OrganizationAddOn'));
     app.all('/api/subscriber',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn'));
     app.all('/api/parking',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartParkingGateway'));
+	app.all('/api/kiosk',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartKioskGateway'));
 
     app.all('/api/spatial',User.authorize,pb_proxy_route('http://192.168.100.244:8080/rest/Spatial/FeatureService/tables/features.json'));
 
