@@ -19,12 +19,38 @@ var proxy_route=function (url){
     }
 }
 
+var pb_proxy_route=function (url){
+
+   var  headers = {
+        'User-Agent': 'request',
+            'Authorization':'Basic YWRtaW46YWRtaW4=',
+            'Username':'admin',
+            'Password':'admin'
+    }
+
+    return function (req,res){
+        var proxy = null;
+        if(req.method === 'POST') {
+            proxy = request.post({uri: url, json: req.body,headers:headers});
+        } else if (req.method === 'DELETE'){
+            proxy = request.delete({uri: url, json: req.body,headers:headers});
+        }   else if (req.method === 'PUT'){
+            proxy = request.put({uri: url, json: req.body,headers:headers});
+        } else {
+            proxy = request.get({uri:url,qs:req.query,headers:headers});
+        }
+        req.pipe(proxy).pipe(res);
+    }
+}
+
 module.exports = function (app){
 
     app.all('/api/lights',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartLightGateway') );
     app.all('/api/organisation',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-OrganizationAddOn'));
     app.all('/api/subscriber',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn'));
     app.all('/api/parking',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartParkingGateway'));
+
+    app.all('/api/spatial',User.authorize,pb_proxy_route('http://192.168.100.244:8080/rest/Spatial/FeatureService/tables/features.json'));
 
     app.get('/api/poi',User.authorize,function (req,res){
         var proxy = request.get({
