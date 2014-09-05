@@ -248,6 +248,19 @@ Request Body:
 DELETE  https://localhost/offers/540967339bd34b840fb0698d  delete a event or offer
 
 
+#File upload service
+
+POST https://localhost/upload
+
+submit file with name "file"
+
+Response:
+{
+            "image": "/offer-images/1409918820501-penguins.jpg"
+}
+
+This name is used to create offer /event
+
 
 
 
