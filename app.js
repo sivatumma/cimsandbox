@@ -47,6 +47,7 @@ var muser = require('./routes/muser.js')(app);
 var fixtures = require('./routes/fixtures.js')(app);
 var mqi = require('./routes/mqi.js')(app);
 var offers = require('./routes/offers.js')(app);
+var upload = require('./routes/upload.js')(app);
 
 mongoose.connect(config.database);
 var db = mongoose.connection;
