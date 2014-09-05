@@ -8,12 +8,19 @@ var app = express();
 var fs=require('fs');
 var user_model=require('./models/user.js')(mongoose);
 var mobile_user_model=require('./models/muser.js')(mongoose);
+var offer_model=require('./models/offer.js')(mongoose);
 
 app.configure(function() {
     app.set('port', process.env.PORT || 443);
     app.set('config', config);
     app.set('env', config.env);
     app.use(express.favicon('public/favicon.ico'));
+    app.use(function (req, res, next) {
+        res.set('Access-Control-Allow-Origin', '*');
+        res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+        res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Accept');
+        next();
+    });
     if(config.env=='development')
     app.use(express.logger('dev'));
     app.use(express.json({limit:'500mb'}));
@@ -39,6 +46,7 @@ var user = require('./routes/user.js')(app);
 var muser = require('./routes/muser.js')(app);
 var fixtures = require('./routes/fixtures.js')(app);
 var mqi = require('./routes/mqi.js')(app);
+var offers = require('./routes/offers.js')(app);
 
 mongoose.connect(config.database);
 var db = mongoose.connection;
@@ -57,6 +65,7 @@ db.once('open', function callback () {
 
 
 process.on('uncaughtException',function (err){
+    console.log(err)
     console.log(err.stack);
     process.exit(1);
 });

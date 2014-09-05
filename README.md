@@ -196,6 +196,57 @@ Response Body:
 }
 
 
+#Offers and Events#
+
+Every Service must set "token" header to authencate.
+
+GET https://localhost/offers ,Returns array of offers and events
+GET https://localhost/offers?q={"model":"OFFER"},Returns array of offers only
+GET https://localhost/offers?q={"model":"EVENT"},Returns array of events only
+GET https://localhost/offers?q={"model":"OFFER","category":"Dining"} , Returns offers with category dining
+
+POST https://localhost/offers    , to create a offer /event
+Request Body:
+{
+
+         "thumb": "/offer-images/placeholder.png",
+         "title": "f4rauyb3oh",
+         "location": "wfqfi5s6g0q62rf2s",
+         "description": "uezjhrserw6bmhwnz20ij3aosyxc",
+         "category": "Dining",
+         "date": "2014-09-05T07:33:07.974Z",
+         "model": "OFFER",
+         "featured": false,
+         "parking_available": "MEDIUM",
+         "crowd_level": "LOW",
+         "latlng": {
+           "lat": "41.8337329",
+           "lng": "-87.7321555"
+         }
+       }
+
+POST https://localhost/offers/540967339bd34b840fb0698d    , to update a offer /event
+Request Body:
+{
+    "_id": "540967339bd34b840fb0698d",
+    "thumb": "/offer-images/placeholder.png",
+    "title": "f4rauyb3oh",
+    "location": "wfqfi5s6g0q62rf2s",
+    "description": "uezjhrserw6bmhwnz20ij3aosyxc",
+    "category": "Dining",
+    "date": "2014-09-05T07:33:07.974Z",
+    "model": "OFFER",
+    "featured": false,
+    "parking_available": "MEDIUM",
+    "crowd_level": "LOW",
+    "latlng": {
+      "lat": "41.8337329",
+      "lng": "-87.7321555"
+    }
+  }
+
+DELETE  https://localhost/offers/540967339bd34b840fb0698d  delete a event or offer
+
 
 
 

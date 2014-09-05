@@ -29,4 +29,40 @@ module.exports = function (app){
 
     });
 
+    app.get('/fixtures/offers/:type',function (req,res,next){
+        fakery.fake('offer', mongoose.model('offer'),{
+            "thumb": "/offer-images/placeholder.png",
+            "title": fakery.g.alphanum(10,20),
+            "location": fakery.g.alphanum(10,20),
+            "latlng": {
+                "lat": "41.8337329",
+                "lng": "-87.7321555"
+            },
+            "description": fakery.g.alphanum(10,50),
+            "category": fakery.g.pick([
+                "Arts, Culture, & Entertainment"
+                ,"Dining"
+                ,"Groups"
+                ,"Hotels"
+                ,"Music & Nightlife"
+                ,"Shopping"
+                ,"Sports & Recreation"
+                ,"Tours & Attractions"
+                ,"Transportation"]),
+            "date": fakery.g.pick([new Date()]),
+            "crowd_level": fakery.g.pick(['LOW','MEDIUM','HIGH']),
+            "parking_available": fakery.g.pick(['LOW','MEDIUM','HIGH']),
+            "featured": fakery.g.rndbool(),
+            "model": req.params.type
+        });
+
+
+        fakery.makeAndSave('offer', function(err, offer) {
+            console.log(err);
+            res.send(offer.toJSON());
+        });
+
+
+    });
+
 }
