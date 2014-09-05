@@ -52,6 +52,8 @@ module.exports = function (app){
 	app.all('/api/kiosk',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartKioskGateway'));
 
     app.all('/api/spatial',User.authorize,pb_proxy_route('http://192.168.100.244:8080/rest/Spatial/FeatureService/tables/features.json'));
+    app.all('/api/neighborhood',User.authorize,pb_proxy_route('http://192.168.100.244:8080/rest/cc_neighborhood/results.json'));
+    app.all('/api/city-asset',User.authorize,pb_proxy_route('http://192.168.100.244:8080/rest/cc_cityasset/results.json'));
 
     app.get('/api/poi',User.authorize,function (req,res){
         var proxy = request.get({
