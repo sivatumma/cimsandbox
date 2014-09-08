@@ -1,9 +1,239 @@
 <!DOCTYPE html>
-<html>
+<!--[if IE 8]>
+<html lang="en" class="ie8">
+<![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9">
+<![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-    <title></title>
-</head>
-<body>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <!-- Global CSS -->
 
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="angular/css/animate.css">
+    <link rel="stylesheet" href="jquery/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="angular/css/bootstrap.css">
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="angular/css/offers.css">
+       <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="">
+<div class="wrapper ng-scope" ng-app="profile">
+    <!-- ******HEADER****** -->
+    <header id="header" class="header ng-scope" ng-controller="offersController">
+        <div class="container">
+            <h1 class="logo pull-left">
+               CLS-OFFERS
+            </h1>
+            <!--//logo-->
+            <nav id="main-nav" class="main-nav navbar-right" role="navigation">
+               <div class="navbar-collapse collapse" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item"><a  class="btn btn-primary" ng-click="open('xs');" href="#">Create Offer</a></li>
+                    </ul>
+               </div>
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <section class="container  ng-scope" ng-controller="offersController">
+
+        <div id="user_books">
+            <div class="row-fluid">
+                <div class="col-md-3  ng-scope margin-btm" ng-repeat="offer in offersList">
+                    <h5 class="boot_title text-info text-center">
+                        {{ offer.title }}
+                    </h5>
+                    <div class="book_thumbs">
+                        <div>
+                            <a href="#" class="ng-scope" ng-href="#" >
+                                <img alt="{{ offer.title }}" src="/offer-images/placeholder.png" ng-src="{{offer.thumb}}" class="img-responsive img-thumbnail"> </a>
+                        </div>
+                        <div class="book_editor">
+                            <a href="#" class="btn btn-primary btn-width80 " ng-click="edit_offer($index)"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                            <a href="#" class="btn btn-primary btn-width80 " ng-click="delete_offer($index)"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/ng-template" id="create_offer_model.html">
+            <div class="modal-header">
+                <h4 class="modal-title">Create a new Offer</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="create_offer_form" novalidate="novalidate" class="form-horizontal">
+                    <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-md-12"><input type="text" ng-model="offer.title" Tooltip="Enter Title" required name="title" maxlength="255" placeholder=" Title" class="form-control"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12"><input type="text" ng-model="offer.location" Tooltip="Enter Location " required name="author" maxlength="255" placeholder="Location" class="form-control"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12"><input type="text" ng-model="offer.description" required name="description" maxlength="255" Tooltip="Enter description" placeholder="description" class="form-control"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <select ng-model="offer.crowd_level" ng-options="crowd for crowd in crowd_level" Tooltip="Select crowd level" class="form-control" required name="crowd_level">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12"><select ng-model="offer.parking_available" Tooltip="Select parking available" ng-options="parking for parking in parking_available" class="form-control" required name="parking_available">
+
+                        </select></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12"><input type="text" ng-model="offer.date" ui-date ui-date-format="" Tooltip="Enter date" name="date" maxlength="255" placeholder="date"  class="form-control datePicker"/></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12"><select ng-model="offer.model" Tooltip="Select model" ng-options="mod for mod in model_type" class="form-control" required name="model">
+                        </select></div>
+                    </div>
+                        <div class="form-group">
+                            <div class="col-md-12"><select ng-model="offer.category" ng-options="cate for cate in category_type" ng-disabled = "offer.model == 'EVENT' " Tooltip="Select category type" class="form-control" required name="category_type">
+                            </select>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                       <span class="btn  btn-file">
+                           Select Image  <input type="file" ng-file-select="onFileSelect($files)" accept="image/*" required="" placeholder="Select Image" class="form-control">
+                       </span>
+                            <span class="btn" style="width:150px;"><img ng-src="{{localUrl}}" ng-show="localUrl" class="img-thumbnail img-upload-thimb"/></span>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-6"><input type="text" ng-model="offer.latlng.lat" Tooltip="Enter Latitude" name="latitude" maxlength="255" placeholder="Latitude"  readonly="readonly" class="form-control"/></div>
+                            <div class="col-md-6"><input type="text" ng-model="offer.latlng.lng" Tooltip="Enter Longitude" name="longitude" maxlength="255" placeholder="Longitude"  readonly="readonly" class="form-control"/></div>
+
+                        </div>
+                        <div class="form-group" id="map-canvas">
+                        <google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+                            <marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id" >
+                            </marker>
+                        </google-map>
+                    </div>
+                    </div>
+                    </div>
+                    <div>{{message}}</div>
+                </form>
+                <div class="modal-footer"><input type="button" class="btn btn-primary" value="Create" ng-disabled="create_offer_form.$invalid || !hascover " ng-click="createOffer();">
+                    <button class="btn btn-warning" ng-click="cancel();">Cancel</button></div>
+            </div>
+
+        </script>
+        <script type="text/ng-template" id="edit_offer_model.html">
+            <div class="modal-header">
+                <h4 class="modal-title">Update  {{offer.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <form name="create_offer_form" novalidate="novalidate" class="form-horizontal">
+                    <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-md-12"><input type="text" ng-model="offer.title" Tooltip="Enter Title" required name="title" maxlength="255" placeholder=" Title" class="form-control"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12"><input type="text" ng-model="offer.location" Tooltip="Enter Location " required name="author" maxlength="255" placeholder="Location" class="form-control"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12"><input type="text" ng-model="offer.description" required name="description" maxlength="255" Tooltip="Enter description" placeholder="description" class="form-control"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <select ng-model="offer.crowd_level" ng-options="crowd for crowd in crowd_level" Tooltip="Select crowd level" class="form-control" required name="crowd_level">
+
+                            </select>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                        <div class="col-md-12"><select ng-model="offer.parking_available" Tooltip="Select parking available" ng-options="parking for parking in parking_available" class="form-control" required name="parking_available">
+
+                        </select></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12"><input type="text" ng-model="offer.date" ui-date ui-date-format="" Tooltip="Enter date" name="date" maxlength="255" placeholder="date" class="form-control "/></div>
+                    </div>
+                        <div class="form-group">
+                        <div class="col-md-12"><select ng-model="offer.model" Tooltip="Select model" ng-options="mod for mod in model_type" class="form-control" required name="model">
+                         </select></div>
+                    </div>
+                        <div class="form-group">
+                            <div class="col-md-12"><select ng-model="offer.category" ng-options="cate for cate in category_type" ng-disabled="offer.model == 'EVENT' " Tooltip="Select category type" class="form-control" required name="category_type">
+                            </select>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                       <span class="btn  btn-file">
+                           Select Image  <input type="file" ng-file-select="onFileSelect($files)" accept="image/*" required="" placeholder="Select Image" class="form-control">
+                       </span>
+                            <span ng-if="localUrl" class="btn" style="width:150px;"><img ng-src="{{localUrl}}" ng-show="localUrl" class="img-thumbnail img-upload-thimb"/></span>
+                            <span  ng-if="!localUrl" class="btn" style="width:150px;"><img ng-src="{{offer.thumb}}"  class="img-thumbnail img-upload-thimb"/></span>
+                        </div>
+                    </div>
+                    </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="col-md-6"><input type="text" ng-model="offer.latlng.lat" Tooltip="Enter Latitude" name="latitude" maxlength="255" placeholder="Latitude"  readonly="readonly" class="form-control"/></div>
+                                <div class="col-md-6"><input type="text" ng-model="offer.latlng.lng" Tooltip="Enter Longitude" name="longitude" maxlength="255" placeholder="Longitude"  readonly="readonly" class="form-control"/></div>
+
+                            </div>
+                            <div class="form-group" id="map-canvas2">
+                                <google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+                                    <marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id" >
+                                    </marker>
+                                </google-map>
+                            </div>
+                        </div>
+                    </div>
+                    <div>{{message}}</div>
+                </form>
+                <div class="modal-footer"><input type="button" class="btn btn-primary" value="Update" ng-disabled="create_offer_form.$invalid  " ng-click="updateOffer();">
+                    <button class="btn btn-warning" ng-click="cancel();">Cancel</button></div>
+            </div>
+
+        </script>
+
+    </section>
+
+    <!--//footer-->
+    <script src="angular/js/angular-file-upload-shim.js"></script>
+    <script src="jquery/jquery-1.10.1.min.js"></script>
+    <script src="angular/js/angular.js"></script>
+    <script src="jquery/jquery-ui/jquery-ui.min.js"></script>
+    <script src="angular/js/date.js"></script>
+    <script src="angular/js/angular-file-upload.js"></script>
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+    <script src="angular/js/lodash.underscore.js"></script>
+    <script src="angular/js/angular-google-maps.js"></script>
+    <script src="angular/js/ui-bootstrap-tpls.js"></script>
+    <script src="angular/js/offers-angular.js"></script>
+    </div>
 </body>
 </html>
