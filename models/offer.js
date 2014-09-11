@@ -2,6 +2,7 @@ module.exports = function (mongoose) {
     var Schema = mongoose.Schema;
     var OfferSchema = Schema({
         thumb: String,
+        coupon: String,
         title: String,
         location: String,
         latlng:{ lat: String, lng : String },

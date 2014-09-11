@@ -10,6 +10,7 @@ var offerController = function($scope,$modalInstance, $http, $timeout, $upload,$
      $scope.offer={
         title:'',
          thumb:'',
+         coupon : '',
          location:'',
          latlng:{"lat": "41.8337329","lng": "-87.7321555"},
          description:'',
@@ -20,8 +21,8 @@ var offerController = function($scope,$modalInstance, $http, $timeout, $upload,$
          featured:'false',
          model:'OFFER'
     }
-    $scope.hascover=true;
-    $scope.hascover=true;
+
+
 
     $scope.map = {center: {latitude: $scope.offer.latlng.lat, longitude: $scope.offer.latlng.lng }, zoom: 6 };
     $scope.options = {scrollwheel: true};
@@ -73,8 +74,35 @@ var offerController = function($scope,$modalInstance, $http, $timeout, $upload,$
             file: file
         }).progress(function(evt) {
            }).success(function(data, status, headers, config) {
+                $scope.hascover=true;
                $scope.offer.thumb=data.image;
                }).error(function (err){
+
+            });
+    }
+
+    $scope.onCouponFileSelect=function ($files){
+        var file = $files[0];
+        if (!file.type.match('image.*')) {
+            return ;
+        }
+        var reader = new FileReader();
+        reader.onload = (function(theFile) {
+            return function(e) {
+                $scope.$apply(function () {
+                    $scope.couponLocalUrl=e.target.result ;
+                });
+            };
+        })(file);
+        reader.readAsDataURL(file);
+        $scope.upload = $upload.upload({
+            url: '/upload',
+            file: file
+        }).progress(function(evt) {
+            }).success(function(data, status, headers, config) {
+                $scope.hascover=true;
+                $scope.offer.coupon=data.image;
+            }).error(function (err){
 
             });
     }
@@ -101,6 +129,7 @@ var offerController = function($scope,$modalInstance, $http, $timeout, $upload,$
         $scope.offer={
             title:'',
             thumb:'',
+            coupon:'',
             location:'',
             latlng:{"lat": "41.8337329","lng": "-87.7321555"},
             description:'',
@@ -173,6 +202,32 @@ var editOfferController = function($scope,$modalInstance, $http, $timeout, $uplo
             }).success(function(data, status, headers, config) {
                 $scope.offer.thumb=data.file;
 
+            }).error(function (err){
+
+            });
+    }
+
+    $scope.onCouponFileSelect=function ($files){
+        var file = $files[0];
+        if (!file.type.match('image.*')) {
+            return ;
+        }
+        var reader = new FileReader();
+        reader.onload = (function(theFile) {
+            return function(e) {
+                $scope.$apply(function () {
+                    $scope.couponLocalUrl=e.target.result ;
+                });
+            };
+        })(file);
+        reader.readAsDataURL(file);
+        $scope.upload = $upload.upload({
+            url: '/upload',
+            file: file
+        }).progress(function(evt) {
+            }).success(function(data, status, headers, config) {
+                $scope.hascover=true;
+                $scope.offer.coupon=data.image;
             }).error(function (err){
 
             });
