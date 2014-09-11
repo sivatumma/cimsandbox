@@ -31,10 +31,12 @@ module.exports = function (app){
 
     app.get('/fixtures/offers/:type',function (req,res,next){
         fakery.fake('offer', mongoose.model('offer'),{
-            "thumb": "/offer-images/placeholder.png",
-            "coupon":"/offer-images/placeholder.png",
+            "thumb": "placeholder.png",
+            "coupon":"placeholder.png",
             "title": fakery.g.alphanum(10,20),
             "location": fakery.g.alphanum(10,20),
+            "frequency":10,
+            "radius":10,
             "latlng": {
                 "lat": "41.8337329",
                 "lng": "-87.7321555"

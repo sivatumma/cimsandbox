@@ -60,7 +60,7 @@
                     <div class="book_thumbs">
                         <div>
                             <a href="#" class="ng-scope" ng-href="#" >
-                                <img alt="{{ offer.title }}" src="/offer-images/placeholder.png" ng-src="{{offer.thumb}}" class="img-responsive img-thumbnail"> </a>
+                                <img alt="{{ offer.title }}" src="/offer-images/placeholder.png" ng-src="offer-images/{{offer.thumb}}" class="img-responsive img-thumbnail"> </a>
                         </div>
                         <div class="book_editor">
                             <a href="#" class="btn btn-primary btn-width80 " ng-click="edit_offer($index)"><span class="glyphicon glyphicon-edit"></span> Edit</a>
@@ -108,11 +108,17 @@
                         <div class="col-md-12"><select ng-model="offer.model" Tooltip="Select model" ng-options="mod for mod in model_type" class="form-control" required name="model">
                         </select></div>
                     </div>
-                        <div class="form-group">
+                    <div class="form-group">
                             <div class="col-md-12"><select ng-model="offer.category" ng-options="cate for cate in category_type" ng-disabled = "offer.model == 'EVENT' " Tooltip="Select category type" class="form-control" required name="category_type">
                             </select>
                             </div>
-                        </div>
+                    </div>
+                    <div class="form-group">
+                            <div class="col-md-6"><select ng-model="offer.frequency" ng-options="freq for freq in ferquency_type"  Tooltip="Select frequency" class="form-control" required name="frequency">
+                            </select>
+                            </div>
+                            <div class="col-md-6"><input type="text" ng-model="offer.radius" required name="radius" maxlength="255" Tooltip="Enter Radius" placeholder="Radius" class="form-control"/> </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-md-5">
                        <span class="btn  btn-file">
@@ -191,19 +197,25 @@
                             </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-6"><select ng-model="offer.frequency" ng-options="freq for freq in ferquency_type"  Tooltip="Select frequency" class="form-control" required name="frequency">
+                            </select>
+                            </div>
+                            <div class="col-md-6"><input type="text" ng-model="offer.radius" required name="radius" maxlength="255" Tooltip="Enter Radius" placeholder="Radius" class="form-control"/> </div>
+                        </div>
                     <div class="form-group">
                         <div class="col-md-5">
                        <span class="btn  btn-file">
                            Select Image  <input type="file" ng-file-select="onFileSelect($files)" accept="image/*" required="" placeholder="Select Image" class="form-control">
                        </span>
                             <span ng-if="localUrl" class="btn" style="width:150px;"><img ng-src="{{localUrl}}" ng-show="localUrl" class="img-thumbnail img-upload-thimb"/></span>
-                            <span  ng-if="!localUrl" class="btn" style="width:150px;"><img ng-src="{{offer.thumb}}"  class="img-thumbnail img-upload-thimb"/></span>
+                            <span  ng-if="!localUrl" class="btn" style="width:150px;"><img ng-src="offer-images/{{offer.thumb}}"  class="img-thumbnail img-upload-thimb"/></span>
                         </div>
                         <div class="col-md-5">
                        <span class="btn  btn-file">
                            Select Coupon Image  <input type="file" ng-file-select="onCouponFileSelect($files)" accept="image/*" required="" placeholder="Select Image" class="form-control">
                        </span>
-                            <span  ng-if="!couponLocalUrl" class="btn" style="width:150px;"><img ng-src="{{offer.coupon}}"  class="img-thumbnail img-upload-thimb"/></span>
+                            <span  ng-if="!couponLocalUrl" class="btn" style="width:150px;"><img ng-src="offer-images/{{offer.coupon}}"  class="img-thumbnail img-upload-thimb"/></span>
                             <span ng-if="couponLocalUrl" class="btn" style="width:150px;"><img ng-src="{{couponLocalUrl}}" ng-show="couponLocalUrl" class="img-thumbnail img-upload-thimb"/></span>
                         </div>
                     </div>

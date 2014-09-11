@@ -3,6 +3,7 @@ var category_type = ["ARTS", "CULTURE & ENTERTAINMENT","DINING","GROUPS","HOTELS
 var crowd_level = ['LOW','MEDIUM','HIGH'];
 var parking_available =['LOW','MEDIUM','HIGH'];
 var model_type = ['OFFER','EVENT']
+var ferquency_type = [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120];
 var profile=angular.module('profile', [ 'angularFileUpload','ui.bootstrap','ui.date','google-maps']);
 
 
@@ -19,9 +20,10 @@ var offerController = function($scope,$modalInstance, $http, $timeout, $upload,$
          crowd_level:'LOW',
          parking_available:'LOW',
          featured:'false',
-         model:'OFFER'
+         model:'OFFER',
+         radius: 0,
+         frequency: 60
     }
-
 
 
     $scope.map = {center: {latitude: $scope.offer.latlng.lat, longitude: $scope.offer.latlng.lng }, zoom: 6 };
@@ -47,6 +49,7 @@ var offerController = function($scope,$modalInstance, $http, $timeout, $upload,$
     $scope.crowd_level=$window.crowd_level;
     $scope.parking_available = $window.parking_available;
     $scope.model_type = $window.model_type;
+    $scope.ferquency_type = $window.ferquency_type;
     $scope.latlng = {
         lat : $scope.lat,
         lng : $scope.lng
@@ -138,7 +141,9 @@ var offerController = function($scope,$modalInstance, $http, $timeout, $upload,$
             crowd_level:'LOW',
             parking_available:'LOW',
             featured:'false',
-            model:'OFFER'
+            model:'OFFER',
+            radius: 0,
+            frequency: 0
         } ;
         $scope.hascover=false;
     }
@@ -154,6 +159,7 @@ var editOfferController = function($scope,$modalInstance, $http, $timeout, $uplo
     $scope.crowd_level=$window.crowd_level;
     $scope.parking_available = $window.parking_available;
     $scope.model_type = $window.model_type;
+    $scope.ferquency_type = $window.ferquency_type;
 
     $scope.map = {center: {latitude: $scope.offer.latlng.lat, longitude: $scope.offer.latlng.lng }, zoom: 6 };
     $scope.options = {scrollwheel: true};

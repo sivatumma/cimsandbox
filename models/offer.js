@@ -3,6 +3,8 @@ module.exports = function (mongoose) {
     var OfferSchema = Schema({
         thumb: String,
         coupon: String,
+        radius:Number,
+        frequency:Number,
         title: String,
         location: String,
         latlng:{ lat: String, lng : String },
