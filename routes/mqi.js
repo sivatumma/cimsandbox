@@ -57,6 +57,9 @@ module.exports = function (app){
     app.all('/api/routes',pb_proxy_route('http://192.168.100.244:8080/rest/cc_routes/results.json'));
     app.all('/api/gov-asset',User.authorize,pb_proxy_route('http://192.168.100.244:8080/rest/cc_govasset/results.json'));
     app.all('/api/directions',pb_proxy_route('http://192.168.100.244:8080/rest/cc_directions_stop/results.json'));
+	app.all('/api/real-directions',pb_proxy_route('http://192.168.100.244:8080/rest/cc_real_directions/results.json'));
+
+	
 
     app.get('/api/poi',User.authorize,function (req,res){
         var proxy = request.get({
