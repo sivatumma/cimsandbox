@@ -248,7 +248,7 @@ Request Body:
 DELETE  https://localhost/offers/540967339bd34b840fb0698d  delete a event or offer
 
 
-#File upload service
+#File upload service#
 
 POST https://localhost/upload
 
@@ -260,6 +260,23 @@ Response:
 }
 
 This name is used to create offer /event
+
+
+#Tour service#
+
+GET https://localhost/tours , list tours
+
+POST https://localhost/tours/ , create tours
+
+request body:
+{"tour_id":"e92a4b16-a7e9-4eed-test-1c6f5586094a","status":true}
+
+POST https://localhost/tours/{_id}      , update tour
+
+request body:
+{"tour_id":"e92a4b16-a7e9-4eed-test-1c6f5586094a","status":true}
+
+DELETE  https://localhost/tours/{_id}   ,delete tour
 
 
 
