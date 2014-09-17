@@ -45,27 +45,27 @@ var pb_proxy_route=function (url){
 
 module.exports = function (app){
 
-    app.all('/api/lights',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartLightGateway') );
-    app.all('/api/organisation',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-OrganizationAddOn'));
-    app.all('/api/subscriber',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn'));
-    app.all('/api/parking',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartParkingGateway'));
-	app.all('/api/kiosk',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartKioskGateway'));
-    app.all('/api/city-info',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartCityInfoGateway'));
-    app.all('/api/smart-movie',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartMovieGateway'));
-    app.all('/api/smart-deal',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartDealGateway'));
+    app.all('/api/lights',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartLightGateway') );
+    app.all('/api/organisation',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-OrganizationAddOn'));
+    app.all('/api/subscriber',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn'));
+    app.all('/api/parking',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartParkingGateway'));
+	app.all('/api/kiosk',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartKioskGateway'));
+    app.all('/api/city-info',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartCityInfoGateway'));
+    app.all('/api/smart-movie',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartMovieGateway'));
+    app.all('/api/smart-deal',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartDealGateway'));
 
 
-    app.all('/api/spatial',User.authorize,pb_proxy_route('http://192.168.100.244:8080/rest/Spatial/FeatureService/tables/features.json'));
-    app.all('/api/neighborhood',User.authorize,pb_proxy_route('http://192.168.100.244:8080/rest/cc_neighborhood/results.json'));
-    app.all('/api/city-asset',User.authorize,pb_proxy_route('http://192.168.100.244:8080/rest/cc_cityasset/results.json'));
+    app.all('/api/spatial',pb_proxy_route('http://192.168.100.244:8080/rest/Spatial/FeatureService/tables/features.json'));
+    app.all('/api/neighborhood',pb_proxy_route('http://192.168.100.244:8080/rest/cc_neighborhood/results.json'));
+    app.all('/api/city-asset',pb_proxy_route('http://192.168.100.244:8080/rest/cc_cityasset/results.json'));
     app.all('/api/routes',pb_proxy_route('http://192.168.100.244:8080/rest/cc_routes/results.json'));
-    app.all('/api/gov-asset',User.authorize,pb_proxy_route('http://192.168.100.244:8080/rest/cc_govasset/results.json'));
+    app.all('/api/gov-asset',pb_proxy_route('http://192.168.100.244:8080/rest/cc_govasset/results.json'));
     app.all('/api/directions',pb_proxy_route('http://192.168.100.244:8080/rest/cc_directions_stop/results.json'));
 	app.all('/api/real-directions',pb_proxy_route('http://192.168.100.244:8080/rest/cc_real_directions/results.json'));
 
 	
 
-    app.get('/api/poi',User.authorize,function (req,res){
+    app.get('/api/poi',function (req,res){
         var proxy = request.get({
             uri:'http://192.168.100.244:8080/rest/poiservice/results.json',
             qs:req.query,
