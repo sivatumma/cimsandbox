@@ -2,11 +2,17 @@ var request=require('request');
 var mongoose=require('mongoose');
 var User=mongoose.model('User');
 
+var proxy_error=function(error, response, body){    
+	if(error)return res.send(500,error);
+  };
+
 var proxy_route=function (url){
 
     return function (req,res){
+
         var proxy = null;
-        if(req.method === 'POST') {
+		console.log(req.method +" Request :->"+req.originalUrl);
+        /*if(req.method === 'POST') {
             proxy = request.post({uri: url, json: req.body});
         } else if (req.method === 'DELETE'){
             proxy = request.delete({uri: url, json: req.body});
@@ -14,7 +20,18 @@ var proxy_route=function (url){
             proxy = request.put({uri: url, json: req.body});
         } else {
             proxy = request.get({uri:url,qs:req.query});
-        }
+        }*/
+
+		if(req.method == 'GET'){
+			proxy = request.get({uri:url,qs:req.query},function(error, response, body){    
+						if(error)return res.send(500,error);
+					});
+		}else {
+			proxy = request[req.method.toLowerCase()]({uri: url, json: req.body},function(error, response, body){    
+						if(error)return res.send(500,error);
+			});			
+		}
+		
         req.pipe(proxy).pipe(res);
     }
 }
@@ -29,6 +46,7 @@ var pb_proxy_route=function (url){
     }
 
     return function (req,res){
+		console.log(req.method +" Request :->"+req.originalUrl);
         var proxy = null;
         if(req.method === 'POST') {
             proxy = request.post({uri: url, json: req.body,headers:headers});
