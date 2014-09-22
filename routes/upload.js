@@ -20,7 +20,7 @@ module.exports = function (app){
             var file_path=path.join(user_dir,new_file_name);
             fs.rename(file.path,file_path,function (err){
                 if(err)return res.send(500,{message:err.stack});
-                res.send({image:"/offer-images/"+new_file_name})
+                res.send({image:new_file_name})
             })
 
         });
