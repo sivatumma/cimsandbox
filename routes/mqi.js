@@ -50,6 +50,32 @@ var pb_proxy_route=function (url){
     }
 }
 
+var lc_proxy_route=function (url){
+
+    var  headers = {
+        'User-Agent': 'request',
+        'Authorization':'Basic YWRtaW46UEBzc1cwcmQhMjM0NTY3',
+        'Username':'admin',
+        'Password':'P@ssW0rd!234567'
+    }
+
+    return function (req,res){
+        console.log(req.method +" Request :->"+req.originalUrl);
+        var proxy = null;
+        if(req.method == 'GET'){
+            proxy = request.get({uri:url,qs:req.query,headers:headers,timeout:TIMEOUT},function(error, response, body){
+                if(error)return res.send(500,error);
+                console.log('Response recieved:'+req.originalUrl);
+            });
+        }else {
+            proxy = request[req.method.toLowerCase()]({uri: url, json: req.body,headers:headers,timeout:TIMEOUT},function(error, response, body){
+                if(error)return res.send(500,error);
+            });
+        }
+        req.pipe(proxy).pipe(res);
+    }
+}
+
 module.exports = function (app){
 
     app.all('/api/lights',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartLightGateway') );
@@ -69,6 +95,9 @@ module.exports = function (app){
     app.all('/api/gov-asset',pb_proxy_route('http://192.168.100.244:8080/rest/cc_govasset/results.json'));
     app.all('/api/directions',pb_proxy_route('http://192.168.100.244:8080/rest/cc_directions_stop/results.json'));
 	app.all('/api/real-directions',pb_proxy_route('http://192.168.100.244:8080/rest/cc_real_directions/results.json'));
+
+    app.all('/api/clients-count',lc_proxy_route('https://173.36.245.194/api/contextaware/v1/location/clients/count'));
+
 
 	
 
