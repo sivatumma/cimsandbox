@@ -104,7 +104,7 @@ module.exports = function (mongoose) {
 
     usersSchema.statics.authorize = function(req,res, next) {
         if(!req.headers['token']) res.send(401,{message:'Authentication token required.'});
-        mongoose.model('User').findOne({ 'tokens.token': req.headers['token'] }, function(err, user) {
+        mongoose.model('mUser').findOne({ 'tokens.token': req.headers['token'] }, function(err, user) {
             if (err) return res.send(500,{message:err});
             if (!user) return res.send(403,{message:'This request authentication  required.'});
             req.user=user;

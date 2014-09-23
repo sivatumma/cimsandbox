@@ -1,6 +1,7 @@
 var request=require('request');
 var mongoose=require('mongoose');
 var User=mongoose.model('User');
+var parseString = require('xml2js').parseString;
 var TIMEOUT=60000;
 var proxy_route=function (url){
 
@@ -65,14 +66,20 @@ var lc_proxy_route=function (url){
         if(req.method == 'GET'){
             proxy = request.get({uri:url,qs:req.query,headers:headers,timeout:TIMEOUT},function(error, response, body){
                 if(error)return res.send(500,error);
-                console.log('Response recieved:'+req.originalUrl);
+                if (!error && response.statusCode == 200) {
+                    parseString(body, function (err, result) {
+                        if(err)return res.send(500,err);
+                        res.send(result);
+                    });
+                }
             });
         }else {
             proxy = request[req.method.toLowerCase()]({uri: url, json: req.body,headers:headers,timeout:TIMEOUT},function(error, response, body){
                 if(error)return res.send(500,error);
             });
+            req.pipe(proxy).pipe(res);
         }
-        req.pipe(proxy).pipe(res);
+
     }
 }
 
@@ -96,7 +103,7 @@ module.exports = function (app){
     app.all('/api/directions',pb_proxy_route('http://192.168.100.244:8080/rest/cc_directions_stop/results.json'));
 	app.all('/api/real-directions',pb_proxy_route('http://192.168.100.244:8080/rest/cc_real_directions/results.json'));
 
-    app.all('/api/clients-count',lc_proxy_route('https://173.36.245.194/api/contextaware/v1/location/clients/count'));
+    app.all('/api/clients-count',lc_proxy_route('https://173.36.245.236/api/contextaware/v1/location/clients/count'));
 
 
 	
