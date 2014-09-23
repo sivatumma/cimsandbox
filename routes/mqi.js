@@ -64,7 +64,7 @@ var lc_proxy_route=function (url){
         console.log(req.method +" Request :->"+req.originalUrl);
         var proxy = null;
         if(req.method == 'GET'){
-            proxy = request.get({uri:url,qs:req.query,headers:headers,timeout:TIMEOUT},function(error, response, body){
+            proxy = request.get({uri:url,qs:req.query,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
                 if(error)return res.send(500,error);
                 if (!error && response.statusCode == 200) {
                     parseString(body, function (err, result) {
@@ -74,7 +74,7 @@ var lc_proxy_route=function (url){
                 }
             });
         }else {
-            proxy = request[req.method.toLowerCase()]({uri: url, json: req.body,headers:headers,timeout:TIMEOUT},function(error, response, body){
+            proxy = request[req.method.toLowerCase()]({uri: url, json: req.body,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
                 if(error)return res.send(500,error);
             });
             req.pipe(proxy).pipe(res);
