@@ -62,9 +62,10 @@ var lc_proxy_route=function (url){
 
     return function (req,res){
         console.log(req.method +" Request :->"+req.originalUrl);
+        var to_path=req.path.replace('/api/mse/','');
         var proxy = null;
         if(req.method == 'GET'){
-            proxy = request.get({uri:url,qs:req.query,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+            proxy = request.get({uri:url+to_path,qs:req.query,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
                 if(error)return res.send(500,error);
                 if (!error && response.statusCode == 200) {
                     parseString(body, function (err, result) {
@@ -76,13 +77,59 @@ var lc_proxy_route=function (url){
                 }
             });
         }else {
-            proxy = request[req.method.toLowerCase()]({uri: url, json: req.body,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+            proxy = request[req.method.toLowerCase()]({uri: url+to_path, json: req.body,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
                 if(error)return res.send(500,error);
             });
             req.pipe(proxy).pipe(res);
         }
 
     }
+}
+
+function ise_proxy_route(req,res){
+   var url='https://68.20.187.152:9060/ers/config/endpoint';
+   var  headers = {
+        'User-Agent': 'request',
+        'Authorization':'Basic ZXJzOklvdHJlc3QxIQ==',
+        'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
+        'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
+   }
+
+    var post_body='<ns3:endpoint name="name" id="id" description="IOT User Endpoint" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
+
+    if(!req.body.mac)return res.send(500,{message:'MAC address missing in body.'})
+
+    if(req.method == 'POST'){
+        proxy = request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+            if(error)return res.send(500,error);
+            res.send({message:'OK'});
+        });
+    }
+
+    if(req.method == 'DELETE'){
+            request.get({uri:url+'?filter=mac.EQ.'+req.body.mac,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+                if(error)return res.send(500,error);
+                if (!error && response.statusCode == 200) {
+                    parseString(body, function (err, result) {
+                        if(err)return res.send(500,err);
+                        try {
+                            var token=result['ns2:searchResult']['resources'][0]['resource'][0]['$']['id'];
+                            console.log('found token'+token);
+                            request.del({uri: url+'/'+token, headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+                                if(error)return res.send(500,error);
+                                res.send({message:'OK'});
+                            });
+
+                        }catch(e){
+                         return res.send(500,e);
+                        }
+                    });
+                }else {
+                    res.send(response);
+                }
+            });
+    }
+
 }
 
 module.exports = function (app){
@@ -106,7 +153,11 @@ module.exports = function (app){
     app.all('/api/directions',pb_proxy_route('http://192.168.100.244:8080/rest/cc_directions_stop/results.json'));
 	app.all('/api/real-directions',pb_proxy_route('http://192.168.100.244:8080/rest/cc_real_directions/results.json'));
 
-    app.all('/api/clients-count',lc_proxy_route('https://173.36.245.236/api/contextaware/v1/location/clients/count'));
+    app.all(/\/api\/mse\/([^\/]+)\/?(.+)?/,lc_proxy_route('https://173.36.245.236/api/contextaware/v1/'));
+
+    app.all('/api/ise',ise_proxy_route);
+
+
 
 
 	
