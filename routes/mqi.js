@@ -71,6 +71,8 @@ var lc_proxy_route=function (url){
                         if(err)return res.send(500,err);
                         res.send(result);
                     });
+                }else {
+                    res.send(response);
                 }
             });
         }else {
@@ -93,6 +95,7 @@ module.exports = function (app){
     app.all('/api/city-info',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartCityInfoGateway'));
     app.all('/api/smart-movie',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartMovieGateway'));
     app.all('/api/smart-deal',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartDealGateway'));
+    app.all('/api/smart-traffic',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartTrafficGateway'));
 
 
     app.all('/api/spatial',pb_proxy_route('http://192.168.100.244:8080/rest/Spatial/FeatureService/tables/features.json'));
