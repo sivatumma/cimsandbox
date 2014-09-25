@@ -63,6 +63,7 @@ var lc_proxy_route=function (url){
     return function (req,res){
         console.log(req.method +" Request :->"+req.originalUrl);
         var to_path=req.path.replace('/api/mse/','');
+        console.log(url+to_path)
         var proxy = null;
         if(req.method == 'GET'){
             proxy = request.get({uri:url+to_path,qs:req.query,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
@@ -95,16 +96,7 @@ function ise_proxy_route(req,res){
         'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
    }
 
-    var post_body='<ns3:endpoint name="name" id="id" description="IOT User Endpoint" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
-
     if(!req.body.mac)return res.send(500,{message:'MAC address missing in body.'})
-
-    if(req.method == 'POST'){
-        proxy = request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
-            if(error)return res.send(500,error);
-            res.send({message:'OK'});
-        });
-    }
 
     if(req.method == 'DELETE'){
             request.get({uri:url+'?filter=mac.EQ.'+req.body.mac,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){

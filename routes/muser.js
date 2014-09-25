@@ -1,6 +1,9 @@
 var mongoose=require('mongoose');
 var _=require('lodash');
 var uuid=require('node-uuid');
+var request=require('request');
+var parseString = require('xml2js').parseString;
+var TIMEOUT=60000;
 Date.prototype.addHours= function(h){
     this.setHours(this.getHours()+h);
     return this;
@@ -51,8 +54,8 @@ module.exports = function (app){
         })
     });
 
-    app.post('/mobile-app/register',function (req,res){
-        if(!req.body.username || !req.body.password || !req.body.provider || !req.body.age || !req.body.sex) return res.send(500,{message:'Invalid request params.',status:500});
+    app.post('/mobile-app/register',ise_proxy_route,function (req,res){
+        if(!req.body.username || !req.body.mac ||  !req.body.password || !req.body.provider || !req.body.age || !req.body.sex) return res.send(500,{message:'Invalid request params.',status:500});
         var user=new User(req.body);
         user.save(function (err,doc){
             if(err) return res.send(403,'Username or email not available.');
@@ -77,6 +80,26 @@ module.exports = function (app){
             res.send({message:'Ok',status:200});
         })
     });
+
+
+    function ise_proxy_route(req,res,next){
+        var url='https://68.20.187.152:9060/ers/config/endpoint';
+        var  headers = {
+            'User-Agent': 'request',
+            'Authorization':'Basic ZXJzOklvdHJlc3QxIQ==',
+            'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
+            'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
+        }
+        var post_body='<ns3:endpoint name="name" id="id" description="IOT User Endpoint" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
+
+        if(!req.body.mac)return res.send(500,{message:'MAC address missing in body.'});
+
+        request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+            if(error)return res.send(500,error);
+            next();
+        });
+
+    }
 
 
 
