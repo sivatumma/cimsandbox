@@ -135,7 +135,17 @@ module.exports = function (app){
     app.all('/api/smart-movie',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartMovieGateway'));
     app.all('/api/smart-deal',function (req,res,next){
      var offer_json=require('./offers.json');
-        res.send(offer_json);
+     var offer_categories=require('./categories.json');
+
+        if(req.body.query
+        && req.body.query.select
+        && req.body.query.select.categoryName
+        ){
+            res.send(offer_categories);
+        }else {
+            res.send(offer_json);
+        }
+
     },proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartDealGateway'));
     app.all('/api/smart-traffic',proxy_route('http://mqciscocls.mqidentity.net:8080/fid-SmartTrafficGateway'));
 
