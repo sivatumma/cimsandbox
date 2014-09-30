@@ -10,7 +10,7 @@ require('./models/user.js')(mongoose);
 require('./models/muser.js')(mongoose);
 require('./models/offer.js')(mongoose);
 require('./models/tour.js')(mongoose);
-
+require('./models/feedback.js')(mongoose);
 app.configure(function() {
     app.set('port', process.env.PORT || 443);
     app.set('config', config);
@@ -50,7 +50,7 @@ var mqi = require('./routes/mqi.js')(app);
 var offers = require('./routes/offers.js')(app);
 var upload = require('./routes/upload.js')(app);
 require('./routes/tours.js')(app);
-
+require('./routes/feedbacks.js')(app);
 mongoose.connect(config.database);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
