@@ -137,8 +137,8 @@
                 </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <div class="col-md-6"><input type="text" ng-model="offer.latlng.lat" Tooltip="Enter Latitude" name="latitude" maxlength="255" placeholder="Latitude" class="form-control"/></div>
-                            <div class="col-md-6"><input type="text" ng-model="offer.latlng.lng" Tooltip="Enter Longitude" name="longitude" maxlength="255" placeholder="Longitude" class="form-control"/></div>
+                            <div class="col-md-6"><input type="text" ng-model="offer.latlng.lat" Tooltip="Enter Latitude" name="latitude" maxlength="255" placeholder="Latitude"  readonly="readonly" class="form-control"/></div>
+                            <div class="col-md-6"><input type="text" ng-model="offer.latlng.lng" Tooltip="Enter Longitude" name="longitude" maxlength="255" placeholder="Longitude"  readonly="readonly" class="form-control"/></div>
 
                         </div>
                         <div class="form-group" id="map-canvas">
