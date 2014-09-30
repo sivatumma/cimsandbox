@@ -21,7 +21,8 @@ module.exports = function (app){
 
         ], function (err, results) {
                 if (err)  return res.send(500,err);
-                res.send(results[0]);
+                if(results[0])return res.send(results[0]);
+                res.send(404,{message:'tour not found.'});
             }
         );
     })
