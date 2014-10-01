@@ -70,6 +70,17 @@ module.exports = function (app){
         })
     });
 
+    app.post('/session/save',User.authorize,function (req,res){
+        if(!req.body.user_id || !req.body.session_data) return res.send(500,{message:'Invalid request params.',status:500});
+
+        mongoose.model('User').update({_id:req.body.user_id},{$set:{session_data:req.body.session_data}},function (err){
+            if(err)return res.send(500,{message:err});
+            res.send({message:'Ok',status:200});
+        })
+
+    });
+
+
 
     app.post('/register',function (req,res){
         if(!req.body.username || !req.body.password || !req.body.provider || !req.body.age || !req.body.sex) return res.send(500,{message:'Invalid request params.',status:500});
