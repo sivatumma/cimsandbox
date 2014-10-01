@@ -32,8 +32,8 @@ app.configure(function() {
     app.use(express.session({ secret: 'keyboard cat' }));
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
-    app.use('/mobile',express.static(config.mobile_app_root));
-    app.use('/portal',express.static(config.portal_app_root));
+    app.use('/chicago/mobile',express.static(config.mobile_app_root));
+    app.use('/chicago/portal',express.static(config.portal_app_root));
 });
 
 
