@@ -71,6 +71,7 @@ module.exports = function (app){
     });
 
     app.post('/session/save',User.authorize,function (req,res){
+
         if(!req.body.user_id || !req.body.session_data) return res.send(500,{message:'Invalid request params.',status:500});
 
         mongoose.model('User').update({_id:req.body.user_id},{$set:{session_data:req.body.session_data}},function (err){
