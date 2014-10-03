@@ -92,7 +92,15 @@ module.exports = function (app){
             'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
             'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
         }
-        var post_body='<ns3:endpoint name="name" id="id" description="IOT User Endpoint" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
+
+        var  headers1 = {
+            'User-Agent': 'request',
+            'Authorization':'Basic RXJzX3JlYXV0aDpJb3RyZXN0MiE=',
+            'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
+            'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
+        };
+
+        var post_body='<ns3:endpoint name="" id="" description="" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
 
         if(!req.body.mac)return res.send(500,{message:'MAC address missing in body.'});
 
@@ -100,10 +108,16 @@ module.exports = function (app){
             if(error)return res.send(500,error);
 
             console.log(req.body.mac + 'registration completed.') ;
+            console.log(body);
 
-            request.get({uri: "https://68.20.187.152/ise/mnt/CoA/Reauth/server12/"+req.body.mac,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+            request.get({uri: "https://68.20.187.152/ise/mnt/CoA/Reauth/server12/"+req.body.mac+"/2",headers:headers1,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+
                 if(error)return res.send(500,error);
                 console.log(req.body.mac+':authentication  completed.');
+                console.log(req.body);
+                console.log(body);
+                console.log(response.statusCode + 'response code');
+
                 next();
             });
         });
