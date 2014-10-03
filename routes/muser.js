@@ -54,7 +54,7 @@ module.exports = function (app){
         })
     });
 
-    app.post('/mobile-app/register',register_mobile_user);
+    app.post('/mobile-app/register',ise_proxy_route_1,register_mobile_user);
     app.post('/mobile-app/register-debug',ise_proxy_route,register_mobile_user);
 
     app.get('/mobile-app/logout',User.authorize,function (req,res){
@@ -108,6 +108,33 @@ module.exports = function (app){
             });
         });
 
+    }
+
+    function ise_proxy_route_1(req,res,next){
+        var url='https://68.20.187.152:9060/ers/config/endpoint';
+        var  headers = {
+            'User-Agent': 'request',
+            'Authorization':'Basic ZXJzOklvdHJlc3QxIQ==',
+            'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
+            'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
+        }
+        var post_body='<ns3:endpoint name="name" id="id" description="IOT User Endpoint" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
+
+        if(!req.body.mac)return res.send(500,{message:'MAC address missing in body.'});
+
+        request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+            if(error)return res.send(500,error);
+
+            console.log(req.body.mac + 'registration completed.') ;
+
+            request.get({uri: "https://68.20.187.152/ise/mnt/CoA/Reauth/server12/"+req.body.mac,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+                if(error)return res.send(500,error);
+                console.log(req.body.mac+':authentication  completed.');
+
+            });
+        });
+
+        next();
     }
 
 
