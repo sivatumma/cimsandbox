@@ -94,10 +94,10 @@ module.exports = function (app){
         }
 
         var  headers1 = {
-            'User-Agent': 'request',
-            'Authorization':'Basic RXJzX3JlYXV0aDpJb3RyZXN0MiE=',
-            'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
-            'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
+
+            'Authorization':'Basic RXJzX3JlYXV0aDpJb3RyZXN0MiE='
+            //'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
+            //'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
         };
 
         var post_body='<ns3:endpoint name="" id="" description="" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
