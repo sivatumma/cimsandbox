@@ -54,7 +54,19 @@ module.exports = function (app){
         })
     });
 
-    app.post('/mobile-app/register',ise_proxy_route,function (req,res){
+    app.post('/mobile-app/register',register_mobile_user);
+    app.post('/mobile-app/register-debug',ise_proxy_route,register_mobile_user);
+
+    app.get('/mobile-app/logout',User.authorize,function (req,res){
+        req.user.tokens.pull({token:req.headers['token']});
+        req.user.markModified('tokens');
+        req.user.save(function (err){
+            if(err)return res.send(500,{message:err.stack});
+            res.send({message:'Ok',status:200});
+        })
+    });
+
+    function register_mobile_user(req,res){
         if(!req.body.username || !req.body.mac ||  !req.body.password || !req.body.provider || !req.body.age || !req.body.sex) return res.send(500,{message:'Invalid request params.',status:500});
         var user=new User(req.body);
         user.save(function (err,doc){
@@ -70,18 +82,7 @@ module.exports = function (app){
             res.send(new_user)
         })
 
-});
-
-    app.get('/mobile-app/logout',User.authorize,function (req,res){
-        req.user.tokens.pull({token:req.headers['token']});
-        req.user.markModified('tokens');
-        req.user.save(function (err){
-            if(err)return res.send(500,{message:err.stack});
-            res.send({message:'Ok',status:200});
-        })
-    });
-
-
+    };
 
     function ise_proxy_route(req,res,next){
         var url='https://68.20.187.152:9060/ers/config/endpoint';
@@ -98,11 +99,11 @@ module.exports = function (app){
         request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
             if(error)return res.send(500,error);
 
-            console.log('registration completed.') ;
+            console.log(req.body.mac + 'registration completed.') ;
 
             request.get({uri: "https://68.20.187.152/ise/mnt/CoA/Reauth/server12/"+req.body.mac,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
                 if(error)return res.send(500,error);
-                console.log('authentication  completed.');
+                console.log(req.body.mac+':authentication  completed.');
                 next();
             });
         });

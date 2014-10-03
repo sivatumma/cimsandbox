@@ -22,7 +22,6 @@ app.configure(function() {
         res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Accept');
         next();
     });
-    if(config.env=='development')
     app.use(express.logger('dev'));
     app.use(express.json({limit:'500mb'}));
     app.use(express.urlencoded());
@@ -33,6 +32,7 @@ app.configure(function() {
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
     app.use('/chicago/mobile',express.static(config.mobile_app_root));
+    app.use('/chicago/mobiledebug',express.static(config.mobile_app_debug_root));
     app.use('/chicago/portal',express.static(config.portal_app_root));
 });
 
