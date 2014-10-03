@@ -97,7 +97,14 @@ module.exports = function (app){
 
         request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
             if(error)return res.send(500,error);
-            next();
+
+            console.log('registration completed.') ;
+
+            request.get({uri: "https://68.20.187.152/ise/mnt/CoA/Reauth/server12/"+req.body.mac,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+                if(error)return res.send(500,error);
+                console.log('authentication  completed.');
+                next();
+            });
         });
 
     }
