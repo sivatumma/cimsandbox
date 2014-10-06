@@ -4,6 +4,7 @@ var uuid=require('node-uuid');
 var request=require('request');
 var parseString = require('xml2js').parseString;
 var TIMEOUT=60000;
+var util = require('util');
 Date.prototype.addHours= function(h){
     this.setHours(this.getHours()+h);
     return this;
@@ -89,7 +90,6 @@ module.exports = function (app){
     function ise_proxy_route(req,res,next){
         var url='https://68.20.187.152:9060/ers/config/endpoint';
         var  headers = {
-            'User-Agent': 'request',
             'Authorization':'Basic ZXJzOklvdHJlc3QxIQ==',
             'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
             'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
@@ -106,16 +106,11 @@ module.exports = function (app){
         request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
             if(error)return res.send(500,error);
 
-            console.log(req.body.mac + 'registration completed.') ;
-            console.log(body);
-
+            console.log(util.inspect(response, { showHidden: true, depth: null }));
             request.get({uri: "https://68.20.187.152/ise/mnt/CoA/Reauth/server12/"+req.body.mac+"/2",headers:headers1,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
 
                 if(error)return res.send(500,error);
-                console.log(req.body.mac+':authentication  completed.');
-                console.log(req.body);
-                console.log(body);
-                console.log(response.statusCode + 'response code');
+                console.log(util.inspect(response, { showHidden: true, depth: null }));
 
                 next();
             });
