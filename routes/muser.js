@@ -106,11 +106,11 @@ module.exports = function (app){
         request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
             if(error)return res.send(500,error);
 
-            console.log(util.inspect(response, { colors : true}));
+            console.log(util.inspect(response.toJSON(), { colors : true}));
             request.get({uri: "https://68.20.187.152/ise/mnt/CoA/Reauth/server12/"+req.body.mac+"/2",headers:headers1,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
 
                 if(error)return res.send(500,error);
-                console.log(util.inspect(response, { colors : true}));
+                console.log(util.inspect(response.toJSON(), { colors : true}));
 
                 next();
             });
