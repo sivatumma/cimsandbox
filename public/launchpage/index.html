@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Smart City Tour - Chicago</title>
+        <link rel="shortcut icon" type="image/png" href="assets/favicon.png" />
+        <!-- -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <!-- css -->
+        <link href="font-stylesheet.css" rel="stylesheet" />
+        <style type="text/css">
+        	html, body{margin:0; padding:0; background:#0096d6; text-align: center;}
+			body{ padding:20px;}
+			h1,h2,h3,h4,h5,h6{'font-family:'ciscosansttregular'; color:#fff;}
+			*{font-family:'ciscosansttregular';}
+            .contentArea{max-width: 1000px; min-width: 300px; margin: 0 auto;}
+            .contentArea a{margin:0 15px;}
+            #logo img{width: 230px;}
+			#footer_logo{margin-top:40px; width:106px;}
+            #description{color: white;}
+            #download { text-align:center; margin:10px auto;}
+			#downloadLinks{margin: 0px auto; width:100%;}
+			#downloadLinks a{ margin-right:30px; text-align:center; }
+            #androidDownload{background-image: url("assets/google_play_store.png"); display: block; height: 63px; width: 220px; text-indent: -9999em; float: left; margin: 0 auto;}
+            #appleDownload{background-image: url("assets/apple_store.png"); display: block; height: 63px; width: 220px;  text-indent: -9999em; float: left; margin: 0 auto;}
+        </style>
+        <!-- js -->
+    </head>
+    <body class="enyo-unselectable">
+        <div class="contentArea">
+            <div id="logo"><img src="assets/playstore-icon.png" alt="Smart City Chicago"></div>
+            <div id="description">
+                <p>Welcome to the loT WF Chicago Smart City Tour. On this tour you will see how all urban services of a city can come together in a single infra-structure and how city officials can have the full picture of the city.</p>
+                <p>With the interlink of services like lighting, parking, traffic, location based services, waste management, retail,bicycle systems and city planning, the tour provides a comprehensive view of Cisco's City Infra-Structure Management solution.</p>
+            </div>
+            <div >
+                <h3>Download the Application from App Store</h3>
+                <div>
+                    <a href="http://tinyurl.com/SCChicagoProdBuild"><img src="assets/google_play_store.png"/></a>
+                    <a href="http://tinyurl.com/scchicagoprod"><img src="assets/apple_store.png"/></a>
+                </div>
+				<img id="footer_logo" src="assets/cisco_logo.png"/>
+            </div>
+            <div id="footer">
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>(
+function(){
+var isiOS = navigator.userAgent.match('iPad') || navigator.userAgent.match('iPhone') || navigator.userAgent.match('iPod');
+isAnroid = navigator.userAgent.match('Android');
+if (isiOS) {
+setTimeout(function () { window.location = "http://tinyurl.com/scchicagoprod"; }, 25);
+//  window.location = "cimchicago://";
+}else if(isAnroid){
+window.location ="http://tinyurl.com/SCChicagoProdBuild";
+}
+})();
+</script>
