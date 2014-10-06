@@ -94,10 +94,7 @@ module.exports = function (app){
         }
 
         var  headers1 = {
-
             'Authorization':'Basic RXJzX3JlYXV0aDpJb3RyZXN0MiE='
-            //'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
-            //'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
         };
 
         var post_body='<ns3:endpoint name="" id="" description="" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
@@ -134,7 +131,7 @@ module.exports = function (app){
         }
         var post_body='<ns3:endpoint name="name" id="id" description="IOT User Endpoint" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
 
-        if(!req.body.mac)return res.send(500,{message:'MAC address missing in body.'});
+       // if(!req.body.mac)return res.send(500,{message:'MAC address missing in body.'});
 
         request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
             if(error)return res.send(500,error);

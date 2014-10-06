@@ -1,3 +1,3 @@
 exports.index = function(req, res){
-  res.send('Welcome');
+  res.redirect('index.html');
 };
