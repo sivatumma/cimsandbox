@@ -90,13 +90,13 @@ module.exports = function (app){
     function ise_proxy_route(req,res,next){
         var url='https://68.20.187.152:9060/ers/config/endpoint';
         var  headers = {
-            'Authorization':'Basic ZXJzOklvdHJlc3QxIQ==',
+            'Authorization':'Basic ZXJzOklvdHJlc3Qx',
             'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
             'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
         }
 
         var  headers1 = {
-            'Authorization':'Basic RXJzX3JlYXV0aDpJb3RyZXN0MiE='
+            'Authorization':'Basic ZXJzOklvdHJlc3Qx'
         };
 
         var post_body='<ns3:endpoint name="" id="" description="" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
@@ -111,7 +111,7 @@ module.exports = function (app){
 
                 if(error)return res.send(500,error);
                 console.log(util.inspect(response.toJSON(), { colors : true}));
-
+console.log(req.body);
                 next();
             });
         });
