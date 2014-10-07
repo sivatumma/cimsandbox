@@ -14,6 +14,7 @@ module.exports = function (app){
     var config=app.get('config');
     app.post('/mobile-app/login',function (req,res){
        if(!req.body.username || !req.body.password) return res.send(500,{message:'Invalid request params.',status:500});
+        req.body.username=req.body.username.toLowerCase();
         User.getAuthenticated(req.body.username,req.body.password,function (err,doc,reason){
             if (err) return res.send(500,{message:err});
             if (!doc) {
@@ -70,7 +71,7 @@ module.exports = function (app){
     function register_mobile_user(req,res){
         if(!req.body.username ||   !req.body.password || !req.body.provider || !req.body.age || !req.body.sex) return res.send(500,{message:'Invalid request params.',status:500});
         req.body.mac=(req.body.mac)?req.body.mac:'';
-
+        req.body.username=req.body.username.toLowerCase();
         var user=new User(req.body);
         user.save(function (err,doc){
             if(err) return res.send(403,'Username or email not available.');
