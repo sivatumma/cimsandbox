@@ -37,9 +37,7 @@ app.configure(function() {
 
 
 // development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
+app.use(express.errorHandler());
 
 app.get('/', routes.index);
 var user = require('./routes/user.js')(app);
@@ -50,6 +48,7 @@ var offers = require('./routes/offers.js')(app);
 var upload = require('./routes/upload.js')(app);
 require('./routes/tours.js')(app);
 require('./routes/feedbacks.js')(app);
+require('./routes/proxy.js')(app);
 mongoose.connect(config.database);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
