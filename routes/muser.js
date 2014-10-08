@@ -14,7 +14,7 @@ module.exports = function (app){
     app.post('/mobile-app/login',function (req,res){
        if(!req.body.username || !req.body.password) return res.send(500,{message:'Invalid request params.',status:500});
         User.getAuthenticated(req.body.username,req.body.password,function (err,doc,reason){
-            if (err) return res.send(500,{message:err});
+            //if (err) return res.send(500,{message:err});
             if (!doc) {
                 var reasons=User.failedLogin;
                 var message='';
@@ -37,7 +37,7 @@ module.exports = function (app){
             doc.tokens.push(token_object);
             doc.markModified('tokens');
             doc.save(function (err){
-                if (err) return res.send(500,{message:err});
+                //if (err) return res.send(500,{message:err});
                 var new_user = _.cloneDeep(doc.toObject());
                 delete new_user.tokens;
                 delete new_user.password;
@@ -85,16 +85,16 @@ module.exports = function (app){
     };
 
     function ise_proxy_route(req,res,next){
-        var url='https://68.20.187.152:9060/ers/config/endpoint';
+        var url='https://104.153.228.2:9060/ers/config/endpoint';
         var  headers = {
             'User-Agent': 'request',
-            'Authorization':'Basic ZXJzOklvdHJlc3QxIQ==',
+            'Authorization':'Basic ZXJzOkphczBuMSE=',
             'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
             'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
         }
 
         var  headers1 = {
-            'Authorization':'Basic RXJzX3JlYXV0aDpJb3RyZXN0MiE='
+            'Authorization':'Basic ZXJzOkphczBuMSE=',
         };
 
         var post_body='<ns3:endpoint name="" id="" description="" xmlns:ns2="ers.ise.cisco.com" xmlns:ns3="identity.ers.ise.cisco.com"><groupId>53a17dc0-434e-11e4-a585-005056ad0fa5</groupId><mac>{{mac}}</mac><staticGroupAssignment>true</staticGroupAssignment><staticProfileAssignment>false</staticProfileAssignment></ns3:endpoint>' ;
@@ -107,7 +107,7 @@ module.exports = function (app){
             console.log(req.body.mac + 'registration completed.') ;
             console.log(body);
 
-            request.get({uri: "https://68.20.187.152/ise/mnt/CoA/Reauth/server12/"+req.body.mac+"/2",headers:headers1,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+            request.get({uri: "https://104.153.228.2/ise/mnt/CoA/Reauth/server12/"+req.body.mac+"/2",headers:headers1,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
 
                 if(error)return res.send(500,error);
                 console.log(req.body.mac+':authentication  completed.');
@@ -122,7 +122,7 @@ module.exports = function (app){
     }
 
     function ise_proxy_route_1(req,res,next){
-        var url='https://68.20.187.152:9060/ers/config/endpoint';
+        var url='https://104.153.228.2:9060/ers/config/endpoint';
         var  headers = {
             'User-Agent': 'request',
             'Authorization':'Basic ZXJzOklvdHJlc3QxIQ==',
@@ -138,7 +138,7 @@ module.exports = function (app){
 
             console.log(req.body.mac + 'registration completed.') ;
 
-            request.get({uri: "https://68.20.187.152/ise/mnt/CoA/Reauth/server12/"+req.body.mac,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
+            request.get({uri: "https://104.153.228.2/ise/mnt/CoA/Reauth/server12/"+req.body.mac,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
                 if(error)return res.send(500,error);
                 console.log(req.body.mac+':authentication  completed.');
 
@@ -151,3 +151,4 @@ module.exports = function (app){
 
 
 }
+
