@@ -2,7 +2,14 @@ var mongoose = require('mongoose');
 var User=mongoose.model('User');
 var formidable=require('formidable');
 var fs=require('fs');
-var path=require('path')
+var path=require('path');
+var s3c = require('../includes/s3client');
+var util=require('util')
+var client = s3c.createClient({
+    key: "AKIAIJ5ETZFB234GPHKQ",
+    secret: "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",
+    bucket: "cisco-smartcity"
+});
 module.exports = function (app){
 
     app.post('/upload', function file_uploads(req,res){
@@ -15,17 +22,24 @@ module.exports = function (app){
             }
             var file = files.file;
             var rand=new Date().getTime();
-            var user_dir=path.join(app.get('config').app_root,'public','offer-images');
-            var new_file_name=rand+"-"+file.name.replace(/\s+/g, '-').toLowerCase();
-            var file_path=path.join(user_dir,new_file_name);
-            fs.rename(file.path,file_path,function (err){
-                if(err)return res.send(500,{message:err.stack});
-                res.send({image:new_file_name})
-            })
+            var new_file_name=rand+''+file.name.replace(/\s+/g, '-').toLowerCase();
+
+            client.upload(file.path, escape(new_file_name), { 'x-amz-acl': 'public-read','Content-Type':file.type }).
+                on('error',function (err) {
+                    console.error("unable to upload: \n", err.stack);
+                    res.send(500, err);
+                }).on('end', function (url) {
+                    res.send({image:url});
+                    fs.unlink(file.path,function (err){
+                       if(err)console.log('delete file error'+err)
+                    })
+                });
 
         });
     });
 
 }
+
+
 
 

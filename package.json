@@ -17,6 +17,7 @@
         "node-uuid":"1.4.1",
         "restify-mongoose": "0.2.2",
         "formidable":"1.0.15",
-        "xml2js":"0.4.4"
+        "xml2js":"0.4.4",
+        "knox":"*"
     }
 }

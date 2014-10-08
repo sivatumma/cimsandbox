@@ -4,6 +4,7 @@ var uuid=require('node-uuid');
 var request=require('request');
 var parseString = require('xml2js').parseString;
 var TIMEOUT=60000;
+var util = require('util');
 Date.prototype.addHours= function(h){
     this.setHours(this.getHours()+h);
     return this;
@@ -13,8 +14,9 @@ module.exports = function (app){
     var config=app.get('config');
     app.post('/mobile-app/login',function (req,res){
        if(!req.body.username || !req.body.password) return res.send(500,{message:'Invalid request params.',status:500});
+        req.body.username=req.body.username.toLowerCase();
         User.getAuthenticated(req.body.username,req.body.password,function (err,doc,reason){
-            //if (err) return res.send(500,{message:err});
+            if (err) return res.send(500,{message:err});
             if (!doc) {
                 var reasons=User.failedLogin;
                 var message='';
@@ -37,7 +39,7 @@ module.exports = function (app){
             doc.tokens.push(token_object);
             doc.markModified('tokens');
             doc.save(function (err){
-                //if (err) return res.send(500,{message:err});
+                if (err) return res.send(500,{message:err});
                 var new_user = _.cloneDeep(doc.toObject());
                 delete new_user.tokens;
                 delete new_user.password;
@@ -67,7 +69,9 @@ module.exports = function (app){
     });
 
     function register_mobile_user(req,res){
-        if(!req.body.username || !req.body.mac ||  !req.body.password || !req.body.provider || !req.body.age || !req.body.sex) return res.send(500,{message:'Invalid request params.',status:500});
+        if(!req.body.username ||   !req.body.password || !req.body.provider || !req.body.age || !req.body.sex) return res.send(500,{message:'Invalid request params.',status:500});
+        req.body.mac=(req.body.mac)?req.body.mac:'';
+        req.body.username=req.body.username.toLowerCase();
         var user=new User(req.body);
         user.save(function (err,doc){
             if(err) return res.send(403,'Username or email not available.');
@@ -110,12 +114,10 @@ module.exports = function (app){
             request.get({uri: "https://104.153.228.2/ise/mnt/CoA/Reauth/server12/"+req.body.mac+"/2",headers:headers1,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
 
                 if(error)return res.send(500,error);
-                console.log(req.body.mac+':authentication  completed.');
-                console.log(req.body);
-                console.log(body);
-                console.log(response.statusCode + 'response code');
-
+                console.log(util.inspect(response.toJSON(), { colors : true }));
+		console.log(req.body);
                 next();
+
             });
         });
 
@@ -151,4 +153,3 @@ module.exports = function (app){
 
 
 }
-
