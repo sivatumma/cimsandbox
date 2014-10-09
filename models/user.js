@@ -112,6 +112,7 @@ module.exports = function (mongoose) {
     usersSchema.statics.authorize = function(req,res, next) {
         if(!req.headers['token']) res.send(401,{message:'Authentication token required.'});
         var app=(req.headers['app'])?req.headers['app']:'mobile';
+        if(app == 'mobile') return next();
         var uModel = (app == 'portal' )?mongoose.model('User'):mongoose.model('mUser');
         uModel.findOne({ 'tokens.token': req.headers['token'] }, function(err, user) {
             if (err) return res.send(500,{message:err});
