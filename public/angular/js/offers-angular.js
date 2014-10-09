@@ -2,12 +2,42 @@
 var category_type = ["ARTS", "CULTURE & ENTERTAINMENT","DINING","GROUPS","HOTELS","MUSIC & NIGHTLIFE","SHOPPING","SPORTS & RECREATION","TOURS & ATTRACTIONS","TRANSPOTATION"];
 var crowd_level = ['LOW','MEDIUM','HIGH'];
 var parking_available =['LOW','MEDIUM','HIGH'];
-var model_type = ['OFFER','EVENT']
+var model_type = ['OFFER','EVENT','LOCATION']
 var ferquency_type = [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120];
-var profile=angular.module('profile', [ 'angularFileUpload','ui.bootstrap','ui.date','google-maps']);
+var profile=angular.module('profile', [ 'angularFileUpload','ui.bootstrap','ui.date','google-maps','ngRoute'])
+    .config([
+    '$routeProvider', function($routeProvider) {
+
+        $routeProvider.when('/', {
+            templateUrl: 'login.html'
+        }).when('/offers', {
+                templateUrl: 'offers_list.html'
+        }).otherwise({
+                redirectTo: '/'
+        });;
+        }])
+    .controller('offerController',offerController)
+    .controller('loginController',loginController)
+    .controller('offersController',offersController);
+
+function loginController ($scope,$location){
+    $scope.user={
+        username:'',
+        password:''
+    };
+    $scope.showError=false;
+    $scope.login=function (){
+        $scope.showError=false;
+        if($scope.user.username == 'adming' && $scope.user.password == 'Passw@rd'){
+            $location.path("/offers");
+            return ;
+        }
+        $scope.showError=true;
+    }
+}
 
 
-var offerController = function($scope,$modalInstance, $http, $timeout, $upload,$window,$rootScope) {
+ function offerController ($scope,$modalInstance, $http, $timeout, $upload,$window,$rootScope) {
      $scope.offer={
         title:'',
          thumb:'',
@@ -254,7 +284,7 @@ var editOfferController = function($scope,$modalInstance, $http, $timeout, $uplo
 
 }
 
-var offersController=function ($scope,$http,$window,$rootScope,$modal){
+function offersController ($scope,$http,$window,$rootScope,$modal){
     $scope.offersList=[];
     $http({
         method: 'GET',
