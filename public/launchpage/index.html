@@ -55,15 +55,17 @@
             <div>
                 <h2 style="margin-top:35px;">Download the Application from App Store</h2>
                 <div>
-					<a href="javascript:launchApp('cimchicago://', 'https://cim.cisco.com/launchpage/app/ChicagoCityApp.html')" id="ios_detect"><img src="assets/apple_store.png"/></a>
+					<a href="javascript:launchApp('cimchicago://', 'https://cim.cisco.com/launchpage/app2/ChicagoCityApp.html')" id="ios_detect"><img src="assets/apple_store.png"/></a>
 					<a href="https://itunes.apple.com/us/app/uber/id368677368?mt=8" id="ios_test">App Store Link Test</a>
 					<a href="javascript:launchApp('intent://chicagoapp/#Intent;scheme=chicagoapp;package=com.july.cimchicago;end')" id="android_detect"><img src="assets/google_play_store.png"/></a>
-					<a href="https://cim.cisco.com/launchpage/app/SCChicago.apk" id="android_test">Download App Here (for Testing)</a>
-					<a href="https://cim.cisco.com/launchpage/app/ChicagoCityApp.html" id="ios_appstore"><img src="assets/apple_store.png"/></a>
+					<a href="https://cim.cisco.com/launchpage/app/SCChicago.apk" id="android_dw">Download App Here (till app is published)</a>
+<a href="https://play.google.com/store/apps/details?id=com.ubercab&hl=en" id="android_test">Play Store Link Test</a>
+					<a href="https://cim.cisco.com/launchpage/app2/ChicagoCityApp.html" id="ios_appstore"><img src="assets/apple_store.png"/></a>
 					<a href="https://cim.cisco.com/launchpage/app/SCChicagoAWSBuild.apk" id="android_playstore"><img src="assets/google_play_store.png"/></a>
 					<script type="text/javascript">
 						if(/(Android|Tablet)/g.test(navigator.userAgent)){
 							document.getElementById('android_detect').style.display = 'block';
+							document.getElementById('android_dw').style.display = 'block';
 							document.getElementById('android_test').style.display = 'block';
 						} else if(/(iPad|iPhone|iPod)/g.test(navigator.userAgent)){ 
 							document.getElementById('ios_detect').style.display = 'block';
