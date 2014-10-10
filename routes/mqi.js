@@ -2,7 +2,7 @@ var request=require('request');
 var mongoose=require('mongoose');
 var User=mongoose.model('User');
 var parseString = require('xml2js').parseString;
-var TIMEOUT=60000;
+var TIMEOUT=10000;
 var proxy_route=function (url){
 
     return function (req,res){

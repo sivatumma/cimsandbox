@@ -1,5 +1,5 @@
 var request=require('request');
-var TIMEOUT=60000;
+var TIMEOUT=10000;
 
 
 module.exports = function (app){

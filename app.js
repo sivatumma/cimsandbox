@@ -21,7 +21,7 @@ app.configure(function() {
         res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Accept');
         next();
     });
-    app.use(express.logger('dev'));
+    //app.use(express.logger('dev'));
     app.use(express.json({limit:'500mb'}));
     app.use(express.urlencoded());
     app.use(express.methodOverride());
@@ -37,7 +37,7 @@ app.configure(function() {
 
 
 // development only
-app.use(express.errorHandler());
+//app.use(express.errorHandler());
 
 app.get('/', routes.index);
 var user = require('./routes/user.js')(app);

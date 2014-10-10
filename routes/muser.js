@@ -3,7 +3,7 @@ var _=require('lodash');
 var uuid=require('node-uuid');
 var request=require('request');
 var parseString = require('xml2js').parseString;
-var TIMEOUT=60000;
+var TIMEOUT=10000;
 var util = require('util');
 Date.prototype.addHours= function(h){
     this.setHours(this.getHours()+h);
@@ -107,12 +107,7 @@ module.exports = function (app){
 
         request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
             if(error)return res.send(500,error);
-
-            console.log(req.body.mac + 'registration completed.') ;
-            console.log(body);
-
             request.get({uri: "https://104.153.228.2/ise/mnt/CoA/Reauth/server12/"+req.body.mac+"/2",headers:headers1,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
-
                 if(error)return res.send(500,error);
                 console.log(util.inspect(response.toJSON(), { colors : true }));
 		console.log(req.body);
@@ -137,12 +132,8 @@ module.exports = function (app){
 
         request.post({uri: url, body:post_body.replace('{{mac}}',req.body.mac),headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
             if(error)return res.send(500,error);
-
-            console.log(req.body.mac + 'registration completed.') ;
-
             request.get({uri: "https://104.153.228.2/ise/mnt/CoA/Reauth/server12/"+req.body.mac,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
                 if(error)return res.send(500,error);
-                console.log(req.body.mac+':authentication  completed.');
 
             });
         });

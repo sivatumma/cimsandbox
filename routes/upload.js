@@ -26,7 +26,6 @@ module.exports = function (app){
 
             client.upload(file.path, escape(new_file_name), { 'x-amz-acl': 'public-read','Content-Type':file.type }).
                 on('error',function (err) {
-                    console.error("unable to upload: \n", err.stack);
                     res.send(500, err);
                 }).on('end', function (url) {
                     res.send({image:url});
