@@ -1,8 +1,8 @@
 "use strict";
-var category_type = ["EMSP offer","ARTS", "CULTURE & ENTERTAINMENT","DINING","GROUPS","HOTELS","MUSIC & NIGHTLIFE","SHOPPING","SPORTS & RECREATION","TOURS & ATTRACTIONS","TRANSPOTATION"];
+var category_type = ["ARTS", "CULTURE & ENTERTAINMENT","DINING","GROUPS","HOTELS","MUSIC & NIGHTLIFE","SHOPPING","SPORTS & RECREATION","TOURS & ATTRACTIONS","TRANSPOTATION"];
 var crowd_level = ['LOW','MEDIUM','HIGH'];
 var parking_available =['LOW','MEDIUM','HIGH'];
-var model_type = ['OFFER','EVENT','LOCATION']
+var model_type = ['OFFER','EVENT','LOCATION','EMSP']
 var ferquency_type = [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120];
 var profile=angular.module('profile', [ 'angularFileUpload','ui.bootstrap','ui.date','google-maps','ngRoute'])
     .config([

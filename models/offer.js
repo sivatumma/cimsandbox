@@ -14,7 +14,7 @@ module.exports = function (mongoose) {
         crowd_level:{type:String ,enum :['LOW','MEDIUM','HIGH'],default:'LOW'},
         parking_available:{type:String ,enum :['LOW','MEDIUM','HIGH'],default:'LOW'},
         featured:{type:Boolean, default:false},
-        model:{type:String, default:'OFFER',enum :['OFFER','EVENT','LOCATION']}
+        model:{type:String, default:'OFFER',enum :['OFFER','EVENT','LOCATION','EMSP']}
     },{ strict: false });
     var Offer = mongoose.model('offer', OfferSchema);
     return Offer;
