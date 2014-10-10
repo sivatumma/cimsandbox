@@ -230,13 +230,13 @@
                            Select Image  <input type="file" ng-file-select="onFileSelect($files)" accept="image/*" required="" placeholder="Select Image" class="form-control">
                        </span>
                             <span ng-if="localUrl" class="btn" style="width:150px;"><img ng-src="{{localUrl}}" ng-show="localUrl" class="img-thumbnail img-upload-thimb"/></span>
-                            <span  ng-if="!localUrl" class="btn" style="width:150px;"><img ng-src="offer-images/{{offer.thumb}}"  class="img-thumbnail img-upload-thimb"/></span>
+                            <span  ng-if="!localUrl" class="btn" style="width:150px;"><img ng-src="{{offer.thumb}}"  class="img-thumbnail img-upload-thimb"/></span>
                         </div>
                         <div class="col-md-5">
                        <span class="btn  btn-file">
                            Select Coupon Image  <input type="file" ng-file-select="onCouponFileSelect($files)" accept="image/*" required="" placeholder="Select Image" class="form-control">
                        </span>
-                            <span  ng-if="!couponLocalUrl" class="btn" style="width:150px;"><img ng-src="offer-images/{{offer.coupon}}"  class="img-thumbnail img-upload-thimb"/></span>
+                            <span  ng-if="!couponLocalUrl" class="btn" style="width:150px;"><img ng-src="{{offer.coupon}}"  class="img-thumbnail img-upload-thimb"/></span>
                             <span ng-if="couponLocalUrl" class="btn" style="width:150px;"><img ng-src="{{couponLocalUrl}}" ng-show="couponLocalUrl" class="img-thumbnail img-upload-thimb"/></span>
                         </div>
                     </div>
