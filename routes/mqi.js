@@ -133,20 +133,7 @@ module.exports = function (app){
 	app.all('/api/kiosk',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartKioskGateway'));
     app.all('/api/city-info',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartCityInfoGateway'));
     app.all('/api/smart-movie',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartMovieGateway'));
-    app.all('/api/smart-deal',User.authorize,function (req,res,next){
-     var offer_json=require('./offers.json');
-     var offer_categories=require('./categories.json');
-
-        if(req.body.query
-        && req.body.query.select
-        && req.body.query.select.categoryName
-        ){
-            res.send(offer_categories);
-        }else {
-            res.send(offer_json);
-        }
-
-    },proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartDealGateway'));
+    app.all('/api/smart-deal',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartDealGateway'));
     app.all('/api/smart-traffic',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartTrafficGateway'));
 
 
