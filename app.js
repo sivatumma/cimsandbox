@@ -6,6 +6,7 @@ var path = require('path');
 var mongoose=require('mongoose');
 var app = express();
 var fs=require('fs');
+https.globalAgent.maxSockets = 1000;
 require('./models/user.js')(mongoose);
 require('./models/muser.js')(mongoose);
 require('./models/offer.js')(mongoose);
@@ -15,19 +16,19 @@ app.configure(function() {
     app.set('port', process.env.PORT || 443);
     app.set('config', config);
     app.set('env', config.env);
-    app.use(function (req, res, next) {
+    /*app.use(function (req, res, next) {
         res.set('Access-Control-Allow-Origin', '*');
         res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
         res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Accept');
         next();
-    });
+    });*/
     //app.use(express.logger('dev'));
     app.use(express.json({limit:'500mb'}));
     app.use(express.urlencoded());
     app.use(express.methodOverride());
-    app.use(express.cookieParser('secret'));
-    app.use(express.cookieSession({ secret: 'tobo!', maxAge: 360*5 }));
-    app.use(express.session({ secret: 'keyboard cat' }));
+   // app.use(express.cookieParser('secret'));
+   // app.use(express.cookieSession({ secret: 'tobo!', maxAge: 360*5 }));
+   // app.use(express.session({ secret: 'keyboard cat' }));
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
     app.use('/chicago/mobile',express.static(config.mobile_app_root));

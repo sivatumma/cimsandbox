@@ -28,7 +28,6 @@ var proxy_route=function (url){
 var pb_proxy_route=function (url){
 
    var  headers = {
-			'User-Agent': 'request',
             'Authorization':'Basic YWRtaW46YWRtaW4=',
             'Username':'admin',
             'Password':'admin'
@@ -54,7 +53,6 @@ var pb_proxy_route=function (url){
 var lc_proxy_route=function (url){
 
     var  headers = {
-        'User-Agent': 'request',
         'Authorization':'Basic Y2l0eWFwcDpJb1RXRjIwMTQ=',
         'Username':'cityapp',
         'Password':'IoTWF2014'
@@ -90,7 +88,6 @@ var lc_proxy_route=function (url){
 function ise_proxy_route(req,res){
    var url='https://68.20.187.152:9060/ers/config/endpoint';
    var  headers = {
-        'User-Agent': 'request',
         'Authorization':'Basic ZXJzOklvdHJlc3QxIQ==',
         'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
         'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
@@ -159,7 +156,6 @@ module.exports = function (app){
             uri:'http://internal-PB-ELB-999255715.us-east-1.elb.amazonaws.com:8080/rest/poiservice/results.json',
             qs:req.query,
             headers: {
-                'User-Agent': 'request',
                 'Authorization':'Basic YWRtaW46YWRtaW4=',
                 'Username':'admin',
                 'Password':'admin'
