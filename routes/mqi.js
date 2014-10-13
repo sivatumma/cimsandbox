@@ -55,9 +55,9 @@ var lc_proxy_route=function (url){
 
     var  headers = {
         'User-Agent': 'request',
-        'Authorization':'Basic YWRtaW46UEBzc1cwcmQhMjM0NTY3',
-        'Username':'admin',
-        'Password':'P@ssW0rd!234567'
+        'Authorization':'Basic Y2l0eWFwcDpJb1RXRjIwMTQ=',
+        'Username':'cityapp',
+        'Password':'IoTWF2014'
     }
 
     return function (req,res){
