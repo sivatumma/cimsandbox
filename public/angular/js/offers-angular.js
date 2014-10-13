@@ -236,7 +236,7 @@ var editOfferController = function($scope,$modalInstance, $http, $timeout, $uplo
             file: file
         }).progress(function(evt) {
             }).success(function(data, status, headers, config) {
-                $scope.offer.thumb=data.file;
+                $scope.offer.thumb=data.image;
 
             }).error(function (err){
 
