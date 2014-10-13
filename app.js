@@ -23,6 +23,7 @@ app.configure(function() {
         next();
     });*/
     //app.use(express.logger('dev'));
+    app.use(express.compress());
     app.use(express.json({limit:'500mb'}));
     app.use(express.urlencoded());
     app.use(express.methodOverride());

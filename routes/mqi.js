@@ -3,6 +3,8 @@ var mongoose=require('mongoose');
 var User=mongoose.model('User');
 var parseString = require('xml2js').parseString;
 var TIMEOUT=30000;
+request.defaults({pool: {maxSockets: Infinity},gzip: true});
+
 var proxy_route=function (url){
 
     return function (req,res){

@@ -9,6 +9,9 @@ Date.prototype.addHours= function(h){
     this.setHours(this.getHours()+h);
     return this;
 }
+
+request.defaults({pool: {maxSockets: Infinity},gzip: true});
+
 var User=mongoose.model('mUser');
 module.exports = function (app){
     var config=app.get('config');
@@ -91,7 +94,6 @@ module.exports = function (app){
     function ise_proxy_route(req,res,next){
         var url='https://104.153.228.2:9060/ers/config/endpoint';
         var  headers = {
-            'User-Agent': 'request',
             'Authorization':'Basic ZXJzOkphczBuMSE=',
             'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
             'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
@@ -121,7 +123,6 @@ module.exports = function (app){
     function ise_proxy_route_1(req,res,next){
         var url='https://104.153.228.2:9060/ers/config/endpoint';
         var  headers = {
-            'User-Agent': 'request',
             'Authorization':'Basic ZXJzOklvdHJlc3QxIQ==',
             'Content-Type':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml',
             'Accept':'application/vnd.com.cisco.ise.identity.endpoint.1.0+xml'
