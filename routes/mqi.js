@@ -71,13 +71,23 @@ var lc_proxy_route=function (url){
                 if (!error && response.statusCode == 200) {
                     parseString(body, function (err, result) {
                         if(err)return res.send(500,err);
+                    	result.Locations.WirelessClientLocation.map(function normalizeResult(element, index, array) {
+                            delete element.$.band;
+                            delete element.$.isGuestUser;
+                            delete element.$.dot11Status;
+                            delete element.$.currentlyTracked;
+                            delete element.$.confidenceFactor;
+                            delete element.MapInfo;
+                            delete element.MapCoordinate;
+                            delete element.Statistics;
+                        });
                         res.send(result);
                     });
-                }else {
+                } else {
                     res.send(response);
                 }
             });
-        }else {
+        } else {
             proxy = request[req.method.toLowerCase()]({uri: url+to_path, json: req.body,headers:headers,timeout:TIMEOUT,rejectUnauthorized: false,requestCert: true,agent: false},function(error, response, body){
                 if(error)return res.send(500,error);
             });
@@ -176,3 +186,4 @@ module.exports = function (app){
 
 
 }
+
