@@ -84,7 +84,7 @@ var lc_proxy_route=function (url){
 	        	res.send(result.Locations.WirelessClientLocation);
                     });
                 } else {
-                    res.send(result);
+                    res.send(response);
                 }
             });
         } else {
