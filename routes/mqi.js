@@ -72,16 +72,16 @@ var lc_proxy_route=function (url){
                     parseString(body, function (err, result) {
                         if(err)return res.send(500,err);
                     	result.Locations.WirelessClientLocation.map(function normalizeResult(element, index, array) {
-				delete element.$.band;
-				delete element.$.isGuestUser;
-				delete element.$.dot11Status;
-				delete element.$.currentlyTracked;
-				delete element.$.confidenceFactor;
-				delete element.MapInfo;
-				delete element.MapCoordinate;
-				delete element.Statistics;
-			});
-	        	res.send(result.Locations.WirelessClientLocation);
+                            delete element.$.band;
+                            delete element.$.isGuestUser;
+                            delete element.$.dot11Status;
+                            delete element.$.currentlyTracked;
+                            delete element.$.confidenceFactor;
+                            delete element.MapInfo;
+                            delete element.MapCoordinate;
+                            delete element.Statistics;
+                        });
+                        res.send(result);
                     });
                 } else {
                     res.send(response);
