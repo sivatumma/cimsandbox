@@ -143,6 +143,7 @@ module.exports = function (app){
     app.all('/api/gov-asset',User.authorize,pb_proxy_route('http://internal-PB-ELB-999255715.us-east-1.elb.amazonaws.com:8080/rest/cc_govasset/results.json'));
     app.all('/api/directions',User.authorize,pb_proxy_route('http://internal-PB-ELB-999255715.us-east-1.elb.amazonaws.com:8080/rest/cc_directions_stop/results.json'));
 	app.all('/api/real-directions',User.authorize,pb_proxy_route('http://internal-PB-ELB-999255715.us-east-1.elb.amazonaws.com:8080/rest/cc_real_directions/results.json'));
+	app.all('/api/tour-directions',User.authorize,pb_proxy_route('http://internal-PB-ELB-999255715.us-east-1.elb.amazonaws.com:8080/rest/cc_directions_tour/results.json'));
 
     app.all(/\/api\/mse\/([^\/]+)\/?(.+)?/,User.authorize,lc_proxy_route('https://104.153.228.2:9061/api/contextaware/v1/'));
 
