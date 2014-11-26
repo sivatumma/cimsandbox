@@ -16,12 +16,12 @@ app.configure(function() {
     app.set('port', process.env.PORT || 443);
     app.set('config', config);
     app.set('env', config.env);
-    /*app.use(function (req, res, next) {
+    app.use(function (req, res, next) {
         res.set('Access-Control-Allow-Origin', '*');
         res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
         res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Accept');
         next();
-    });*/
+    });
     //app.use(express.logger('dev'));
     app.use(express.compress());
     app.use(express.json({limit:'500mb'}));
