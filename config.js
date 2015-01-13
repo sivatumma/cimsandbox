@@ -25,7 +25,7 @@ module.exports = function (env){
         mobile_app_root:path.join('/','opt','CLS-Mobile-App'),
         portal_app_root:path.join('/','opt','CLS-Portal-App'),
         mobile_app_debug_root:path.join('/','opt','CLS-Mobile-App-Debug'),
-        sandbox_app_root:path.join('/','opt','sandbox'),
+        sandbox_app_root:path.join('/','opt','sandbox')
     }
 
     return _.extend(main,(env=='dev')?dev:prod);
