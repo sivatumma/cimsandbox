@@ -22,9 +22,11 @@ module.exports = function (env){
         temp:path.join('/','tmp'),
         env:'production',
         certificates_dir:path.join('/','etc','ssl','self-signed'),
+<<<<<<< HEAD
         mobile_app_root:path.join('/','opt','cisco-sandbox-mobile-app'),
         portal_app_root:path.join('/','opt','cisco-sandbox-portal-app'),
-        mobile_app_debug_root:path.join('/','opt','cisco-sandbox-mobile-app-Debug')
+        mobile_app_debug_root:path.join('/','opt','cisco-sandbox-mobile-app-Debug'),
+        sandbox_app_root:path.join('/','opt','sandbox')
     }
 
     return _.extend(main,(env=='dev')?dev:prod);
