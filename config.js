@@ -4,7 +4,7 @@ var path = require('path')
 
 module.exports = function (env){
     var main={
-      database:'mongodb://10.10.0.27/cls',
+      database:'mongodb://localhost/cls',
       app_name:'CLS mobile app',
       app_root:root_path,
       temp:path.join('D:','temp'),
