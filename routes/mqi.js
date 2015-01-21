@@ -135,15 +135,15 @@ function ise_proxy_route(req,res){
 
 module.exports = function (app){
 
-    app.all('/api/lights',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartLightGateway') );
-    app.all('/api/organisation',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-OrganizationAddOn'));
-    app.all('/api/subscriber',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SubscriberAddOn'));
-    app.all('/api/parking',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartParkingGateway'));
-	app.all('/api/kiosk',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartKioskGateway'));
-    app.all('/api/city-info',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartCityInfoGateway'));
-    app.all('/api/smart-movie',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartMovieGateway'));
-    app.all('/api/smart-deal',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartDealGateway'));
-    app.all('/api/smart-traffic',User.authorize,proxy_route('http://internal-MQ-ELB-1506850226.us-east-1.elb.amazonaws.com:8080/fid-SmartTrafficGateway'));
+    app.all('/api/lights',User.authorize,proxy_route('http://172.19.0.111:8080/fid-SmartLightGateway') );
+    app.all('/api/organisation',User.authorize,proxy_route('http://172.19.0.111:8080/fid-OrganizationAddOn'));
+    app.all('/api/subscriber',User.authorize,proxy_route('http://172.19.0.111:8080/fid-SubscriberAddOn'));
+    app.all('/api/parking',User.authorize,proxy_route('http://172.19.0.111:8080/fid-SmartParkingGateway'));
+	app.all('/api/kiosk',User.authorize,proxy_route('http://172.19.0.111:8080/fid-SmartKioskGateway'));
+    app.all('/api/city-info',User.authorize,proxy_route('http://172.19.0.111:8080/fid-SmartCityInfoGateway'));
+    app.all('/api/smart-movie',User.authorize,proxy_route('http://172.19.0.111:8080/fid-SmartMovieGateway'));
+    app.all('/api/smart-deal',User.authorize,proxy_route('http://172.19.0.111:8080/fid-SmartDealGateway'));
+    app.all('/api/smart-traffic',User.authorize,proxy_route('http://172.19.0.111:8080/fid-SmartTrafficGateway'));
 
     //  The following three had been added in view of sandbox initiative UI.
     app.all('/api/lights',User.authorize,proxy_route('http://54.169.200.173:8080/fid-SmartLightGateway') );
