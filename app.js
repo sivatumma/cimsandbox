@@ -2,18 +2,19 @@ var config=require('./config.js')(process.env.env);
 var express = require('express');
 var routes = require('./routes');
 var https = require('https');
+var http = require('http');
 var path = require('path');
 var mongoose=require('mongoose');
 var app = express();
 var fs=require('fs');
-https.globalAgent.maxSockets = 1000;
+http.globalAgent.maxSockets = 1000;
 require('./models/user.js')(mongoose);
 require('./models/muser.js')(mongoose);
 require('./models/offer.js')(mongoose);
 require('./models/tour.js')(mongoose);
 require('./models/feedback.js')(mongoose);
 app.configure(function() {
-    app.set('port', process.env.PORT || 443);
+    app.set('port', process.env.PORT || 80);
     app.set('config', config);
     app.set('env', config.env);
     app.use(function (req, res, next) {
@@ -32,8 +33,9 @@ app.configure(function() {
    // app.use(express.session({ secret: 'keyboard cat' }));
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
-    app.use('/chicago/mobile',express.static(config.mobile_app_root));
+    app.use('/sandbox/mobile',express.static(config.mobile_app_root));
     app.use('/chicago/mobile-dev',express.static(config.mobile_app_debug_root));
+    app.use('/sandbox/portal',express.static(config.portal_app_root));
     app.use('/chicago/portal',express.static(config.portal_app_root));
     app.use('/new/sandbox', express.static(config.sandbox_app_root));
 });
@@ -56,13 +58,14 @@ mongoose.connect(config.database);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
-    var server_credentials={
-        key: fs.readFileSync(path.join(config.certificates_dir,'server.key')),
-        ca: fs.readFileSync(path.join(config.certificates_dir,'server.csr')),
-        cert: fs.readFileSync(path.join(config.certificates_dir,'server.crt'))
-    };
+//    var server_credentials={
+ //       key: fs.readFileSync(path.join(config.certificates_dir,'server.key')),
+  //      ca: fs.readFileSync(path.join(config.certificates_dir,'server.csr')),
+   //     cert: fs.readFileSync(path.join(config.certificates_dir,'server.crt'))
+    //};
 
-    https.createServer(server_credentials,app).listen(app.get('port'), function(){
+    //https.createServer(server_credentials,app).listen(app.get('port'), function(){
+    http.createServer(app).listen(app.get('port'), function(){
         console.log('Express server listening on port ' + app.get('port'));
     });
 });
