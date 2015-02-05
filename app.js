@@ -37,7 +37,7 @@ app.configure(function() {
     app.use('/chicago/mobile-dev',express.static(config.mobile_app_debug_root));
     app.use('/sandbox/portal',express.static(config.portal_app_root));
     app.use('/chicago/portal',express.static(config.portal_app_root));
-    app.use('/', express.static(config.sandbox_app_root));
+    app.use('/new/sandbox', express.static(config.sandbox_app_root));
 });
 
 
