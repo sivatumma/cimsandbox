@@ -62,7 +62,9 @@
                             }
                         },
                         "find": {
-                            "sid": "sensity.*8D1A5ZW9"
+                            "light": {
+                                "sid": "sensity.*8D1A5ZW9"
+                            }
                         }
                     }
                 }
