@@ -44,7 +44,7 @@ app.configure(function() {
 // development only
 //app.use(express.errorHandler());
 
-app.get('/', routes.index);
+app.get('/', express.static(config.sandbox_app_root));
 var user = require('./routes/user.js')(app);
 var muser = require('./routes/muser.js')(app);
 var fixtures = require('./routes/fixtures.js')(app);
