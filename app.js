@@ -38,14 +38,14 @@ app.configure(function() {
     app.use('/sandbox/portal',express.static(config.portal_app_root));
     app.use('/chicago/portal',express.static(config.portal_app_root));
     app.use('/new/sandbox', express.static(config.sandbox_app_root));
-    app.use('/', express.static(config.sandbox_app_root));
+    // app.use('/', express.static(config.sandbox_app_root));
 });
 
 
 // development only
 //app.use(express.errorHandler());
 
-// app.get('/', express.static(config.sandbox_app_root));
+app.get('/', routes.index);
 var user = require('./routes/user.js')(app);
 var muser = require('./routes/muser.js')(app);
 var fixtures = require('./routes/fixtures.js')(app);
