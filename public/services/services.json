@@ -1,12 +1,12 @@
 [{
     "providerName": "MQI",
     "API": {
-        "endPoint": "/api/mqi",
+        "endPoint": "api/mqi",
         "API_KEY": "EXAMPLE: 4b2891f7-f272-4f1e-a51d",
         "services": [{
             "serviceName": "light",
             "serviceList": [{
-                "icon":"assets/lightOn.png",
+                "icon": "assets/lightOn.png",
                 "requestDescription": "Get All Light Data",
                 "postBody": {
                     "query": {
@@ -17,7 +17,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get Light Data in Viewport",
                 "postBody": {
                     "query": {
@@ -33,7 +33,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightPause.png",
+                "icon": "assets/lightPause.png",
                 "requestDescription": "Set State to : ON",
                 "postBody": {
                     "query": {
@@ -51,7 +51,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightOff.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "Set State to : OFF",
                 "postBody": {
                     "query": {
@@ -72,7 +72,7 @@
         }, {
             "serviceName": "ambience",
             "serviceList": [{
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get Ambience from All Sensors",
                 "postBody": {
                     "query": {
@@ -83,7 +83,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get from specific Sensors",
                 "postBody": {
                     "query": {
@@ -99,7 +99,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Filter on Flux level",
                 "postBody": {
                     "query": {
@@ -123,7 +123,7 @@
         }, {
             "serviceName": "traffic",
             "serviceList": [{
-                "icon":"assets/road.png",
+                "icon": "assets/road.png",
                 "requestDescription": "Get for Roads",
                 "postBody": {
                     "query": {
@@ -134,7 +134,7 @@
                     }
                 }
             }, {
-                "icon":"assets/routes.png",
+                "icon": "assets/routes.png",
                 "requestDescription": "Get for Routes",
                 "postBody": {
                     "query": {
@@ -148,7 +148,7 @@
         }, {
             "serviceName": "parking",
             "serviceList": [{
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get All Parking Data",
                 "postBody": {
                     "query": {
@@ -159,7 +159,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Filter - Occupied",
                 "postBody": {
                     "query": {
@@ -176,7 +176,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Filter - Vacant",
                 "postBody": {
                     "query": {
@@ -196,8 +196,310 @@
             }]
         }]
     }
-},
-{
+}, {
+    "providerName": "EBC",
+    "API": {
+        "endPoint": "api/ebc",
+        "API_KEY": "EXAMPLE: 4b2891f7-f272-4f1e-a51d",
+        "services": [{
+            "serviceName": "illumination",
+            "serviceList": [{
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Filter on Operater + viewport",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all lights operated by specified organization within the specified viewport. Lat is specified in the format minLat,maxLat and Lon is specified as minLong, maxLong",
+                        "find": {
+                            "light": {
+                                "operatedBy": "sensity-qa",
+                                "geocoordinates": {
+                                    "lat": "+37.232976,+37.442615",
+                                    "lon": "-122.174149,-121.771088"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightOff.png",
+                "requestDescription": "Filter by IDs",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all lights operated by specified organization and with the given                         ids.Id 's are comma separated and case insensitive",
+                        "find": {
+                            "light": {
+                                "operatedBy": "sensity-qa",
+                                "id": ["sensity.*HH6DTAMb", "sensity.*Q2BGKVGZ"]
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/light.png",
+                "requestDescription": "All operated by a provider",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all lights operated by specified organization(maps to logical scopes)",
+                        "find": {
+                            "light": {
+                                "operatedBy": "sensity‐qa"
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/light.png",
+                "requestDescription": "Set Power State - ON",
+                "postBody": {
+                    "query": {
+                        "documentation": "Turn on all lights operated by specified organization (maps to logical scopes)",
+                        "process": {
+                            "set": {
+                                "powerstate": "ON"
+                            }
+                        },
+                        "find": {
+                            "light": {
+                                "operatedBy": "sensity‐qa"
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/light.png",
+                "requestDescription": "Set Power State - OFF",
+                "postBody": {
+                    "query": {
+                        "documentation": "Turn off all lights lights operated by sensity-‐lab",
+                        "find": {
+                            "light": {
+                                "operatedby": "sensity‐qa"
+                            }
+                        },
+                        "process": {
+                            "set": {
+                                "powerstate": "off"
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/light.png",
+                "requestDescription": "Set Intensity Level",
+                "postBody": {
+                    "query": {
+                        "documentation": "Set the intensity level to 50 for all lights operated by specified organization (maps to logical scopes) and within a specified viewport",
+                        "process": {
+                            "set": {
+                                "intensitylevel": "50"
+                            }
+                        },
+                        "find": {
+                            "light": {
+                                "operatedBy": "sensity‐qa",
+                                "geocoordinates": {
+                                    "lat": "+37.232976,+37.442615",
+                                    "lon": "-122.174149,‐121.771088"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/light.png",
+                "requestDescription": "Schedule",
+                "postBody": {
+                    "query": {
+                        "documentation": "Set the intensity level to 50 for all lights operated by specified organization (maps to logical scopes) for 10 mins",
+                        "process": {
+                            "set": {
+                                "intensitylevel": "50"
+                            },
+                            "schedule": {
+                                "duration": 10
+                            }
+                        },
+                        "find": {
+                            "light": {
+                                "operatedBy": "sensity­‐qa",
+                                "geocoordinates": {
+                                    "lat": "+37.232976,+37.442615",
+                                    "lon": "‐122.174149,‐121.771088"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightPolicy.png",
+                "requestDescription": "Apply Policy (Ex 1)",
+                "postBody": {
+                    "query": {
+                        "documentation": "Turn on all specified lights on 1st of Sep 2014 @ 6 AM",
+                        "policy": {
+                            "name": "Policy1",
+                            "trigger": {
+                                "name": "Trigger1",
+                                "year": {
+                                    "eq": 2014,
+                                    "month": {
+                                        "eq": "SEP",
+                                        "day": {
+                                            "eq": "1",
+                                            "hour": {
+                                                "eq": 6
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "action": {
+                                "name": "Action1",
+                                "set": {
+                                    "powerstate": "ON"
+                                }
+                            }
+                        },
+                        "find": {
+                            "light": {
+                                "operatedBy": "sensity‐qa",
+                                "id": ["sensity.*HH6DTAMb", "sensity.*Q2BGKVGZ"]
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightPolicy.png",
+                "requestDescription": "Apply Policy (Ex 2)",
+                "postBody": {
+                    "query": {
+                        "documentation": "Set intensity level of all specified lights to 50% on 1st of Sep 2014 @ 6:30 AM and then make it 100% at 1st of Sep 2014, 8:00 AM",
+                        "policy": [{
+                            "name": "Policy2",
+                            "trigger": {
+                                "name": "Trigger1",
+                                "year": {
+                                    "eq": 2014,
+                                    "month": {
+                                        "eq": "SEP",
+                                        "day": {
+                                            "eq": "1",
+                                            "hour": {
+                                                "eq": 6,
+                                                "minute": {
+                                                    "eq": "30"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "action": {
+                                "name": "Action1",
+                                "set": {
+                                    "intensitylevel": "50"
+                                }
+                            }
+                        }, {
+                            "name": "Policy2",
+                            "trigger": {
+                                "name": "Trigger2",
+                                "year": {
+                                    "eq": 2014,
+                                    "month": {
+                                        "eq": "SEP",
+                                        "day": {
+                                            "eq": "1",
+                                            "hour": {
+                                                "eq": 8
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "action": {
+                                "name": "Action2",
+                                "set": {
+                                    "intensitylevel": "100"
+                                }
+                            }
+                        }],
+                        "find": {
+                            "light": {
+                                "operatedBy": "sensity‐qa"
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightPolicy.png",
+                "requestDescription": "Apply Policy (Ex 3)",
+                "postBody": {
+                    "query": {
+                        "documentation": "Set intensity level of all specified lights to 50% on 1st of Sep 2014 @ 6:30 AM and then make it 100% at 1st of Sep 2014, 8:00 AM",
+                        "policy": [{
+                            "name": "Policy1",
+                            "trigger": {
+                                "name": "Trigger1",
+                                "year": {
+                                    "eq": 2014,
+                                    "month": {
+                                        "eq": "SEP",
+                                        "day": {
+                                            "eq": "1",
+                                            "hour": {
+                                                "eq": 6,
+                                                "minute": {
+                                                    "eq": "30"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "action": {
+                                "name": "Action1",
+                                "set": {
+                                    "intensitylevel": "50"
+                                }
+                            }
+                        }, {
+                            "name": "Policy2",
+                            "trigger": {
+                                "name": "Trigger2",
+                                "year": {
+                                    "eq": 2014,
+                                    "month": {
+                                        "eq": "SEP",
+                                        "day": {
+                                            "eq": "1",
+                                            "hour": {
+                                                "eq": 8
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "action": {
+                                "name": "Action2",
+                                "set": {
+                                    "intensitylevel": "100"
+                                }
+                            }
+                        }],
+                        "find": {
+                            "light": {
+                                "operatedBy": "sensity-­‐qa"
+                            }
+                        }
+                    }
+                }
+            }]
+        }, {
+            "serviceName": ""
+        }]
+    }
+}, {
     "providerName": "DMS",
     "API": {
         "endPoint": "/api/mqi",
@@ -205,7 +507,7 @@
         "services": [{
             "serviceName": "light",
             "serviceList": [{
-                "icon":"assets/lightOn.png",
+                "icon": "assets/lightOn.png",
                 "requestDescription": "Get All Light Data",
                 "postBody": {
                     "query": {
@@ -216,7 +518,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get Light Data in Viewport",
                 "postBody": {
                     "query": {
@@ -232,7 +534,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightPause.png",
+                "icon": "assets/lightPause.png",
                 "requestDescription": "Set State to : ON",
                 "postBody": {
                     "query": {
@@ -250,7 +552,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightOff.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "Set State to : OFF",
                 "postBody": {
                     "query": {
@@ -269,7 +571,7 @@
         }, {
             "serviceName": "ambience",
             "serviceList": [{
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get Ambience from All Sensors",
                 "postBody": {
                     "query": {
@@ -280,7 +582,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get from specific Sensors",
                 "postBody": {
                     "query": {
@@ -296,7 +598,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Filter on Flux level",
                 "postBody": {
                     "query": {
@@ -320,7 +622,7 @@
         }, {
             "serviceName": "traffic",
             "serviceList": [{
-                "icon":"assets/road.png",
+                "icon": "assets/road.png",
                 "requestDescription": "Get for Roads",
                 "postBody": {
                     "query": {
@@ -331,7 +633,7 @@
                     }
                 }
             }, {
-                "icon":"assets/routes.png",
+                "icon": "assets/routes.png",
                 "requestDescription": "Get for Routes",
                 "postBody": {
                     "query": {
@@ -345,7 +647,7 @@
         }, {
             "serviceName": "parking",
             "serviceList": [{
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get All Parking Data",
                 "postBody": {
                     "query": {
@@ -356,7 +658,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Filter - Occupied",
                 "postBody": {
                     "query": {
@@ -373,7 +675,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Filter - Vacant",
                 "postBody": {
                     "query": {
@@ -393,8 +695,7 @@
             }]
         }]
     }
-},
-{
+}, {
     "providerName": "World Sensing",
     "API": {
         "endPoint": "/api/worldsensing",
@@ -402,7 +703,7 @@
         "services": [{
             "serviceName": "light",
             "serviceList": [{
-                "icon":"assets/lightOn.png",
+                "icon": "assets/lightOn.png",
                 "requestDescription": "Get All Light Data",
                 "postBody": {
                     "query": {
@@ -413,7 +714,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get Light Data in Viewport",
                 "postBody": {
                     "query": {
@@ -429,7 +730,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightPause.png",
+                "icon": "assets/lightPause.png",
                 "requestDescription": "Set State to : ON",
                 "postBody": {
                     "query": {
@@ -447,7 +748,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightOff.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "Set State to : OFF",
                 "postBody": {
                     "query": {
@@ -466,7 +767,7 @@
         }, {
             "serviceName": "ambience",
             "serviceList": [{
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get Ambience from All Sensors",
                 "postBody": {
                     "query": {
@@ -477,7 +778,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get from specific Sensors",
                 "postBody": {
                     "query": {
@@ -493,7 +794,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Filter on Flux level",
                 "postBody": {
                     "query": {
@@ -517,7 +818,7 @@
         }, {
             "serviceName": "traffic",
             "serviceList": [{
-                "icon":"assets/road.png",
+                "icon": "assets/road.png",
                 "requestDescription": "Get for Roads",
                 "postBody": {
                     "query": {
@@ -528,7 +829,7 @@
                     }
                 }
             }, {
-                "icon":"assets/routes.png",
+                "icon": "assets/routes.png",
                 "requestDescription": "Get for Routes",
                 "postBody": {
                     "query": {
@@ -542,7 +843,7 @@
         }, {
             "serviceName": "parking",
             "serviceList": [{
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Get All Parking Data",
                 "postBody": {
                     "query": {
@@ -553,7 +854,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Filter - Occupied",
                 "postBody": {
                     "query": {
@@ -570,7 +871,7 @@
                     }
                 }
             }, {
-                "icon":"assets/lightViewport.png",
+                "icon": "assets/lightViewport.png",
                 "requestDescription": "Filter - Vacant",
                 "postBody": {
                     "query": {
