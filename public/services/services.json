@@ -159,6 +159,29 @@
                     }
                 }
             }, {
+                "icon": "assets/parkingNearby.png",
+                "requestDescription": "Within a radius",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get nearby parking spots (distance in miles)",
+                        "find": {
+                            "var": {
+                                "name": "queryPoint",
+                                "geocoordinates": {
+                                    "latitude": 37.38445,
+                                    "longitude": -121.98757
+                                }
+                            },
+                            "parkingSpace": {
+                                "le": {
+                                    "target": "distance(this.parkingSpots, queryPoint)",
+                                    "value": "1.0"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
                 "icon": "assets/parking.png",
                 "requestDescription": "Filter - Occupied",
                 "postBody": {
@@ -207,7 +230,7 @@
                         "sid": "daytimeParking"
                     }
                 }
-            },{
+            }, {
                 "icon": "assets/crudCreate.png",
                 "url": "/api/mqi/crud",
                 "requestDescription": "Create ParkingOpParams",
@@ -243,7 +266,7 @@
                         }
                     }
                 }
-            },{
+            }, {
                 "icon": "assets/crudDelete.png",
                 "url": "/api/mqi/crud",
                 "requestDescription": "Delete ParkingOpParams",
