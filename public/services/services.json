@@ -716,7 +716,7 @@
         }]
     }
 }, {
-    "providerName": "World Sensing",
+    "providerName": "World-Sensing",
     "API": {
         "endPoint": "/api/worldsensing",
         "API_KEY": "EXAMPLE: 4b2891f7-f272-4f1e-a51d",
