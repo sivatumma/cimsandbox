@@ -83,7 +83,7 @@
                     }
                 }
             }, {
-                "icon": "assets/ambienceMood.jpg",
+                "icon": "assets/ambienceMood.png",
                 "requestDescription": "Get from specific Sensors",
                 "postBody": {
                     "query": {
@@ -180,10 +180,9 @@
                 "requestDescription": "Filter - Vacant",
                 "postBody": {
                     "query": {
-                        "documentation": "Get parking space operated by specified organization, but retrieve only parking spots with specified state",
+                        "documentation": "Get parking space - retrieve only parking spots with specified state",
                         "find": {
                             "parkingSpace": {
-                                "operatedBy": "sensity‐qa",
                                 "parkingSpots": {
                                     "state": {
                                         "occupied": false
