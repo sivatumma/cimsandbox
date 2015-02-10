@@ -196,7 +196,7 @@
         }, {
             "serviceName": "CRUD",
             "serviceList": [{
-                "icon": "assets/crud.png",
+                "icon": "assets/crudRead.png",
                 "url": "/api/mqi/crud",
                 "requestDescription": "Read ParkingOpParams",
                 "postBody": {
@@ -208,7 +208,7 @@
                     }
                 }
             },{
-                "icon": "assets/crud.png",
+                "icon": "assets/crudCreate.png",
                 "url": "/api/mqi/crud",
                 "requestDescription": "Create ParkingOpParams",
                 "postBody": {
@@ -226,7 +226,7 @@
                     }
                 }
             }, {
-                "icon": "assets/crud.png",
+                "icon": "assets/crudUpdate.png",
                 "url": "/api/mqi/crud",
                 "requestDescription": "Update ParkingOpParams",
                 "postBody": {
@@ -244,7 +244,7 @@
                     }
                 }
             },{
-                "icon": "assets/crud.png",
+                "icon": "assets/crudDelete.png",
                 "url": "/api/mqi/crud",
                 "requestDescription": "Delete ParkingOpParams",
                 "postBody": {
