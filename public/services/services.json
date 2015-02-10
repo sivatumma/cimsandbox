@@ -72,7 +72,7 @@
         }, {
             "serviceName": "ambience",
             "serviceList": [{
-                "icon": "assets/ambienceColors.png",
+                "icon": "assets/ambienceMood.png",
                 "requestDescription": "Get Ambience from All Sensors",
                 "postBody": {
                     "query": {
@@ -83,7 +83,7 @@
                     }
                 }
             }, {
-                "icon": "assets/ambienceSpecificSensors.jpg",
+                "icon": "assets/ambienceMood.jpg",
                 "requestDescription": "Get from specific Sensors",
                 "postBody": {
                     "query": {
@@ -195,7 +195,7 @@
                 }
             }]
         }, {
-            "serviceName": "crud",
+            "serviceName": "CRUD",
             "serviceList": [{
                 "icon": "assets/crud.svg",
                 "url":"/api/mqi/crud",
