@@ -148,7 +148,7 @@
         }, {
             "serviceName": "parking",
             "serviceList": [{
-                "icon": "assets/parking.png",
+                "icon": "assets/parkingAll.png",
                 "requestDescription": "Get All Parking Data",
                 "postBody": {
                     "query": {
@@ -182,7 +182,7 @@
                     }
                 }
             }, {
-                "icon": "assets/parking.png",
+                "icon": "assets/parkingFilled.png",
                 "requestDescription": "Filter - Occupied",
                 "postBody": {
                     "query": {
@@ -199,7 +199,7 @@
                     }
                 }
             }, {
-                "icon": "assets/parking.png",
+                "icon": "assets/parkingVacant.png",
                 "requestDescription": "Filter - Vacant",
                 "postBody": {
                     "query": {
