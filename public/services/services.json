@@ -194,6 +194,27 @@
                     }
                 }
             }]
+        }, {
+            "serviceName": "CRUD",
+            "serviceList": [{
+                "icon": "",
+                "url":"api/mqi/crud",
+                "requestDescription": "Create ParkingOpParams",
+                "postBody": {
+                    "type": "ParkingOperationParameters",
+                    "operation": "create",
+                    "ParkingOperationParameters": {
+                        "name": "daytimeParking",
+                        "sid": "daytimeParking",
+                        "timeLimits": {
+                            "validTimeOfDay": [{
+                                "startTime": "08:00:00",
+                                "endTime": "18:00:00"
+                            }]
+                        }
+                    }
+                }
+            }]
         }]
     }
 }, {
