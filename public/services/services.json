@@ -72,7 +72,7 @@
         }, {
             "serviceName": "ambience",
             "serviceList": [{
-                "icon": "assets/lightViewport.png",
+                "icon": "assets/ambienceColors.png",
                 "requestDescription": "Get Ambience from All Sensors",
                 "postBody": {
                     "query": {
@@ -83,7 +83,7 @@
                     }
                 }
             }, {
-                "icon": "assets/lightViewport.png",
+                "icon": "assets/ambienceSpecificSensors.jpg",
                 "requestDescription": "Get from specific Sensors",
                 "postBody": {
                     "query": {
@@ -99,7 +99,7 @@
                     }
                 }
             }, {
-                "icon": "assets/lightViewport.png",
+                "icon": "assets/ambienceMood.png",
                 "requestDescription": "Filter on Flux level",
                 "postBody": {
                     "query": {
@@ -148,7 +148,7 @@
         }, {
             "serviceName": "parking",
             "serviceList": [{
-                "icon": "assets/lightViewport.png",
+                "icon": "assets/parking.png",
                 "requestDescription": "Get All Parking Data",
                 "postBody": {
                     "query": {
@@ -159,7 +159,7 @@
                     }
                 }
             }, {
-                "icon": "assets/lightViewport.png",
+                "icon": "assets/parking.png",
                 "requestDescription": "Filter - Occupied",
                 "postBody": {
                     "query": {
@@ -176,7 +176,7 @@
                     }
                 }
             }, {
-                "icon": "assets/lightViewport.png",
+                "icon": "assets/parking.png",
                 "requestDescription": "Filter - Vacant",
                 "postBody": {
                     "query": {
@@ -235,7 +235,7 @@
                     }
                 }
             }, {
-                "icon": "assets/light.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "All operated by a provider",
                 "postBody": {
                     "query": {
@@ -248,7 +248,7 @@
                     }
                 }
             }, {
-                "icon": "assets/light.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "Set Power State - ON",
                 "postBody": {
                     "query": {
@@ -266,7 +266,7 @@
                     }
                 }
             }, {
-                "icon": "assets/light.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "Set Power State - OFF",
                 "postBody": {
                     "query": {
@@ -284,7 +284,7 @@
                     }
                 }
             }, {
-                "icon": "assets/light.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "Set Intensity Level",
                 "postBody": {
                     "query": {
@@ -306,7 +306,7 @@
                     }
                 }
             }, {
-                "icon": "assets/light.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "Schedule",
                 "postBody": {
                     "query": {
@@ -331,7 +331,7 @@
                     }
                 }
             }, {
-                "icon": "assets/lightPolicy.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "Apply Policy (Ex 1)",
                 "postBody": {
                     "query": {
@@ -369,7 +369,7 @@
                     }
                 }
             }, {
-                "icon": "assets/lightPolicy.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "Apply Policy (Ex 2)",
                 "postBody": {
                     "query": {
@@ -432,7 +432,7 @@
                     }
                 }
             }, {
-                "icon": "assets/lightPolicy.png",
+                "icon": "assets/lightOff.png",
                 "requestDescription": "Apply Policy (Ex 3)",
                 "postBody": {
                     "query": {
