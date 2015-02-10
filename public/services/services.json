@@ -197,8 +197,8 @@
         }, {
             "serviceName": "CRUD",
             "serviceList": [{
-                "icon": "",
-                "url":"/api/mqi/crud",
+                "icon": "assets/crud.svg",
+                "url":"/api/crud",
                 "requestDescription": "Create ParkingOpParams",
                 "postBody": {
                     "type": "ParkingOperationParameters",
