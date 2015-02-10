@@ -72,7 +72,7 @@
         }, {
             "serviceName": "ambience",
             "serviceList": [{
-                "icon": "assets/ambience1.png",
+                "icon": "assets/ambience.png",
                 "requestDescription": "Get Ambience from All Sensors",
                 "postBody": {
                     "query": {
