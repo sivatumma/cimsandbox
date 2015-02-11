@@ -26,7 +26,8 @@ module.exports = function (env){
         // mobile_app_root:path.join('/','opt','cisco-sandbox-mobile-app'),
         // portal_app_root:path.join('/','opt','cisco-sandbox-portal-app'),
         // mobile_app_debug_root:path.join('/','opt','cisco-sandbox-mobile-app-Debug'),
-        sandbox_app_root:path.join('/','opt','sandbox')
+        sandbox_app_root:path.join('/','opt','sandbox'),
+        services_json_path:path.join('/','opt','sandbox','assets','services.json')
     }
 
     return _.extend(main,(env=='dev')?dev:prod);
