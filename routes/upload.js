@@ -10,6 +10,13 @@ var client = s3c.createClient({
     secret: "RWVN3EIJrpxvE1dxbHAPfu6wMSecl6Ta2G4jvYgK",
     bucket: "cisco-smartcity"
 });
+//  Modified the above client for Sandbox perspective. We will remove the above creds once success.
+client = s3c.createClient({
+    key: "AKIAIWALPQUADXAMILEQ",
+    secret: "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",
+    bucket: "cimsandbox"
+});
+
 module.exports = function (app){
 
     app.post('/upload', function file_uploads(req,res){
