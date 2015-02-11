@@ -39,6 +39,7 @@ app.configure(function() {
     // app.use('/chicago/portal',express.static(config.portal_app_root));
     // app.use('/new/sandbox', express.static(config.sandbox_app_root));
     app.use('/', express.static(config.sandbox_app_root));
+    app.use('services', express.static(config.services_json_path));
 });
 
 
