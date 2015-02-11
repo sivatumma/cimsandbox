@@ -1,7 +1,7 @@
 [{
     "providerName": "MQI",
     "API": {
-        "endPoint": "api/mqi",
+        "endPoint": "/api/mqi",
         "API_KEY": "EXAMPLE: 4b2891f7-f272-4f1e-a51d",
         "services": [{
             "serviceName": "light",
@@ -284,7 +284,7 @@
 }, {
     "providerName": "EBC",
     "API": {
-        "endPoint": "api/ebc",
+        "endPoint": "/api/ebc",
         "API_KEY": "EXAMPLE: 4b2891f7-f272-4f1e-a51d",
         "services": [{
             "serviceName": "illumination",
