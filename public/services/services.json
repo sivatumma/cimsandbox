@@ -581,7 +581,393 @@
                 }
             }]
         }, {
-            "serviceName": ""
+            "serviceName": "parking",
+            "serviceList": [{
+                "icon": "",
+                "requestDescription": "Filter by Operator",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get parking space operated by specified organization",
+                        "find": {
+                            "parkingSpace": {
+                                "operatedBy": "sensity-qa"
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Filter by State",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get parking space operated by specified organization, but retrieve only parking spots with specified state",
+                        "find": {
+                            "parkingSpace": {
+                                "operatedBy": "sensity-qa",
+                                "parkingSpots": {
+                                    "state": {
+                                        "occupied": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Nearby Parking spaces",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get nearby parking spots (distance in miles)",
+                        "find": {
+                            "var": {
+                                "name": "queryPoint",
+                                "geocoordinates": {
+                                    "latitude": 37.38445,
+                                    "longitude": -121.98757
+                                }
+                            },
+                            "parkingSpace": {
+                                "le": {
+                                    "target": "distance(this.parkingSpots, queryPoint)",
+                                    "value": "1.0"
+                                }
+                            }
+                        }
+                    }
+                }
+            }]
+        }, {
+            "serviceName": "kiosk",
+            "serviceList": [{
+                "icon": "",
+                "requestDescription": "Find All Kiosks",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all kiosks",
+                        "find": {
+                            "kiosk": {}
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Nearby a geolocation",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get kiosks near specified geocoordinates",
+                        "find": {
+                            "var": {
+                                "name": "queryPoint",
+                                "geocoordinates": {
+                                    "latitude": 37.38545,
+                                    "longitude": -121.98857
+                                }
+                            },
+                            "kiosk": {
+                                "le": {
+                                    "target": "distance(this, queryPoint)",
+                                    "value": "5ft"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Set Content Info",
+                "postBody": {
+                    "query": {
+                        "documentation": "Set content for specified kiosk",
+                        "find": {
+                            "kiosk": {
+                                "id": ["1"]
+                            }
+                        },
+                        "process": {
+                            "set": {
+                                "currentContentsInfo": [{
+                                    "id": "someContentId"
+                                }]
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Set Current Alert",
+                "postBody": {
+                    "query": {
+                        "documentation": "Set notification for specified kiosks",
+                        "find": {
+                            "kiosk": {
+                                "id": ["1", "2"]
+                            }
+                        },
+                        "process": {
+                            "set": {
+                                "currentAlert": "some notification"
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Remove Alerts",
+                "postBody": {
+                    "query": {
+                        "documentation": "Cancel the notification for specified kiosks",
+                        "find": {
+                            "kiosk": {
+                                "id": ["1", "2"]
+                            }
+                        },
+                        "process": {
+                            "set": {
+                                "currentAlert": null
+                            }
+                        }
+                    }
+                }
+            }]
+        }, {
+            "serviceName": "City Data",
+            "serviceList": [{
+                "icon": "",
+                "requestDescription": "All City Info",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all city information for specified city",
+                        "find": {
+                            "event": {
+                                "cityName": "Chicago"
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Filter On Time",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get events in specified time frame",
+                        "find": {
+                            "event": {
+                                "cityName": "Chicago",
+                                "startTime": {
+                                    "le": "2014-10-22T00:00:00‐05:00"
+                                },
+                                "endTime": {
+                                    "ge": "2014-10-21T00:00:00-05:00"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Get events on a Business Zone",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get city events in specified location.",
+                        "find": {
+                            "event": {
+                                "location": {
+                                    "zone": "businessZone"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Many Filters",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all city information for specified city",
+                        "find": {
+                            "spotlight": {
+                                "cityName": "someCityName"
+                            },
+                            "event": {
+                                "cityName": "someCityName"
+                            },
+                            "attraction": {
+                                "cityName": "someCityName"
+                            },
+                            "official": {
+                                "cityName": "someCityName"
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Find Deals",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all deals in specified time frame",
+                        "find": {
+                            "deal": {
+                                "startTime": {
+                                    "le": "2014-10-22T00:00:00-05:00"
+                                },
+                                "endTime": {
+                                    "ge": "2014-10-21T00:00:00-05:00"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Nearby Deals",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get nearby deals",
+                        "find": {
+                            "var": {
+                                "name": "queryPoint",
+                                "geocoordinates": {
+                                    "latitude": 41.87938,
+                                    "longitude": -87.624551
+                                }
+                            },
+                            "deal": {
+                                "le": {
+                                    "target": "distance(this.address, queryPoint)",
+                                    "value": "10.0"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Deals at a location",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get deals in specified location",
+                        "find": {
+                            "deal": {
+                                "location": {
+                                    "zone": "businessZone"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Categories Filter",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get deals in specified categories",
+                        "find": {
+                            "deal": {
+                                "category.name": ["cat1", "cat2", "Placeholders"]
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Get Category Names",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get categories of deals",
+                        "find": {
+                            "deal": {}
+                        },
+                        "select": {
+                            "categoryName": "[:category.name:]"
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Filter on time, geo, categories",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get nearby deals in specified time frame, of specified categories",
+                        "find": {
+                            "var": {
+                                "name": "queryPoint",
+                                "geocoordinates": {
+                                    "latitude": 41.87938,
+                                    "longitude": -87.624551
+                                }
+                            },
+                            "deal": {
+                                "le": {
+                                    "target": "distance(this.address, queryPoint)",
+                                    "value": "10.0"
+                                },
+                                "startTime": {
+                                    "le": "2014-10-22T00:00:00-05:00"
+                                },
+                                "endTime": {
+                                    "ge": "2014-10-21T00:00:00-05:00"
+                                },
+                                "category.name": ["cat1", "cat2", "Placeholders"]
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Find Theatrical Information",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get theaters within specified distance from specified point",
+                        "find": {
+                            "var": {
+                                "name": "queryPoint",
+                                "geocoordinates": {
+                                    "latitude": 37.38545,
+                                    "longitude": -121.98857
+                                }
+                            },
+                            "theater": {
+                                "le": {
+                                    "target": "distance(this.address, queryPoint)",
+                                    "value": "5ft"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Theatres in a geolocation",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get theaters in specified location.",
+                        "find": {
+                            "theater": {
+                                "location": {
+                                    "zone": "businessZone"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "",
+                "requestDescription": "Movies in a Theater",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get movies in specified theater",
+                        "find": {
+                            "movie": {
+                                "theater": {
+                                    "id": "someTheaterId"
+                                }
+                            }
+                        }
+                    }
+                }
+            }]
         }]
     }
 }, {
