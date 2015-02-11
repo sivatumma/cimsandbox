@@ -327,7 +327,7 @@
                         "documentation": "Get all lights operated by specified organization(maps to logical scopes)",
                         "find": {
                             "light": {
-                                "operatedBy": "sensity‐qa"
+                                "operatedBy": "sensity-qa"
                             }
                         }
                     }
@@ -345,7 +345,7 @@
                         },
                         "find": {
                             "light": {
-                                "operatedBy": "sensity‐qa"
+                                "operatedBy": "sensity-qa"
                             }
                         }
                     }
@@ -358,7 +358,7 @@
                         "documentation": "Turn off all lights lights operated by sensity-lab",
                         "find": {
                             "light": {
-                                "operatedby": "sensity‐qa"
+                                "operatedby": "sensity-qa"
                             }
                         },
                         "process": {
@@ -381,10 +381,10 @@
                         },
                         "find": {
                             "light": {
-                                "operatedBy": "sensity‐qa",
+                                "operatedBy": "sensity-qa",
                                 "geocoordinates": {
                                     "lat": "+37.232976,+37.442615",
-                                    "lon": "-122.174149,‐121.771088"
+                                    "lon": "-122.174149,-121.771088"
                                 }
                             }
                         }
@@ -406,10 +406,10 @@
                         },
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa",
+                                "operatedBy": "sensityÂ­-qa",
                                 "geocoordinates": {
                                     "lat": "+37.232976,+37.442615",
-                                    "lon": "‐122.174149,‐121.771088"
+                                    "lon": "-122.174149,-121.771088"
                                 }
                             }
                         }
@@ -755,7 +755,7 @@
                             "event": {
                                 "cityName": "Chicago",
                                 "startTime": {
-                                    "le": "2014-10-22T00:00:00‐05:00"
+                                    "le": "2014-10-22T00:00:00-05:00"
                                 },
                                 "endTime": {
                                     "ge": "2014-10-21T00:00:00-05:00"
@@ -1153,7 +1153,7 @@
                         "documentation": "Get parking space operated by specified organization, but retrieve only parking spots with specified state",
                         "find": {
                             "parkingSpace": {
-                                "operatedBy": "sensity‐qa",
+                                "operatedBy": "sensity-qa",
                                 "parkingSpots": {
                                     "state": {
                                         "occupied": false
@@ -1349,7 +1349,7 @@
                         "documentation": "Get parking space operated by specified organization, but retrieve only parking spots with specified state",
                         "find": {
                             "parkingSpace": {
-                                "operatedBy": "sensity‐qa",
+                                "operatedBy": "sensity-qa",
                                 "parkingSpots": {
                                     "state": {
                                         "occupied": false
