@@ -159,7 +159,8 @@ module.exports = function (app)
     //  The above set had been depricated in the recent release and a common URL to hit.
     app.all('/api/mqi',User.authorize,proxy_route('http://54.169.200.173:8080/fid-CIMQueryInterface'));
     app.all('/api/mqi/crud',User.authorize,proxy_route('http://54.169.200.173:8080/fid-CIMCrudInterface'));
-    app.all('/api/ebc',User.authorize,proxy_route('http://mqciscocls.mqidentity.net:8080/fid-CIMQueryInterface'));
+    //  Build specific to EBC, on a separate instance (box)
+    app.all('/api/ebc',User.authorize,proxy_route('http://54.169.115.123:8080/fid-CIMQueryInterface'));
 
     app.all('/api/spatial',User.authorize,pb_proxy_route('http://internal-PB-ELB-999255715.us-east-1.elb.amazonaws.com:8080/rest/Spatial/FeatureService/tables/features.json'));
     app.all('/api/neighborhood',User.authorize,pb_proxy_route('http://internal-PB-ELB-999255715.us-east-1.elb.amazonaws.com:8080/rest/cc_neighborhood/results.json'));
