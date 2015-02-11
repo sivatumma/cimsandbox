@@ -22,10 +22,10 @@ module.exports = function (env){
     var prod={
         temp:path.join('/','tmp'),
         env:'production',
-        certificates_dir:path.join('/','etc','ssl','self-signed'),
-        mobile_app_root:path.join('/','opt','cisco-sandbox-mobile-app'),
-        portal_app_root:path.join('/','opt','cisco-sandbox-portal-app'),
-        mobile_app_debug_root:path.join('/','opt','cisco-sandbox-mobile-app-Debug'),
+        // certificates_dir:path.join('/','etc','ssl','self-signed'),
+        // mobile_app_root:path.join('/','opt','cisco-sandbox-mobile-app'),
+        // portal_app_root:path.join('/','opt','cisco-sandbox-portal-app'),
+        // mobile_app_debug_root:path.join('/','opt','cisco-sandbox-mobile-app-Debug'),
         sandbox_app_root:path.join('/','opt','sandbox')
     }
 
