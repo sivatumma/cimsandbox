@@ -355,7 +355,7 @@
                 "requestDescription": "Set Power State - OFF",
                 "postBody": {
                     "query": {
-                        "documentation": "Turn off all lights lights operated by sensity-‐lab",
+                        "documentation": "Turn off all lights lights operated by sensity-lab",
                         "find": {
                             "light": {
                                 "operatedby": "sensity‐qa"
@@ -447,7 +447,7 @@
                         },
                         "find": {
                             "light": {
-                                "operatedBy": "sensity‐qa",
+                                "operatedBy": "sensity-qa",
                                 "id": ["sensity.*HH6DTAMb", "sensity.*Q2BGKVGZ"]
                             }
                         }
@@ -511,7 +511,7 @@
                         }],
                         "find": {
                             "light": {
-                                "operatedBy": "sensity‐qa"
+                                "operatedBy": "sensity-qa"
                             }
                         }
                     }
@@ -574,7 +574,7 @@
                         }],
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-­‐qa"
+                                "operatedBy": "sensity-qa"
                             }
                         }
                     }
