@@ -406,7 +406,7 @@
                         },
                         "find": {
                             "light": {
-                                "operatedBy": "sensityÂ­-qa",
+                                "operatedBy": "sensity-qa",
                                 "geocoordinates": {
                                     "lat": "+37.232976,+37.442615",
                                     "lon": "-122.174149,-121.771088"
