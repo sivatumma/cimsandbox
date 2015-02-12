@@ -30,7 +30,7 @@ module.exports = function (app){
             var rand=new Date().getTime();
             var new_file_name=file.name.replace(/\s+/g, '-').toLowerCase() + '_' + rand;
 
-            client.upload(file.path, escape(new_file_name), { 'x-amz-acl': 'public-read','Content-Type':file.type }).
+            client.upload(file.path, '/builds/mqi/' + escape(new_file_name), { 'x-amz-acl': 'public-read','Content-Type':file.type }).
                 on('error',function (err) {
                     res.send(500, err);
                 }).on('end', function (url) {
