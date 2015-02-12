@@ -18,12 +18,14 @@ module.exports = function (app){
 
         var form = new formidable.IncomingForm();
         // form.uploadDir=path.join(app.get('config').temp);
-        form.uploadDir=path.join('builds',form.providerName);
+        console.log(req);
+        console.log(req.providerName);
         form.type=true;
         form.parse(req, function(err, fields, files) {
             if (!files.file || files.file.size == 0) {
                 return res.send(500,{message:'No file added.'});
             }
+            form.uploadDir=path.join('builds',fields.providerName);
             var file = files.file;
             var rand=new Date().getTime();
             var new_file_name=file.name.replace(/\s+/g, '-').toLowerCase() + '_' + rand;
