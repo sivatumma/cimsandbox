@@ -25,12 +25,11 @@ module.exports = function (app){
             if (!files.file || files.file.size == 0) {
                 return res.send(500,{message:'No file added.'});
             }
-            form.uploadDir=path.join('builds',fields.providerName);
             var file = files.file;
             var rand=new Date().getTime();
-            var new_file_name=file.name.replace(/\s+/g, '-').toLowerCase() + '_' + rand;
+            // var new_file_name=file.name.replace(/\s+/g, '-');
 
-            client.upload(file.path, '/builds/mqi/' + escape(new_file_name), { 'x-amz-acl': 'public-read','Content-Type':file.type }).
+            client.upload(file.path, '/builds/' + fields.providerName + escape(file.name), { 'x-amz-acl': 'public-read','Content-Type':file.type }).
                 on('error',function (err) {
                     res.send(500, err);
                 }).on('end', function (url) {
