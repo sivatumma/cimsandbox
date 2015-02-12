@@ -12,9 +12,6 @@ module.exports = function (app){
 
     function offer_post(model){
         request.post({uri: url, json: model,timeout:TIMEOUT},function(error, response, body){
-            console.log("Please find the post request details:");
-            console.log("Body\n\n",body);
-            console.log("response\n\n",response);
             if(error)return console.log('posting offer to july system failed.'+error);
         });
 
