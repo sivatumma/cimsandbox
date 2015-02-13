@@ -62,6 +62,7 @@ var upload = require('./routes/upload.js')(app);
 require('./routes/tours.js')(app);
 require('./routes/feedbacks.js')(app);
 require('./routes/proxy.js')(app);
+require('./routes/mail.js')(app);
 mongoose.connect(config.database);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
