@@ -1,7 +1,7 @@
 CIM Sandbox
 =================
 # README #
-This is aimed as a temperory front-end for an Infrastructure driven SAAS + PAAS project of Cisco, called CIM Sandbox. At its core, The sandbox is perceived to be a highly scalable, higly available infrastructure environment for increasing number of **Providers** who operate intelligent devices; And **Developers** who build applications while consuming these services.
+This is aimed as a temperory front-end for an Infrastructure driven SAAS + PAAS project of Cisco, called CIM Sandbox. At its core, The sandbox is perceived to be a highly scalable, higly available infrastructure environment for increasing number of **Providers** who operate intelligent devices and expose CRUD services on them; And **Developers** who build applications while consuming these services.
 
 This repo has following .gitignore; Please add these folders when you clone 
 * /data 
