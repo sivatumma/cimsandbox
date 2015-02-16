@@ -1,5 +1,6 @@
 [{
     "providerName": "MQI",
+    "catalogLink": "MQI.pdf",
     "API": {
         "endPoint": "api/mqi",
         "API_KEY": "EXAMPLE: 4b2891f7-f272-4f1e-a51d",
@@ -283,6 +284,7 @@
     }
 }, {
     "providerName": "EBC",
+    "catalogLink": "EBC.pdf",
     "API": {
         "endPoint": "api/ebc",
         "API_KEY": "EXAMPLE: 4b2891f7-f272-4f1e-a51d",

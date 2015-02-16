@@ -1,4 +1,4 @@
-cd views
+cd ui
 chmod a+x tools/deploy.sh
 tools/deploy.sh
 cd ..

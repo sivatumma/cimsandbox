@@ -40,7 +40,7 @@ app.configure(function() {
     }));
     app.use(app.router);
     // app.use(express.static(path.join(__dirname, 'public')));
-    app.use(express.static(path.join(__dirname, 'views')));
+    app.use(express.static(path.join(__dirname, 'ui')));
     // app.use('.html', require('jade'));
     // app.use('/sandbox/mobile',express.static(config.mobile_app_root));
     // app.use('/chicago/mobile-dev',express.static(config.mobile_app_debug_root));

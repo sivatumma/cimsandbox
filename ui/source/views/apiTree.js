@@ -65,8 +65,10 @@ enyo.kind({
         var that = this;
         treeComponentJson.kind = "Node";
         treeComponentJson.endPoint = o.API.endPoint;
-        treeComponentJson.content = o.providerName;
+        treeComponentJson.content = o.providerName + " <a href='catalogues/" + o.catalogLink + "'>[Catalog]</a>";
+        treeComponentJson.allowHtml = true;
         treeComponentJson.name = o.providerName;
+        treeComponentJson.catalogLink = o.catalogLink;
         treeComponentJson.icon = 'assets/api-lb.png';
         treeComponentJson.classes = "topLevelTreeItem";
         treeComponentJson.expandable = true;    //  (o.providerName == "MQI");
@@ -101,6 +103,7 @@ enyo.kind({
                 });
             });
         });
+        console.log(treeComponentJson);
         this.$.menuArea.createComponent(treeComponentJson,{owner:this});
     },
     capitalize: function(string) {
