@@ -19,6 +19,7 @@
         "formidable":"1.0.15",
         "xml2js":"0.4.4",
         "knox":"*",
-        "nodemailer":"*"
+        "nodemailer":"*",
+        "jade":"*"
     }
 }

@@ -1,3 +1,4 @@
 exports.index = function(req, res){
-  res.redirect('/new/sandbox');
+  res.redirect('index.html');
 };
+

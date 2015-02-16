@@ -14,7 +14,6 @@ require('./models/offer.js')(mongoose);
 require('./models/tour.js')(mongoose);
 require('./models/feedback.js')(mongoose);
 app.configure(function() {
-    console.log(process.env);
     app.set('port', process.env.PORT || 80);
     app.set('config', config);
     app.set('env', config.env);
@@ -40,19 +39,21 @@ app.configure(function() {
         secret: 'keyboard cat'
     }));
     app.use(app.router);
-    app.use(express.static(path.join(__dirname, 'public')));
+    // app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, 'views')));
+    // app.use('.html', require('jade'));
     // app.use('/sandbox/mobile',express.static(config.mobile_app_root));
     // app.use('/chicago/mobile-dev',express.static(config.mobile_app_debug_root));
     // app.use('/sandbox/portal',express.static(config.portal_app_root));
     // app.use('/chicago/portal',express.static(config.portal_app_root));
     // app.use('/new/sandbox', express.static(config.sandbox_app_root));
-    app.use('/', express.static(config.sandbox_app_root));
+    // app.use('/', express.static(config.sandbox_app_root));
     app.use('/services', express.static(config.services_json_path));
 });
 // development only
 app.use(express.errorHandler());
-// app.get('/', routes.index);
-app.get('/', express.static(config.sandbox_app_root));
+app.get('/', routes.index);
+// app.get('/', express.static(config.sandbox_app_root));
 var user = require('./routes/user.js')(app);
 var muser = require('./routes/muser.js')(app);
 var fixtures = require('./routes/fixtures.js')(app);

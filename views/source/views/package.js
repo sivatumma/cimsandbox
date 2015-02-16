@@ -1,0 +1,11 @@
+enyo.depends(
+	"views.js",
+	"apiTree.js",
+	"documentation.js",
+	"apiActions.js",
+	"loginView.js",
+	"mainView.js",
+	"config.js",
+	"bugReport.js",
+	"fileUpload.js"
+);
