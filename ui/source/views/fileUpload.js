@@ -1,9 +1,8 @@
 enyo.kind({
     name: "fileUpload",
-    classes: "create-offer-popup",
     kind: "FittableColumns",
     uploadedFiles: {
-        offer: "",
+        build: "",
         coupon: ""
     },
     components: [{
@@ -20,9 +19,9 @@ enyo.kind({
             classes: "file-input-div",
             components: [{
                 kind: "enyo.FileInputDecorator",
-                name: "offerImage",
+                name: "buildImage",
                 onSelect: "fileUploaded",
-                imageType: "offer",
+                buildType: "build",
                 classes: "file-upload-field"
             }]
         }, {
@@ -31,26 +30,26 @@ enyo.kind({
                 kind: "Button",
                 content: "Submit",
                 classes: "upload-buttons",
-                onclick: "createOffer"
+                onclick: "createbuild"
             }]
         }]
     }],
     create: function() {
         this.inherited(arguments);
-        console.log(this.$.offerImage);
+        console.log(this.$.buildImage);
     },
-    createOffer: function() {
-        if (this.uploadedFiles["offer"]["length"] === 0) {
-            this.$.offerImage.controls[0].controls[0].addStyles("border:1px solid red;");
+    createbuild: function() {
+        if (this.uploadedFiles["build"]["length"] === 0) {
+            this.$.buildImage.controls[0].controls[0].addStyles("border:1px solid red;");
             return false;
         } else {
-            this.OfferPopUpValuesValidations();
+            this.buildPopUpValuesValidations();
             var token = 123456;
             var authToken = {
                 "token": token
             };
-            if (this.uploadedFiles["offer"]["length"]) {
-                var filebody = this.uploadedFiles["offer"][0];
+            if (this.uploadedFiles["build"]["length"]) {
+                var filebody = this.uploadedFiles["build"][0];
                 var formData = new FormData();
                 formData.append("file", filebody);
                 formData.append("providerName","MQI");
@@ -65,18 +64,18 @@ enyo.kind({
         app.hideSpinner();
     },
     fileUploaded: function(inSender, inEvent) {
-        this.uploadedFiles[inSender.imageType] = inEvent.files;
+        this.uploadedFiles[inSender.buildType] = inEvent.files;
     },
     hidePopup: function(inSender, inEvent) {
-        this.emptyOfferPopUpValues();
-        this.OfferPopUpValuesValidations();
+        this.emptybuildPopUpValues();
+        this.buildPopUpValuesValidations();
     },
-    OfferPopUpValuesValidations: function() {
-        this.$.offerImage.controls[0].controls[0].addStyles("border:none;");
+    buildPopUpValuesValidations: function() {
+        this.$.buildImage.controls[0].controls[0].addStyles("border:none;");
     },
-    emptyOfferPopUpValues: function() {
-        this.uploadedFiles.offer = "";
+    emptybuildPopUpValues: function() {
+        this.uploadedFiles.build = "";
         this.uploadedFiles.coupon = "";
     },
-    closeCreateOfferPopUp: function() {}
+    closeCreatebuildPopUp: function() {}
 });

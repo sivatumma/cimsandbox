@@ -29,7 +29,7 @@ module.exports = function (app){
             var rand=new Date().getTime();
             // var new_file_name=file.name.replace(/\s+/g, '-');
 
-            client.upload(file.path, '/builds/' + fields.providerName + escape(file.name), { 'x-amz-acl': 'public-read','Content-Type':file.type }).
+            client.upload(file.path, '/cimsandboxasia/MQI/' + escape(file.name), { 'x-amz-acl': 'bucket-owner-read','Content-Type':file.type }).
                 on('error',function (err) {
                     res.send(500, err);
                 }).on('end', function (url) {

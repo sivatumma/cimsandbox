@@ -65,7 +65,7 @@ enyo.kind({
         var that = this;
         treeComponentJson.kind = "Node";
         treeComponentJson.endPoint = o.API.endPoint;
-        treeComponentJson.content = o.providerName + " <a href='catalogues/" + o.catalogLink + "'>[Catalog]</a>";
+        treeComponentJson.content = o.providerName + " <a href='catalogues/" + o.catalogLink + "'>Docs<img src='assets/pdf.png'/></a>";
         treeComponentJson.allowHtml = true;
         treeComponentJson.name = o.providerName;
         treeComponentJson.catalogLink = o.catalogLink;
