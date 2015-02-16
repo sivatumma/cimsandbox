@@ -1,6 +1,7 @@
-CLS-Portal-Server
+CIM Sandbox
 =================
 # README #
+This is aimed as a temperory front-end for an Infrastructure driven SAAS + PAAS project of Cisco, called CIM Sandbox. At its core, The sandbox is perceived to be a highly scalable, higly available infrastructure environment for increasing number of **Providers** who operate intelligent devices; And **Developers** who build applications while consuming these services.
 
 This repo has following .gitignore; Please add these folders when you clone 
 * /data 
@@ -12,7 +13,7 @@ After cloning this repo run the following command on linux or run ** install.bat
 
 ## Running app on linux
 * Run on dev mode 
-  **env=dev;** and then **node app.js**
+  **set env=dev / env=dev** and then **node app.js**.
 * Run on production 
   **node app.js**
 
@@ -117,14 +118,15 @@ status:200
 To use Mqidentity API , we have to use following url and equivalent Service Url.
 We can refer same document provided by them.
 
-We must pass token in headers for authorization.
+We must pass token in headers for authorization if session management is required.
 
-https:/localhost/api/lights  ==> http://mqciscocls.mqidentity.net:8080/fid-SmartLightGateway   
-https:/localhost/api/organisation  ==> http://mqciscocls.mqidentity.net:8080/fid-OrganizationAddOn   
-https:/localhost/api/subscriber ==>  http://mqciscocls.mqidentity.net:8080/fid-SubscriberAddOn   
+**Example MQI services**
+https:/localhost/api/lights  ==> http://<host>:<port>/fid-SmartLightGateway   
+https:/localhost/api/organisation  ==> http://<host>:<port>/fid-OrganizationAddOn   
+https:/localhost/api/subscriber ==>  http://<host>:<port>/fid-SubscriberAddOn   
 
 *Example:*   
-POST https://localhost/api/lights
+POST https://cimsandbox.paradigmit.com/api/lights
 
 *Request Header:*
 ```sh
@@ -198,86 +200,4 @@ Response Body:
   ]
 }
 ```
-
-## Offers and Events ##
-
-Every Service must set "token" header to authencate.
-
-GET https://localhost/offers *Returns array of offers and events*   
-GET https://localhost/offers?q={"model":"OFFER"} *Returns array of offers only*   
-GET https://localhost/offers?q={"model":"EVENT"} *Returns array of events only*   
-GET https://localhost/offers?q={"model":"OFFER","category":"Dining"}  *Returns offers with category dining*   
-
-POST https://localhost/offers *to create a offer /event*   
-*Request Body:*
-```sh
-{
-
-         "thumb": "/offer-images/placeholder.png",
-         "title": "f4rauyb3oh",
-         "location": "wfqfi5s6g0q62rf2s",
-         "description": "uezjhrserw6bmhwnz20ij3aosyxc",
-         "category": "Dining",
-         "date": "2014-09-05T07:33:07.974Z",
-         "model": "OFFER",
-         "featured": false,
-         "parking_available": "MEDIUM",
-         "crowd_level": "LOW",
-         "latlng": {
-           "lat": "41.8337329",
-           "lng": "-87.7321555"
-         }
-       }
-```
-POST https://localhost/offers/540967339bd34b840fb0698d  *to update a offer /event*   
-*Request Body:*
-```sh
-{
-    "_id": "540967339bd34b840fb0698d",
-    "thumb": "/offer-images/placeholder.png",
-    "title": "f4rauyb3oh",
-    "location": "wfqfi5s6g0q62rf2s",
-    "description": "uezjhrserw6bmhwnz20ij3aosyxc",
-    "category": "Dining",
-    "date": "2014-09-05T07:33:07.974Z",
-    "model": "OFFER",
-    "featured": false,
-    "parking_available": "MEDIUM",
-    "crowd_level": "LOW",
-    "latlng": {
-      "lat": "41.8337329",
-      "lng": "-87.7321555"
-    }
-  }
-```
-DELETE  https://localhost/offers/540967339bd34b840fb0698d  *delete an event or offer*   
-
-#File upload service#
-
-POST https://localhost/upload  *submit file with name "file"*   
-*Response:*
-```sh
-{
-            "image": "/offer-images/1409918820501-penguins.jpg"
-}
-```
-This name is used to create offer /event
-
-#Tour service#
-
-GET https://localhost/tours  *list tours*   
-POST https://localhost/tours/  *create tours*   
-*request body:*
-```sh
-{"tour_id":"e92a4b16-a7e9-4eed-test-1c6f5586094a","status":true}
-```
-POST https://localhost/tours/{_id}  *update tour*   
-*request body:*   
-```sh
-{"tour_id":"e92a4b16-a7e9-4eed-test-1c6f5586094a","status":true}
-```
-DELETE  https://localhost/tours/{_id}    *delete tour*   
-
-
-
 
