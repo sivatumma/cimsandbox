@@ -8,6 +8,3 @@ var provider_access 	= ['CRUD'],
 	//	'_' is meant to fetch the roles dynamically which means depending on the 
 	//	bought services a developer could have bought.
 	developer_access	= ['_'];
-
-var acl = require('acl');
-console.log(acl);
