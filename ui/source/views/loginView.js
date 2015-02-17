@@ -83,6 +83,7 @@ enyo.kind({
         }
     },
     loginSuccess: function(inSender, inResponse) {
+        UserModel.userObject = inResponse;
         enyo.Signals.send("loginSuccess", {});
     },
     loginError: function(inSender, inResponse) {
