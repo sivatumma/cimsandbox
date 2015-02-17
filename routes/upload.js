@@ -9,7 +9,7 @@ var util=require('util')
 client = s3c.createClient({
     key: "AKIAIWALPQUADXAMILEQ",
     secret: "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",
-    bucket: "cimsandbox"
+    bucket: "cimsandboxasia"
 });
 
 module.exports = function (app){
@@ -29,7 +29,7 @@ module.exports = function (app){
             var rand=new Date().getTime();
             // var new_file_name=file.name.replace(/\s+/g, '-');
 
-            client.upload(file.path, '/cimsandboxasia/MQI/' + escape(file.name), { 'x-amz-acl': 'bucket-owner-read','Content-Type':file.type }).
+            client.upload(file.path, 'MQI/' + escape(file.name), { 'x-amz-acl': 'bucket-owner-read','Content-Type':file.type }).
                 on('error',function (err) {
                     res.send(500, err);
                 }).on('end', function (url) {
