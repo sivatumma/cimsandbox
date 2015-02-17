@@ -52,7 +52,7 @@ enyo.kind({
                 var filebody = this.uploadedFiles["build"][0];
                 var formData = new FormData();
                 formData.append("file", filebody);
-                formData.append("providerName","MQI");
+                formData.append("providerName",UserModel.userObject.username);  //  Shall use userObject.providerName going forward
                 app.showSpinner();
                 AjaxAPI.makeAjaxRequest("/upload", null, this, "processMyData", null, "POST", formData, "multipart/form-data", null, authToken);
             }

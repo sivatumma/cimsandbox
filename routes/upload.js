@@ -6,9 +6,18 @@ var path=require('path');
 var s3c = require('../includes/s3client');
 var util=require('util')
 //  Modified the above client for Sandbox perspective. We will remove the above creds once success.
+
+//  Given by Aneel
 client = s3c.createClient({
     key: "AKIAIWALPQUADXAMILEQ",
     secret: "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",
+    bucket: "cimsandboxasia"
+});
+
+//  Give by Vamsi - both are working so we can keep these handy
+client = s3c.createClient({
+    key: "AKIAIGSE6G3YKQBOC2TA",
+    secret: "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",
     bucket: "cimsandboxasia"
 });
 
@@ -29,7 +38,7 @@ module.exports = function (app){
             var rand=new Date().getTime();
             // var new_file_name=file.name.replace(/\s+/g, '-');
 
-            client.upload(file.path, 'MQI/' + escape(file.name), { 'x-amz-acl': 'bucket-owner-read','Content-Type':file.type }).
+            client.upload(file.path, fields.providerName + '/' + escape(file.name), { 'x-amz-acl': 'bucket-owner-read','Content-Type':file.type }).
                 on('error',function (err) {
                     res.send(500, err);
                 }).on('end', function (url) {
