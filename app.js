@@ -83,14 +83,14 @@ db.once('open', function callback() {
     });
 });
 
-var acl = require('acl');
-console.log(acl);
-acl = new acl(new acl.mongodbBackend(db, 'clsdev'));
-acl.addUserRoles('joed', 'guest');
-acl.allow('guest', 'index.html', 'view');
-acl.middleware();
+// var acl = require('acl');
+// console.log(acl);
+// acl = new acl(new acl.mongodbBackend(db, 'clsdev'));
+// acl.addUserRoles('joed', 'guest');
+// acl.allow('guest', 'index.html', 'view');
+// acl.middleware();
 
-console.log(acl.isAllowed('guest', 'index.html', 'view'));
+// console.log(acl.isAllowed('guest', 'index.html', 'view'));
 
 process.on('uncaughtException', function(err) {
     console.log(err)
