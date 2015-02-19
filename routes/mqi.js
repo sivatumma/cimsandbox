@@ -9,6 +9,7 @@ var proxy_route=function (url){
 
     return function (req,res){
 
+        console.log(req.body);
         var proxy = null;
 		console.log(req.method +" Request :->"+req.originalUrl);
 		if(req.method == 'GET'){

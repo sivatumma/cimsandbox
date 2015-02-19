@@ -82,6 +82,16 @@ db.once('open', function callback() {
         console.log('Express server listening on port ' + app.get('port'));
     });
 });
+
+var acl = require('acl');
+console.log(acl);
+acl = new acl(new acl.mongodbBackend(db, 'clsdev'));
+acl.addUserRoles('joed', 'guest');
+acl.allow('guest', 'index.html', 'view');
+acl.middleware();
+
+console.log(acl.isAllowed('guest', 'index.html', 'view'));
+
 process.on('uncaughtException', function(err) {
     console.log(err)
     console.log(err.stack);
