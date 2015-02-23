@@ -84,6 +84,8 @@ enyo.kind({
     },
     loginSuccess: function(inSender, inResponse) {
         UserModel.userObject = inResponse;
+        localStorage.currentUserObject = JSON.stringify(inResponse);
+        enyo.Signals.send("reRenderMenuArea",{});
         enyo.Signals.send("loginSuccess", {});
     },
     loginError: function(inSender, inResponse) {

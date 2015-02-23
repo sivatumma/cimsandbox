@@ -1020,4 +1020,396 @@
             }]
         }]
     }
+}, {
+    "providerName": "DMS",
+    "API": {
+        "endPoint": "api/mqi",
+        "API_KEY": "EXAMPLE: 4b2891f7-f272-4f1e-a51d",
+        "services": [{
+            "serviceName": "light",
+            "serviceList": [{
+                "icon": "assets/lightOn.png",
+                "requestDescription": "Get All Light Data",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all lights",
+                        "find": {
+                            "light": {}
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Get Light Data in Viewport",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all lights within the specified viewport. Lat is specified in the format minLat,maxLat and Lon is specified as minLong, maxLong",
+                        "find": {
+                            "light": {
+                                "geocoordinates": {
+                                    "lat": "+37.232976,+37.442615",
+                                    "lon": "-122.174149,-121.771088"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightPause.png",
+                "requestDescription": "Set State to : ON",
+                "postBody": {
+                    "query": {
+                        "documentation": "Turn on all lights with the following IDs",
+                        "process": {
+                            "set": {
+                                "powerstate": "ON"
+                            }
+                        },
+                        "find": {
+                            "light": {
+                                "sid": "sensity.*8D1A5ZW9"
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightOff.png",
+                "requestDescription": "Set State to : OFF",
+                "postBody": {
+                    "query": {
+                        "documentation": "Turn off all lights with the following IDs",
+                        "process": {
+                            "set": {
+                                "powerstate": "OFF"
+                            }
+                        },
+                        "find": {
+                            "sid": "sensity.*8D1A5ZW9"
+                        }
+                    }
+                }
+            }]
+        }, {
+            "serviceName": "ambience",
+            "serviceList": [{
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Get Ambience from All Sensors",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get ambient light level from all sensors",
+                        "find": {
+                            "ambience": {}
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Get from specific Sensors",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get ambient light level from all sensors within the specified bounding box",
+                        "find": {
+                            "ambience": {
+                                "geocoordinates": {
+                                    "lat": "+37.232976,+37.442615",
+                                    "lon": "-122.174149,-121.771088"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Filter on Flux level",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get ambient light level from all sensors within the specified bounding box where the lux level < 100",
+                        "find": {
+                            "ambience": {
+                                "geocoordinates": {
+                                    "lat": "+37.232976,+37.442615",
+                                    "lon": "-122.174149,-121.771088"
+                                },
+                                "illuminance": {
+                                    "Value": {
+                                        "lt": 100
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }]
+        }, {
+            "serviceName": "traffic",
+            "serviceList": [{
+                "icon": "assets/road.png",
+                "requestDescription": "Get for Roads",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get traffic details for all the road segments.",
+                        "find": {
+                            "roadSegment": {}
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/routes.png",
+                "requestDescription": "Get for Routes",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get traffic details for all the routes.",
+                        "find": {
+                            "route": {}
+                        }
+                    }
+                }
+            }]
+        }, {
+            "serviceName": "parking",
+            "serviceList": [{
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Get All Parking Data",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get parking space info",
+                        "find": {
+                            "parkingSpace": {}
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Filter - Occupied",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get parking space info, retrieve only parking spots with specified state",
+                        "find": {
+                            "parkingSpace": {
+                                "parkingSpots": {
+                                    "state": {
+                                        "occupied": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Filter - Vacant",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get parking space operated by specified organization, but retrieve only parking spots with specified state",
+                        "find": {
+                            "parkingSpace": {
+                                "operatedBy": "sensity-qa",
+                                "parkingSpots": {
+                                    "state": {
+                                        "occupied": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }]
+        }]
+    }
+}, {
+    "providerName": "World-Sensing",
+    "API": {
+        "endPoint": "api/worldsensing",
+        "API_KEY": "EXAMPLE: 4b2891f7-f272-4f1e-a51d",
+        "services": [{
+            "serviceName": "light",
+            "serviceList": [{
+                "icon": "assets/lightOn.png",
+                "requestDescription": "Get All Light Data",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all lights",
+                        "find": {
+                            "light": {}
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Get Light Data in Viewport",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get all lights within the specified viewport. Lat is specified in the format minLat,maxLat and Lon is specified as minLong, maxLong",
+                        "find": {
+                            "light": {
+                                "geocoordinates": {
+                                    "lat": "+37.232976,+37.442615",
+                                    "lon": "-122.174149,-121.771088"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightPause.png",
+                "requestDescription": "Set State to : ON",
+                "postBody": {
+                    "query": {
+                        "documentation": "Turn on all lights with the following IDs",
+                        "process": {
+                            "set": {
+                                "powerstate": "ON"
+                            }
+                        },
+                        "find": {
+                            "light": {
+                                "sid": "sensity.*8D1A5ZW9"
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightOff.png",
+                "requestDescription": "Set State to : OFF",
+                "postBody": {
+                    "query": {
+                        "documentation": "Turn off all lights with the following IDs",
+                        "process": {
+                            "set": {
+                                "powerstate": "OFF"
+                            }
+                        },
+                        "find": {
+                            "sid": "sensity.*8D1A5ZW9"
+                        }
+                    }
+                }
+            }]
+        }, {
+            "serviceName": "ambience",
+            "serviceList": [{
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Get Ambience from All Sensors",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get ambient light level from all sensors",
+                        "find": {
+                            "ambience": {}
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Get from specific Sensors",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get ambient light level from all sensors within the specified bounding box",
+                        "find": {
+                            "ambience": {
+                                "geocoordinates": {
+                                    "lat": "+37.232976,+37.442615",
+                                    "lon": "-122.174149,-121.771088"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Filter on Flux level",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get ambient light level from all sensors within the specified bounding box where the lux level < 100",
+                        "find": {
+                            "ambience": {
+                                "geocoordinates": {
+                                    "lat": "+37.232976,+37.442615",
+                                    "lon": "-122.174149,-121.771088"
+                                },
+                                "illuminance": {
+                                    "Value": {
+                                        "lt": 100
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }]
+        }, {
+            "serviceName": "traffic",
+            "serviceList": [{
+                "icon": "assets/road.png",
+                "requestDescription": "Get for Roads",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get traffic details for all the road segments.",
+                        "find": {
+                            "roadSegment": {}
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/routes.png",
+                "requestDescription": "Get for Routes",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get traffic details for all the routes.",
+                        "find": {
+                            "route": {}
+                        }
+                    }
+                }
+            }]
+        }, {
+            "serviceName": "parking",
+            "serviceList": [{
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Get All Parking Data",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get parking space info",
+                        "find": {
+                            "parkingSpace": {}
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Filter - Occupied",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get parking space info, retrieve only parking spots with specified state",
+                        "find": {
+                            "parkingSpace": {
+                                "parkingSpots": {
+                                    "state": {
+                                        "occupied": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }, {
+                "icon": "assets/lightViewport.png",
+                "requestDescription": "Filter - Vacant",
+                "postBody": {
+                    "query": {
+                        "documentation": "Get parking space operated by specified organization, but retrieve only parking spots with specified state",
+                        "find": {
+                            "parkingSpace": {
+                                "operatedBy": "sensity-qa",
+                                "parkingSpots": {
+                                    "state": {
+                                        "occupied": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }]
+        }]
+    }
 }]

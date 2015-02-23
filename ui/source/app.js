@@ -23,6 +23,9 @@ enyo.kind({
         this.viewstack = [];
         this.setViewDirect("HOME");
     },
+    getUserObject: function(){
+        console.log(UserModel.userObject);
+    },
     currentViewChanged: function(inOldValue) {
         if (this.currentView !== inOldValue) {
             switch (this.currentView) {
