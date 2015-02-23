@@ -38,7 +38,7 @@ enyo.kind({
     },
     constuctor: function() {
         this.inherited(arguments);
-        window.reload();
+        localtion.reload();
     },
     nodeExpand: function(inSender, inEvent) {
         // inSender.setIcon('assets/' + (inSender.expanded ? 'layers.png' : 'layers.png'));
@@ -66,7 +66,8 @@ enyo.kind({
         this.$.menuArea.render();
     },
     reRenderMenuArea: function(inEvent, inResponse) {
-        this.$.menuArea.render();
+        this.successHandler();
+        location.reload();
     },
     errorHandler: function(inEvent, inResponse) {
         this.$.ErrorConditionMessages.setContent("There was some error while parsing the services file. Please notify to siva.tumma@paradigminfotech.com");
