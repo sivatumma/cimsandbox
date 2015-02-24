@@ -9,10 +9,13 @@ enyo.kind({
     }, {
         kind: "LoginView"
     }, {
-        kind: "RegistrationView"
+        kind: "Scroller",
+        components: [{
+            kind: "RegistrationView",
+        }]
     }],
-    showLoginForm: function(){
-    	this.setIndex(0);
+    showLoginForm: function() {
+        this.setIndex(0);
     },
     showRegistrationForm: function() {
         this.setIndex(1);

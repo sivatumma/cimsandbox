@@ -5,5 +5,6 @@ enyo.depends(
 	"provider.less",
 	"apiActions.less",
 	"loginView.less",
-	"fileUpload.less"
+	"fileUpload.less",
+	"registration.less"
 );

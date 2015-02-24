@@ -85,7 +85,7 @@ module.exports = function (app){
 
 
     app.post('/register',function (req,res){
-        if(!req.body.username || !req.body.password || !req.body.provider || !req.body.age || !req.body.sex) return res.send(500,{message:'Invalid request params.',status:500});
+        if(!req.body.username || !req.body.password || !req.body.age || !req.body.sex) return res.send(500,{message:'Invalid request params.',status:500});
         var user=new User(req.body);
         user.save(function (err,doc){
             if(err) return res.send(403,'Username or email not available.');

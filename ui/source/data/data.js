@@ -149,6 +149,20 @@ enyo.kind({
                 "token": token
             };
             AjaxAPI.makeAjaxRequest("logout", null, ctx, successCallback, errorCallback, "GET", null, null, null, authToken);
+        },
+        registerUser: function(params, successCallback, errorCallback, ctx) {
+            var postBody = {
+                "username": params.username, //    what is facebook id ?
+                "email": params.email,
+                "password": params.password || 'testing',
+                "age": params.age || 21, //  If this is facebook user, we default that to 21 years of age
+                "sex": params.gender || "Male", //  Only male or female
+                "provider": params.provider
+            };
+            AjaxAPI.makeAjaxRequest("register", null, ctx, successCallback, errorCallback, "POST", postBody);
+        },
+        authorizeUser: function(params, successCallback, errorCallback, ctx) {
+            AjaxAPI.makeAjaxRequest("mobile-app/authorize", null, ctx, successCallback, errorCallback, "POST", postBody);
         }
     }
 });

@@ -37,8 +37,7 @@ enyo.kind({
             ontap: "submitLoginForm"
         }, {
             name: "registrationButton",
-            kind: "enyo.Button",
-            classes: "loginview_input_button",
+            tag: "a",
             content: "Register",
             ontap: "showRegistrationForm"
         }]
