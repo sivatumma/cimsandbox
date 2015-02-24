@@ -6,38 +6,43 @@ enyo.kind({
     },
     components: [{
         classes: "login",
-     
-    components: [{
-        name: "logo",
-        kind: "branding"
-    }, {
-        name: "alertMessage",
-        kind:"enyo.Control",
-        content: "Please check your login credentials ",
-        classes: "alertMessage"
-    }, {
-        name: "username",
-        kind: "enyo.Input",
-        classes: "loginview_input_text",
-        placeholder: "Username",
-        onkeydown: "handleKeyStroke"
-    }, {
-        name: "password",
-        kind: "enyo.Input",
-        classes: "loginview_input_text",
-        placeholder: "Password",
-        onkeydown: "handleKeyStroke",
-        attributes: {
-            type: "password"
-        }
-    }, {
-        name: "loginButton",
-        kind: "enyo.Button",
-        classes: "loginview_input_button",
-        content: "Sign In",
-        ontap: "submitLoginForm"
+        components: [{
+            name: "logo",
+            kind: "branding"
+        }, {
+            name: "alertMessage",
+            kind: "enyo.Control",
+            content: "Please check your login credentials ",
+            classes: "alertMessage"
+        }, {
+            name: "username",
+            kind: "enyo.Input",
+            classes: "loginview_input_text",
+            placeholder: "Username",
+            onkeydown: "handleKeyStroke"
+        }, {
+            name: "password",
+            kind: "enyo.Input",
+            classes: "loginview_input_text",
+            placeholder: "Password",
+            onkeydown: "handleKeyStroke",
+            attributes: {
+                type: "password"
+            }
+        }, {
+            name: "loginButton",
+            kind: "enyo.Button",
+            classes: "loginview_input_button",
+            content: "Sign In",
+            ontap: "submitLoginForm"
+        }, {
+            name: "registrationButton",
+            kind: "enyo.Button",
+            classes: "loginview_input_button",
+            content: "Register",
+            ontap: "showRegistrationForm"
         }]
-            }],
+    }],
     create: function() {
         this.inherited(arguments);
         if (AppConfig.defaultCredentials && AppConfig.debugMode) {
@@ -45,8 +50,11 @@ enyo.kind({
             this.$.password.setValue(AppConfig.defaultCredentials.split("/")[1]);
         }
     },
-    constructor:function(){
+    constructor: function() {
         this.inherited(arguments);
+    },
+    showRegistrationForm:function(){
+        enyo.Signals.send("showRegistrationForm",{});
     },
     showSignupForm: function() {
         AppConfig.log("direct to Signup page <or a openid kind >");
@@ -85,7 +93,7 @@ enyo.kind({
     loginSuccess: function(inSender, inResponse) {
         UserModel.userObject = inResponse;
         localStorage.currentUserObject = JSON.stringify(inResponse);
-        enyo.Signals.send("reRenderMenuArea",{});
+        enyo.Signals.send("reRenderMenuArea", {});
         enyo.Signals.send("loginSuccess", {});
     },
     loginError: function(inSender, inResponse) {
@@ -100,7 +108,7 @@ enyo.kind({
     components: [{
         kind: "Image",
         // src: "assets/cisco-logo-red.png",
-        src: window.location.hostname == "localhost" ? "assets/cisco-logo-tm.jpg" : "assets/cisco-logo-red.png",
+        src: window.location.hostname == "localhost" ? "assets/cisco-logo-tm.jpg" : "assets/logo1.png",
         classes: "logo"
     }, {
         content: "CIM Sandbox",
