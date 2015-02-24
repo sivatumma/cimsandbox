@@ -2,11 +2,11 @@ enyo.kind({
     name: "fileUpload",
     kind: "FittableColumns",
     uploadedFiles: {
-        build: "",
-        coupon: ""
+        build: ""
     },
     components: [{
         kind: "Signals",
+        showOrHideFileUpload:"showOrHideFileUpload",
         locationValue: "locationValue"
     }, {
         classes: "",
@@ -37,6 +37,12 @@ enyo.kind({
     create: function() {
         this.inherited(arguments);
         console.log(this.$.buildImage);
+    },
+    rendered:function(){
+        enyo.Signals.send("showOrHideFileUpload");
+    },
+    showOrHideFileUpload:function(){
+        this.addClass(JSON.parse(localStorage.currentUserObject).provider === true ? "visible": "invisible");
     },
     createbuild: function() {
         if (this.uploadedFiles["build"]["length"] === 0) {

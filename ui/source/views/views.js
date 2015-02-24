@@ -12,8 +12,8 @@ enyo.kind({
         loginSuccess: "loginSuccess",
         logoutUser:"logoutUser"
     }, {
-        name:"LOGIN_VIEW",
-        kind: "LoginView"
+        name:"USER_ENTRY",
+        kind: "UserEntry"
     }, {
         name:"MAIN_VIEW",
         kind: "MainView"
@@ -29,10 +29,23 @@ enyo.kind({
     loginSuccess:function(){
         localStorage.loggedIn = true;
         this.setIndex(1);
+        enyo.Signals.send("showOrHideFileUpload");
     },
     logoutUser:function(){
+        console.log(JSON.parse(localStorage.currentUserObject).username);
+        UserModel.logoutUser(JSON.parse(localStorage.currentUserObject).username,this.logoutSuccess, this.logoutError, this);
+    },
+    logoutSuccess: function(){
         localStorage.loggedIn = null;
+        localStorage.currentUserObject = null;
         this.setIndex(0);
-        window.location.reload();
+        location.reload();
+    },
+    logoutError:function(){
+        console.log("There was an error; could not log out due to token issues; But clearing the cache so to avoid demo obstacles");
+        localStorage.loggedIn = null;
+        localStorage.currentUserObject = null;
+        this.setIndex(0);
+        location.reload();
     }
 });

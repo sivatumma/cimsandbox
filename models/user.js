@@ -11,6 +11,7 @@ module.exports = function (mongoose) {
        loginAttempts: { type: Number, required: true, default: 0 },
        lockUntil: { type: Number },
        roles:{type:String,default:'subscriber'},
+       provider:{type:Boolean, default: false},
        created_at:{type:Date,default:Date.now},
        updated_at:Date ,
        tokens:[{_id:false,token:{type:String},token_created:{type:Date},token_expires:{type:Date}}] ,
@@ -123,5 +124,6 @@ module.exports = function (mongoose) {
     }
     var User = mongoose.model('User', usersSchema);
 
+    console.log(User);
     return User;
 }

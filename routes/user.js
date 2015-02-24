@@ -45,6 +45,7 @@ module.exports = function (app){
                 delete user.loginAttempts;
                 delete user.active;
                 res.set(token_object);
+                console.log(user);
                 res.send(user)
             })
 

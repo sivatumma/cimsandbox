@@ -144,7 +144,7 @@ enyo.kind({
         },
         logoutUser: function(username, successCallback, errorCallback, ctx) {
             AppConfig.log("Finally in UserModel, loggingout");
-            var token = UserModel.responseHeader.token;
+            var token = UserModel.responseHeader.token || "4b2891f7-f272-4f1e-a51d";
             var authToken = {
                 "token": token
             };

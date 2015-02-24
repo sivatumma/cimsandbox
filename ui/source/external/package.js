@@ -1,5 +1,6 @@
 enyo.depends(
 	"ciscoFonts",
 	"underscore-min.js",
-	"FileInputDecorator.js"
+	"FileInputDecorator.js",
+	"lightbox"
 );
