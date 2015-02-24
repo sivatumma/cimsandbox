@@ -84,7 +84,7 @@ enyo.kind({
         treeComponentJson.icon = 'assets/api-lb.png';
         treeComponentJson.classes = "topLevelTreeItem";
         treeComponentJson.expandable = true; //  (o.providerName == "MQI");
-        treeComponentJson.expanded = (o.providerName == "MQI");
+        treeComponentJson.expanded = false; //  (o.providerName == "MQI");
         treeComponentJson.events = {
             onNodeExpand: "doNodeExpand",
             onNodeTap: "doNodeTap"
