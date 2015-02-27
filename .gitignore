@@ -1,0 +1,7 @@
+.idea/
+/data/
+/temp/
+/node_modules/
+/public/offer-images/
+/build/
+run.sh

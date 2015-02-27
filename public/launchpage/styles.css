@@ -1,0 +1,70 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	background: #0096d6;
+	text-align: center;
+	font-size: 95%;
+	letter-spacing: 0.1px;
+}
+body {
+	padding: 20px;
+}
+h1, h2, h3, h4, h5, h6 {
+	'font-family: 'ciscosansttextralight';
+	color: #fff;
+}
+* {
+	font-family: 'ciscosansttextralight';
+}
+.contentArea {
+	max-width: 1000px;
+	min-width: 300px;
+	margin: 0 auto;
+}
+.contentArea a {
+	margin: 0 15px;
+}
+#logo img {
+	width: 230px;
+}
+#footer_logo {
+	margin-top: 40px;
+	width: 106px;
+}
+#description {
+	color: white;
+}
+#description p {
+	margin-top: 3px;
+	line-height: 110%;
+}
+#download {
+	text-align: center;
+	margin: 10px auto;
+}
+#downloadLinks {
+	margin: 0px auto;
+	width: 100%;
+}
+#downloadLinks a {
+	margin-right: 30px;
+	text-align: center;
+}
+#androidDownload {
+	background-image: url("assets/google_play_store.png");
+	display: block;
+	height: 63px;
+	width: 220px;
+	text-indent: -9999em;
+	float: left;
+	margin: 0 auto;
+}
+#appleDownload {
+	background-image: url("assets/apple_store.png");
+	display: block;
+	height: 63px;
+	width: 220px;
+	text-indent: -9999em;
+	float: left;
+	margin: 0 auto;
+}
