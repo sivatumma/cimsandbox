@@ -6,31 +6,43 @@ enyo.kind({
     },
     components: [{
         kind: "Signals",
-        showOrHideFileUpload:"showOrHideFileUpload",
+        showOrHideFileUpload: "showOrHideFileUpload",
         locationValue: "locationValue"
     }, {
-        classes: "",
-        kind: "FittableColumns",
+        kind: "onyx.MenuDecorator",
+        classes: "fileUploadDecorator",
         components: [{
-            content: "Upload your Build here",
-            classes: "justify"
+            name: "fileUpload",
+            classes: "fileUploadIcon",
         }, {
-            name: "fileInputDiv",
-            classes: "file-input-div",
+            kind: "onyx.ContextualPopup",
+            name: "buildUploadContainer",
+            title: "Upload your Build here",
+            floating: true,
             components: [{
-                kind: "enyo.FileInputDecorator",
-                name: "buildImage",
-                onSelect: "fileUploaded",
-                buildType: "build",
-                classes: "file-upload-field"
-            }]
-        }, {
-            classes: "actionItems",
-            components: [{
-                kind: "Button",
-                content: "Submit",
-                classes: "upload-buttons",
-                onclick: "createbuild"
+                classes: "",
+                kind: "FittableColumns",
+                components: [{
+                    name: "fileInputDiv",
+                    classes: "file-input-div",
+                    components: [{
+                        kind: "enyo.FileInputDecorator",
+                        name: "buildImage",
+                        onSelect: "fileUploaded",
+                        buildType: "build",
+                        classes: "file-upload-field"
+                    }]
+                }, {
+                    tag: "br"
+                }, {
+                    classes: "actionItems",
+                    components: [{
+                        kind: "Button",
+                        content: "Submit",
+                        classes: "upload-buttons",
+                        onclick: "createbuild"
+                    }]
+                }]
             }]
         }]
     }],
@@ -38,11 +50,11 @@ enyo.kind({
         this.inherited(arguments);
         console.log(this.$.buildImage);
     },
-    rendered:function(){
+    rendered: function() {
         enyo.Signals.send("showOrHideFileUpload");
     },
-    showOrHideFileUpload:function(){
-        this.addClass(JSON.parse(localStorage.currentUserObject).provider === true ? "visible": "invisible");
+    showOrHideFileUpload: function() {
+        this.addClass(JSON.parse(localStorage.currentUserObject).provider === true ? "visible" : "invisible");
     },
     createbuild: function() {
         if (this.uploadedFiles["build"]["length"] === 0) {
@@ -58,8 +70,8 @@ enyo.kind({
                 var filebody = this.uploadedFiles["build"][0];
                 var formData = new FormData();
                 formData.append("file", filebody);
-                console.log(UserModel.userObject);
-                formData.append("providerName",UserModel.userObject.username.toUpperCase());  //  Shall use userObject.providerName going forward
+                console.log(JSON.parse(localStorage.currentUserObject).username);
+                formData.append("providerName", JSON.parse(localStorage.currentUserObject).username.toUpperCase()); //  Shall use userObject.providerName going forward
                 app.showSpinner();
                 AjaxAPI.makeAjaxRequest("/upload", null, this, "processMyData", null, "POST", formData, "multipart/form-data", null, authToken);
             }
@@ -69,6 +81,7 @@ enyo.kind({
         var statusMessage = inResponse.xhrResponse.status === 200 ? 'Your build is uploaded Successfully' : 'Problem while uploading, returned HTTP code - ' + xhrResponse.status;
         alert(statusMessage);
         app.hideSpinner();
+        this.$.buildUploadContainer.hide();
     },
     fileUploaded: function(inSender, inEvent) {
         this.uploadedFiles[inSender.buildType] = inEvent.files;

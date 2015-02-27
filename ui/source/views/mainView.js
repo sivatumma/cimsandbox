@@ -19,7 +19,12 @@ enyo.kind({
                 classes: "logoutButton",
                 content: "Logout",
                 ontap: "logout"
-            },{
+            }, {
+                name: "uploadFile",
+                kind: "fileUpload",
+                content: "Upload to S3",
+                style:"float:right;"
+            }, {
                 content: "CIM Sandbox",
             }, {
                 name: "logo",
@@ -55,27 +60,24 @@ enyo.kind({
                 kind: "sandbox.Documentation"
             }]
         }]
-    }, {
-        kind: "onyx.Toolbar",
-        classes: "bottomToolbar",
-        components: [
-            /*{
-                        kind: "Input",
-                        name: "feedBackText"
-                    }, */
-            {
-                kind: "sandbox.BugReportKind",
-                classes: "cisco-theme",
-                content: "Report Bug",
-                ontap: "updateFeedback"
-            }, {
-                name: "uploadFile",
-                kind: "fileUpload",
-                content: "Upload to S3",
-                style:"float:right"
-            }
-        ]
-    }],
+    }
+    // , {
+    //     kind: "onyx.Toolbar",
+    //     classes: "bottomToolbar",
+    //     components: [
+    //         {
+    //                     kind: "Input",
+    //                     name: "feedBackText"
+    //                 }, 
+    //         {
+    //             kind: "sandbox.BugReportKind",
+    //             classes: "cisco-theme",
+    //             content: "Report Bug",
+    //             ontap: "updateFeedback"
+    //         }
+    //     ]
+    // }
+    ],
     create: function() {
         this.inherited(arguments);
     },

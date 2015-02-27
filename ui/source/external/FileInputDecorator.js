@@ -152,7 +152,7 @@ enyo.kind({
                 });
                 break;
             default:
-                alert('not allowed');
+                alert('Only JAR, WAR, EAR, ZIP, TAR, GZ Files are allowed to be deployed on Sandbox.');
                 this.value='';
                 console.log(inSender);
                 return false;
