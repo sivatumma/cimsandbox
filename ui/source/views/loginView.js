@@ -35,12 +35,14 @@ enyo.kind({
             classes: "loginview_input_button",
             content: "Sign In",
             ontap: "submitLoginForm"
-        }, {
-            name: "registrationButton",
-            tag: "a",
-            content: "Register",
-            ontap: "showRegistrationForm"
-        }]
+        }
+        // , {
+        //     name: "registrationButton",
+        //     tag: "a",
+        //     content: "Register",
+        //     ontap: "showRegistrationForm"
+        // }
+        ]
     }],
     create: function() {
         this.inherited(arguments);
@@ -107,7 +109,7 @@ enyo.kind({
     components: [{
         kind: "Image",
         // src: "assets/cisco-logo-red.png",
-        src: "assets/Cisco-loto.jpg",
+        src: "assets/Cisco-Logo.jpg",
         classes: "logo"
     }, {
         content: "CIM Sandbox",
