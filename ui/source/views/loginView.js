@@ -107,7 +107,7 @@ enyo.kind({
     components: [{
         kind: "Image",
         // src: "assets/cisco-logo-red.png",
-        src: window.location.hostname == "localhost" ? "assets/cisco-logo-tm.jpg" : "assets/logo1.png",
+        src: "assets/Cisco-loto.jpg",
         classes: "logo"
     }, {
         content: "CIM Sandbox",
