@@ -37,7 +37,8 @@ enyo.kind({
         },
         debug_: function() {
             //  Use to disable the above functionality for any debug() statements
-        },
+        }
+    },
     create: function() {
         this.inherited(arguments);
         AppConfig.alert("Hellow Vizag");
