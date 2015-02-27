@@ -9,10 +9,6 @@ var app = express();
 var fs = require('fs');
 http.globalAgent.maxSockets = 1000;
 require('./models/user.js')(mongoose);
-require('./models/muser.js')(mongoose);
-require('./models/offer.js')(mongoose);
-require('./models/tour.js')(mongoose);
-require('./models/feedback.js')(mongoose);
 
 app.configure(function() {
     app.set('port', process.env.PORT || 80);
@@ -40,34 +36,17 @@ app.configure(function() {
         secret: 'keyboard cat'
     }));
     app.use(app.router);
-    // app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.static(path.join(__dirname, 'ui')));
-    // app.use('.html', require('jade'));
-    // app.use('/sandbox/mobile',express.static(config.mobile_app_root));
-    // app.use('/chicago/mobile-dev',express.static(config.mobile_app_debug_root));
-    // app.use('/sandbox/portal',express.static(config.portal_app_root));
-    // app.use('/chicago/portal',express.static(config.portal_app_root));
-    // app.use('/new/sandbox', express.static(config.sandbox_app_root));
-    // app.use('/', express.static(config.sandbox_app_root));
     app.use('/services', express.static(config.services_json_path));
 });
 // development only
 app.use(express.errorHandler());
 app.get('/', routes.index);
-// app.get('/', express.static(config.sandbox_app_root));
 var user = require('./routes/user.js')(app);
-var muser = require('./routes/muser.js')(app);
-var fixtures = require('./routes/fixtures.js')(app);
 var mqi = require('./routes/mqi.js')(app);
-var offers = require('./routes/offers.js')(app);
 var upload = require('./routes/upload.js')(app);
-var mail = require('./routes/mail.js')(app);
 
-
-require('./routes/tours.js')(app);
-require('./routes/feedbacks.js')(app);
 require('./routes/proxy.js')(app);
-require('./routes/mail.js')(app);
 mongoose.connect(config.database);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -82,15 +61,6 @@ db.once('open', function callback() {
         console.log('Express server listening on port ' + app.get('port'));
     });
 });
-
-// var acl = require('acl');
-// console.log(acl);
-// acl = new acl(new acl.mongodbBackend(db, 'clsdev'));
-// acl.addUserRoles('joed', 'guest');
-// acl.allow('guest', 'index.html', 'view');
-// acl.middleware();
-
-// console.log(acl.isAllowed('guest', 'index.html', 'view'));
 
 process.on('uncaughtException', function(err) {
     console.log(err)

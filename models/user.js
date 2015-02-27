@@ -123,7 +123,5 @@ module.exports = function (mongoose) {
             });
     }
     var User = mongoose.model('User', usersSchema);
-
-    console.log(User);
     return User;
 }
