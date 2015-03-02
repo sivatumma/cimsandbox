@@ -19,6 +19,11 @@ enyo.kind({
                 classes: "logoutButton",
                 content: "Logout",
                 ontap: "logout"
+            },{
+                kind: "onyx.Button",
+                classes: "logoutButton",
+                content: "Logout",
+                ontap: "logout"
             }, {
                 name: "uploadFile",
                 kind: "fileUpload",

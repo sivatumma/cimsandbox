@@ -5,7 +5,6 @@ enyo.depends(
 	"apiActions.js",
 	"loginView.js",
 	"mainView.js",
-	"config.js",
 	"bugReport.js",
 	"fileUpload.js",
 	"registration.js",

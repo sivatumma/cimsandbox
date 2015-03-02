@@ -79,6 +79,45 @@ Connection: keep-alive
   "active": true
 }
 ```
+POST https://localhost/register
+
+
+*Request Headers:* 
+```sh 
+none
+```
+
+```sh
+Request Body:
+{
+  "username": "cim",
+  "password": "sandbox",
+  "age": 30,
+  "sex": 30,
+  "gender": "male",
+  "roles":"crud",
+  "provider":false
+}
+```
+**Response When Success:**   
+*Response Body:*
+```sh
+{
+  "updated_at": "2015-03-02T05:50:46.301Z",
+  "username": "cim",
+  "profile": {
+    "interests": [],
+    "children_under_18": 0,
+    "married": false,
+    "age": 21,
+    "sex": "male"
+  },
+  "created_at": "2015-03-02T05:50:46.300Z",
+  "provider": false
+}
+```
+
+
 
 GET https://localhost/userlist   
 *Request Headers:* 
