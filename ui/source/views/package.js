@@ -8,5 +8,7 @@ enyo.depends(
 	"bugReport.js",
 	"fileUpload.js",
 	"registration.js",
-	"entryPage.js"
+	"entryPage.js",
+	"mainAreaPanels.js",
+	"healthMonitor.js"
 );

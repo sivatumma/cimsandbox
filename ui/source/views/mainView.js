@@ -8,80 +8,59 @@ enyo.kind({
     name: "MainView",
     fit: true,
     components: [{
-        kind: "onyx.Toolbar",
-        classes: "topToolbar",
-        components: [{
-            kind: "FittableColumns",
-            layoutKind: "FittableColumnsLayout",
-            classes: "fullwidth",
+            kind: "onyx.Toolbar",
+            classes: "topToolbar",
             components: [{
-                kind: "onyx.Button",
-                classes: "logoutButton",
-                content: "Logout",
-                ontap: "logout"
-            },{
-                kind: "onyx.Button",
-                classes: "logoutButton",
-                content: "Logout",
-                ontap: "logout"
-            }, {
-                name: "uploadFile",
-                kind: "fileUpload",
-                content: "Upload to S3",
-                style:"float:right;"
-            }, {
-                content: "CIM Sandbox",
-            }, {
-                name: "logo",
-                fit:true,
-                classes: "toolbarlogo"
-            }]
-        }]
-    }, {
-        kind: "FittableColumns",
-        fit: true,
-        components: [{
-            classes: "leftMenu",
-            name: "leftMenu",
-            kind: "FittableRows",
-            components: [{
-                content: "Provider Services",
-                classes: "header"
-            }, {
-                kind: "sandbox.APITree"
+                kind: "FittableColumns",
+                layoutKind: "FittableColumnsLayout",
+                classes: "fullwidth",
+                components: [{
+                    kind: "onyx.Button",
+                    name: "homeButton",
+                    classes: "showHomeButton",
+                    ontap: "showHome"
+                }, {
+                    kind: "onyx.Button",
+                    name: "healthMonitorButton",
+                    classes: "healthMonitorButton",
+                    ontap: "showSystemHealth"
+                }, {
+                    kind: "onyx.Button",
+                    classes: "logoutButton",
+                    content: "Logout",
+                    ontap: "logout"
+                }, {
+                    name: "uploadFile",
+                    kind: "fileUpload",
+                    content: "Upload to S3",
+                    style: "float:right;"
+                }, {
+                    content: "CIM Sandbox",
+                }, {
+                    name: "logo",
+                    fit: true,
+                    classes: "toolbarlogo"
+                }]
             }]
         }, {
-            kind: "enyo.Scroller",
-            fit: true,
-            components: [{
-                name: "mainArea",
-                kind: "sandbox.APIActions",
-                classes: "mainArea",
-            }]
-        }, {
-            name: "documentation",
-            classes:"documentation",
-            components: [{
-                kind: "sandbox.Documentation"
-            }]
-        }]
-    }
-    // , {
-    //     kind: "onyx.Toolbar",
-    //     classes: "bottomToolbar",
-    //     components: [
-    //         {
-    //                     kind: "Input",
-    //                     name: "feedBackText"
-    //                 }, 
-    //         {
-    //             kind: "sandbox.BugReportKind",
-    //             classes: "cisco-theme",
-    //             content: "Report Bug",
-    //             ontap: "updateFeedback"
-    //         }
-    //     ]
-    // }
+            kind: "MainAreaPanels"
+        }
+        // , {
+        //     kind: "onyx.Toolbar",
+        //     classes: "bottomToolbar",
+        //     components: [
+        //         {
+        //                     kind: "Input",
+        //                     name: "feedBackText"
+        //                 }, 
+        //         {
+        //             kind: "sandbox.BugReportKind",
+        //             classes: "cisco-theme",
+        //             content: "Report Bug",
+        //             ontap: "updateFeedback"
+        //         }
+        //     ]
+        // }
     ],
     create: function() {
         this.inherited(arguments);
@@ -96,5 +75,11 @@ enyo.kind({
         var link = "mailto:siva.tumma@paradigmcreatives.com" + "?cc=ram@paradigmcreatives.com" + "&subject=" + escape("Please add these suggestions in Sandbox UI") + "&body=" + escape(this.$.feedBackText.value);
         window.location.href = link;
         this.$.feedbackArea.addContent("Feedback posted. Thankyou<br/>");
+    },
+    showSystemHealth: function() {
+        enyo.Signals.send("showSystemHealth", {});
+    },
+    showHome:function(){
+        enyo.Signals.send("showHome",{});
     }
 });
