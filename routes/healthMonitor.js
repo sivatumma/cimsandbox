@@ -22,17 +22,18 @@ module.exports = function (app){
     app.post('/ping',User.authorize,function (req,res){
 
         if(req.body.host === ""){
-            exec("ping localhost", function(err, out, code) {
+            exec("ping -w 3 localhost", function(err, out, code) {
               if (err instanceof Error)
                 throw err;
               res.send({"message":"no host provided, pinged localhost, working"});
             });
         } else {
             console.log(req.body.host);
-            exec("ping " + req.body.host, function(err, out, code) {
+            // exec("ping " + req.body.host, function(err, out, code) {
+            exec("ping -w 3" + req.body.host, function(err, out, code) {
               if (err instanceof Error)
                 res.send({error:err});
-              if (out.indexOf("Reply from") > 0)
+              if (out.indexOf("bytes from") > 0)
                 res.send({"message":"&#10003;"});
             });
         }
