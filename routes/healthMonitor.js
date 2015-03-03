@@ -30,7 +30,7 @@ module.exports = function (app){
         } else {
             console.log(req.body.host);
             // exec("ping " + req.body.host, function(err, out, code) {
-            exec("ping -w 3" + req.body.host, function(err, out, code) {
+            exec("ping -w 3 " + req.body.host, function(err, out, code) {
               if (err instanceof Error)
                 res.send({error:err});
               if (out.indexOf("bytes from") > 0)

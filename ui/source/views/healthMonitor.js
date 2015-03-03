@@ -72,7 +72,7 @@ enyo.kind({
         this.$.serverName.setContent(this.serverName);
         this.$.serverIP.setContent(this.serverIP);
         var postBody = {
-            host:this.serverIP || "localhost"
+            host:this.serverIP
         };
         var token = {
             token: "4b2891f7-f272-4f1e-a51d"
