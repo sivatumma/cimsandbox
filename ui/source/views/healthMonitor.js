@@ -45,7 +45,7 @@ enyo.kind({
             });
         });
         this.render();
-    },
+    }
 });
 enyo.kind({
     kind: "FittableColumns",
@@ -53,6 +53,7 @@ enyo.kind({
     classes: "OneAMIStatus",
     serverName: "",
     serverIP: "",
+    spinnerHtml: "<img src='assets/spinner-tiny.gif'/>",
     components: [{
         name: "serverIP",
         content: ""
@@ -61,14 +62,16 @@ enyo.kind({
         content: "Server Name"
     }, {
         name:"pingStatus",
-        content: "<img src='assets/spinner-tiny.gif'/>",
-        allowHtml:true
+        content: this.spinnerHtml,
+        allowHtml:true,
+        ontap:"updatePingStatus"
     }, {
         name:"overallStatus",
         content: ""
     }],
     create: function() {
         this.inherited(arguments);
+        this.$.pingStatus.setContent(this.spinnerHtml);
         this.$.serverName.setContent(this.serverName);
         this.$.serverIP.setContent(this.serverIP);
         var postBody = {
@@ -84,5 +87,21 @@ enyo.kind({
     },
     pingErrorHandler:function(){
         this.$.pingStatus.setContent(inResponse);
+    },
+    showRefreshIcon:function(){
+        this.$.pingStatus.setContent("&#x21bb;");
+    },
+    showSpinnerHtml:function(){
+        this.$.pingStatus.setContent(this.spinnerHtml);
+    },
+    updatePingStatus:function(){
+        this.$.pingStatus.setContent(this.spinnerHtml);
+        var postBody = {
+            host:this.serverIP
+        };
+        var token = {
+            token: "4b2891f7-f272-4f1e-a51d"
+        };
+        AjaxAPI.makeAjaxRequest('/ping', null, this, this.pingSuccessHandler, this.pingErrorHandler, "POST", postBody, "", null, token);
     }
 })

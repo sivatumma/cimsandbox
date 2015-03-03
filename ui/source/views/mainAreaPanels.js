@@ -1,5 +1,6 @@
 enyo.kind({
     kind: "enyo.Panels",
+    draggable:false,
     name: "MainAreaPanels",
     classes:"fullheight",
     components: [{
