@@ -5,16 +5,16 @@ enyo.kind({
     published: {
         amiList: [{
             "name": "Portal Server",
-            "ip": ""
+            "ip": "localhost"
         }, {
             "name": "MongoDB",
             "ip": "172.19.1.11"
         }, {
             "name": "MQI",
-            "ip": ""
+            "ip": "54.169.200.173"
         }, {
             "name": "EBC",
-            "ip": ""
+            "ip": "54.169.115.123"
         }]
     },
     components: [{
