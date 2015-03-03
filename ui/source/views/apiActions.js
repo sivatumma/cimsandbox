@@ -53,7 +53,7 @@ enyo.kind({
                         "documentation": "Get all lights operated by specified organization (maps to logical scopes)",
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa"
+                                "operatedBy": "sensity"
                             }
                         }
                     }
