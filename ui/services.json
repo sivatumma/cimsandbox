@@ -316,7 +316,7 @@
                         "documentation": "Get all lights operated by specified organization within the specified viewport. Lat is specified in the format minLat,maxLat and Lon is specified as minLong, maxLong",
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa",
+                                "operatedBy": "sensity",
                                 "geocoordinates": {
                                     "lat": "+37.232976,+37.442615",
                                     "lon": "-122.174149,-121.771088"
@@ -334,7 +334,7 @@
                         "documentation": "Get all lights operated by specified organization and with the given                         ids.Id 's are comma separated and case insensitive",
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa",
+                                "operatedBy": "sensity",
                                 "id": ["sensity.*HH6DTAMb", "sensity.*Q2BGKVGZ"]
                             }
                         }
@@ -349,7 +349,7 @@
                         "documentation": "Get all lights operated by specified organization(maps to logical scopes)",
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa"
+                                "operatedBy": "sensity"
                             }
                         }
                     }
@@ -368,7 +368,7 @@
                         },
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa"
+                                "operatedBy": "sensity"
                             }
                         }
                     }
@@ -382,7 +382,7 @@
                         "documentation": "Turn off all lights lights operated by sensity-lab",
                         "find": {
                             "light": {
-                                "operatedby": "sensity-qa"
+                                "operatedby": "sensity"
                             }
                         },
                         "process": {
@@ -406,7 +406,7 @@
                         },
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa",
+                                "operatedBy": "sensity",
                                 "geocoordinates": {
                                     "lat": "+37.232976,+37.442615",
                                     "lon": "-122.174149,-121.771088"
@@ -432,7 +432,7 @@
                         },
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa",
+                                "operatedBy": "sensity",
                                 "geocoordinates": {
                                     "lat": "+37.232976,+37.442615",
                                     "lon": "-122.174149,-121.771088"
@@ -474,7 +474,7 @@
                         },
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa",
+                                "operatedBy": "sensity",
                                 "id": ["sensity.*HH6DTAMb", "sensity.*Q2BGKVGZ"]
                             }
                         }
@@ -539,7 +539,7 @@
                         }],
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa"
+                                "operatedBy": "sensity"
                             }
                         }
                     }
@@ -603,7 +603,7 @@
                         }],
                         "find": {
                             "light": {
-                                "operatedBy": "sensity-qa"
+                                "operatedBy": "sensity"
                             }
                         }
                     }
@@ -620,7 +620,7 @@
                         "documentation": "Get parking space operated by specified organization",
                         "find": {
                             "parkingSpace": {
-                                "operatedBy": "sensity-qa"
+                                "operatedBy": "sensity"
                             }
                         }
                     }
@@ -634,7 +634,7 @@
                         "documentation": "Get parking space operated by specified organization, but retrieve only parking spots with specified state",
                         "find": {
                             "parkingSpace": {
-                                "operatedBy": "sensity-qa",
+                                "operatedBy": "sensity",
                                 "parkingSpots": {
                                     "state": {
                                         "occupied": false
