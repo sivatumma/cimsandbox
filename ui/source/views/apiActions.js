@@ -48,34 +48,6 @@ enyo.kind({
                 kind: "TextArea",
                 classes: "textAreaForServices",
                 name: "requestJson",
-                postBodyForLights: {
-                    "query": {
-                        "documentation": "Get all lights operated by specified organization (maps to logical scopes)",
-                        "find": {
-                            "light": {
-                                "operatedBy": "sensity-qa"
-                            }
-                        }
-                    }
-                },
-                postBodyForKiosks: {
-                    "query": {
-                        "documentation": "Get kiosks at specified location",
-                        "find": {
-                            "kiosk": {}
-                        }
-                    }
-                },
-                postBodyForParking: {
-                    "query": {
-                        "documentation": "Get parking space operated by specified organization",
-                        "find": {
-                            "parkingSpace": {
-                                "operatedBy": "worldsensing"
-                            }
-                        }
-                    }
-                }
             }]
         }, {
             name: "spinner",
@@ -147,8 +119,6 @@ enyo.kind({
 enyo.kind({
     name: "Spinner",
     components: [{
-        components: [{
-            kind: "onyx.Spinner"
-        }]
+        kind: "onyx.Spinner"
     }]
 });

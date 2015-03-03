@@ -45,6 +45,7 @@ app.get('/', routes.index);
 var user = require('./routes/user.js')(app);
 var mqi = require('./routes/mqi.js')(app);
 var upload = require('./routes/upload.js')(app);
+var healthMonitor = require('./routes/healthMonitor.js')(app);
 
 require('./routes/proxy.js')(app);
 mongoose.connect(config.database);
