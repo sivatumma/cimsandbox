@@ -104,7 +104,7 @@ enyo.kind({
         var token = {
             token: "4b2891f7-f272-4f1e-a51d"
         };
-        AjaxAPI.makeAjaxRequest("/api/proxy?url=" + "http://" + this.buildPingURL, null, this, this.buildPingCallback, this.buildPingCallback, "POST", null, null, null, token);
+        AjaxAPI.makeAjaxRequest("/api/proxy?url=" + encodeURI(this.buildPingURL), null, this, this.buildPingCallback, this.buildPingCallback, "POST", null, null, null, token);
         AjaxAPI.makeAjaxRequest('/ping', null, this, this.pingSuccessHandler, this.pingErrorHandler, "POST", postBody, "", null, token);
     },
     pingSuccessHandler: function(inSender, inResponse, invalidJSON) {
@@ -123,7 +123,7 @@ enyo.kind({
         this.$.buildPingStatus.setContent(inResponse);
     },
     updateBuildPingStatus:function(){
-        AjaxAPI.makeAjaxRequest("/api/proxy?url=" + "http://" + this.buildPingURL, null, this, this.buildPingCallback, this.buildPingCallback, "POST", null, null, null, null);
+        AjaxAPI.makeAjaxRequest("/api/proxy?url=" + encodeURI(this.buildPingURL), null, this, this.buildPingCallback, this.buildPingCallback, "POST", null, null, null, null);
     },
     updatePingStatus: function() {
         this.$.pingStatus.setContent(this.spinnerHtml);
