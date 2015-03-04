@@ -88,11 +88,14 @@ enyo.kind({
                         break;
                 }
             }
+            var successHandler = (context && successCallback) ? enyo.bind(context, successCallback) : null;
+            var errorHandler = (context && errorCallback) ? enyo.bind(context, errorCallback) : null;
             ajax.response(function(inSender, inResponse) {
                 if (!AjaxAPI.unifiedSuccessHandler(inSender, inResponse) && successHandler) {
                     successHandler(inSender, inResponse, false);
                 } else {
                     //  Implies that the response returned is not a valid JSON
+                    console.log(successHandler);
                     successHandler(inSender,inResponse,true);
                 }
             });
@@ -100,7 +103,6 @@ enyo.kind({
             // send parameters the remote service using the 'go()' method
             ajax.go();
             // attach responders to the transaction object
-            var successHandler = (context && successCallback) ? enyo.bind(context, successCallback) : null;
             // ajax.response(function(inSender, inResponse) {
             //     // unifiedSuccessHandler returns true if it handled the response, so
             //     //  don't call the handler if it returns true
@@ -110,7 +112,6 @@ enyo.kind({
             //         }
             //     }
             // });
-            var errorHandler = (context && errorCallback) ? enyo.bind(context, errorCallback) : null;
             // user error handler that was passed in or the default handler
             ajax.error(errorHandler || AjaxAPI.defaultErrorHandler);
         },

@@ -33,11 +33,14 @@ module.exports = function (app){
             exec("ping -w 3 " + req.body.host, function(err, out, code) {
               if (err instanceof Error)
                 res.send({error:err});
-              if (out.indexOf("bytes from") > 0)
+              if (out.indexOf("bytes from") > 0 || out.indexOf("Reply from") > 0)
                 res.send({"message":"&#10003;"});
+              console.log(out);
+              if(out.indexOf("Request timed out") > 0 || out.error !== undefined)
+                res.send("X");
+              res.end();
             });
         }
-
     });
 
 
@@ -51,7 +54,6 @@ module.exports = function (app){
               res.send(out);
             });
         }
-
     });
 
     
