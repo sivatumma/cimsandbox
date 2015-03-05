@@ -134,7 +134,7 @@ enyo.kind({
         this.$.pingStatus.setContent(this.spinnerHtml);
     },
     buildPingCallback:function(inSender, inResponse, invalidJSON){
-        this.$.buildPingStatus.setContent(inResponse);
+        this.$.buildPingStatus.setContent(inResponse === 0 ? "?" : "&#10003;");
     },
     updateBuildPingStatus:function(){
         if (this.httpEnabled){
