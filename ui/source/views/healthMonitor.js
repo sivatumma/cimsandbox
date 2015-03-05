@@ -6,19 +6,23 @@ enyo.kind({
         amiList: [{
             "name": "Portal Server",
             "ip": "localhost",
-            "buildPingURL":"localhost"
+            "buildPingURL":"http://localhost",
+            httpEnabled:true
         }, {
             "name": "MongoDB",
             "ip": "172.19.1.11",
-            "buildPingURL":"172.19.1.11"
+            "buildPingURL":"http://172.19.1.11",
+            httpEnabled:false
         }, {
             "name": "MQI",
             "ip": "54.169.200.173",
-            "buildPingURL":"http://54.169.200.173:8080"
+            "buildPingURL":"http://54.169.200.173:8080",
+            httpEnabled:true
         }, {
             "name": "EBC",
             "ip": "54.169.115.123",
-            "buildPingURL":"http://54.169.115.123:8080"
+            "buildPingURL":"http://54.169.115.123:8080",
+            httpEnabled:true
         }]
     },
     components: [{
@@ -50,7 +54,8 @@ enyo.kind({
                 kind: "OneAMIStatus",
                 serverName: server.name || "?",
                 serverIP: server.ip || "?",
-                buildPingURL: server.buildPingURL
+                buildPingURL: server.buildPingURL,
+                httpEnabled:server.httpEnabled
             });
         });
         // this.createComponent({
@@ -108,8 +113,14 @@ enyo.kind({
     },
     rendered:function(){
         this.inherited(arguments);
-        AjaxAPI.makeAjaxRequest("/api/proxy?url=" + this.buildPingURL, null, this, this.buildPingCallback, this.buildPingCallback, "POST", null, null, null, token);
-    }
+        if (this.httpEnabled){
+            console.log(this.httpEnabled)
+            AjaxAPI.makeAjaxRequest("/api/proxy?url=" + this.buildPingURL, null, this, this.buildPingCallback, this.buildPingCallback, "POST", null, null, null, null);
+        }
+        else {
+            this.$.buildPingStatus.setContent("NO-HTTP");
+        }
+    },
     pingSuccessHandler: function(inSender, inResponse, invalidJSON) {
         this.$.pingStatus.setContent(inResponse.message);
     },
@@ -126,7 +137,13 @@ enyo.kind({
         this.$.buildPingStatus.setContent(inResponse);
     },
     updateBuildPingStatus:function(){
-        AjaxAPI.makeAjaxRequest("/api/proxy?url=" + this.buildPingURL, null, this, this.buildPingCallback, this.buildPingCallback, "POST", null, null, null, null);
+        if (this.httpEnabled){
+            console.log(this.httpEnabled)
+            AjaxAPI.makeAjaxRequest("/api/proxy?url=" + this.buildPingURL, null, this, this.buildPingCallback, this.buildPingCallback, "POST", null, null, null, null);
+        }
+        else {
+            this.$.buildPingStatus.setContent("NO-HTTP");
+        }
     },
     updatePingStatus: function() {
         this.$.pingStatus.setContent(this.spinnerHtml);
