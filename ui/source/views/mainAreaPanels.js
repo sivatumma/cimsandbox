@@ -2,7 +2,7 @@ enyo.kind({
     kind: "enyo.Panels",
     draggable: false,
     name: "MainAreaPanels",
-    classes: "fullheight",
+    classes: "fullheight mainAreaPanels",
     components: [{
         kind: "Signals",
         showHome: "showHome",

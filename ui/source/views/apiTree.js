@@ -1,6 +1,6 @@
 enyo.kind({
     name: 'sandbox.APITree',
-    classes: 'enyo-unselectable',
+    classes: 'enyo-unselectable apiTree',
     kind: 'FittableRows',
     published: {
         icons: {
