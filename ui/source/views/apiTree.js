@@ -26,7 +26,7 @@ enyo.kind({
         classes:"apiTree",
         kind: 'Scroller',
         // touch: true,
-        vertical:"scroll",
+        vertical:"auto",
         fit: true,
         components: []
     }],
