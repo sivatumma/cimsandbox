@@ -7,22 +7,26 @@ enyo.kind({
             "name": "Portal Server",
             "ip": "localhost",
             "buildPingURL":"http://localhost",
-            httpEnabled:true
+            httpEnabled:true,
+            httpPingMethod:"GET"
         }, {
             "name": "MongoDB",
             "ip": "172.19.1.11",
             "buildPingURL":"http://172.19.1.11",
-            httpEnabled:false
+            httpEnabled:false,
+            httpPingMethod:null
         }, {
             "name": "MQI",
             "ip": "54.169.200.173",
             "buildPingURL":"http://54.169.200.173:8080",
-            httpEnabled:true
+            httpEnabled:true,
+            httpPingMethod:"POST"
         }, {
             "name": "EBC",
             "ip": "54.169.115.123",
             "buildPingURL":"http://54.169.115.123:8080",
-            httpEnabled:true
+            httpEnabled:true,
+            httpPingMethod:"POST"
         }]
     },
     components: [{
@@ -103,6 +107,9 @@ enyo.kind({
         this.$.buildPingStatus.setContent(this.spinnerHtml);
         this.$.serverName.setContent(this.serverName);
         this.$.serverIP.setContent(this.serverIP === "localhost" ? "Sandbox Root Host" : this.serverIP);
+    },
+    rendered:function(){
+        this.inherited(arguments);
         var postBody = {
             host: this.serverIP
         };
@@ -110,9 +117,6 @@ enyo.kind({
             token: "4b2891f7-f272-4f1e-a51d"
         };
         AjaxAPI.makeAjaxRequest('/ping', null, this, this.pingSuccessHandler, this.pingErrorHandler, "POST", postBody, "", null, token);
-    },
-    rendered:function(){
-        this.inherited(arguments);
         if (this.httpEnabled){
             console.log(this.httpEnabled)
             AjaxAPI.makeAjaxRequest("/api/proxy?url=" + this.buildPingURL, null, this, this.buildPingCallback, this.buildPingCallback, "POST", null, null, null, null);

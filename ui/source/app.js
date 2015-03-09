@@ -60,9 +60,11 @@ enyo.kind({
         }
     },
     showSpinner: function(){
+        enyo.scrim.show();
         enyo.Signals.send("showSpinner",{});
     },
     hideSpinner: function(){
+        enyo.scrim.hide();
         enyo.Signals.send("hideSpinner",{});
     }
 });
