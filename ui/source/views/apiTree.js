@@ -20,11 +20,13 @@ enyo.kind({
         reRenderMenuArea: "reRenderMenuArea"
     }, {
         name: "ErrorConditionMessages",
-        style: "color:red; font-weight:bold; padding:10px;"
+        style: "color:red; font-weight:bold; padding:10px; display:none;"
     }, {
         name: "menuArea",
+        classes:"apiTree",
         kind: 'Scroller',
-        touch: true,
+        // touch: true,
+        vertical:"auto",
         fit: true,
         components: []
     }],
@@ -70,6 +72,7 @@ enyo.kind({
         location.reload();
     },
     errorHandler: function(inEvent, inResponse) {
+        this.$.ErrorConditionMessages.show();
         this.$.ErrorConditionMessages.setContent("There was some error while parsing the services file. Please notify to siva.tumma@paradigminfotech.com");
     },
     traverse: function(o) {

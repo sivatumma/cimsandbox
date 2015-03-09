@@ -7,22 +7,26 @@ enyo.kind({
             "name": "Portal Server",
             "ip": "localhost",
             "buildPingURL":"http://localhost",
-            httpEnabled:true
+            httpEnabled:true,
+            httpPingMethod:"GET"
         }, {
             "name": "MongoDB",
             "ip": "172.19.1.11",
             "buildPingURL":"http://172.19.1.11",
-            httpEnabled:false
+            httpEnabled:false,
+            httpPingMethod:null
         }, {
             "name": "MQI",
             "ip": "54.169.200.173",
             "buildPingURL":"http://54.169.200.173:8080",
-            httpEnabled:true
+            httpEnabled:true,
+            httpPingMethod:"POST"
         }, {
             "name": "EBC",
             "ip": "54.169.115.123",
             "buildPingURL":"http://54.169.115.123:8080",
-            httpEnabled:true
+            httpEnabled:true,
+            httpPingMethod:"POST"
         }]
     },
     components: [{
